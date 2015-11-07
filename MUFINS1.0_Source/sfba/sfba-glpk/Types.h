@@ -1,0 +1,195 @@
+/* 
+ * File:   Types.h
+ * Author: Albert Gevorgyan
+ *
+ * Created on 20 January 2010, 11:07
+ */
+
+#ifndef _TYPES_H
+#define	_TYPES_H
+
+#include <cstdlib>
+#include <iostream>
+#include <stdexcept>
+#include <cstdio>
+
+#include <string>
+#include <vector>
+#include <map>
+#include <stack>
+#include <iterator>
+#include <set>
+
+#include "Const.h"
+
+using namespace std;
+
+//container types; may be redefined
+typedef vector <string> strvec;
+typedef map<string, double> stomap; //reaction stoichiometry, mapping metabolite names to coefs.
+typedef stomap flomap;//w/
+typedef map<string, int> argmap;
+typedef map<int, string> constmap;
+typedef map<int, int>intmap;
+
+typedef bool t_val;
+typedef t_val (*op)(t_val, t_val);
+typedef t_val (*t_translate)(string);
+typedef map<string, op> opmap;//mapping names to binary operators
+
+typedef stack<string> strstack;
+typedef stack<t_val> tstack;
+
+typedef ostream_iterator<string>  ostrit;
+typedef istream_iterator<string>  istrit;
+
+typedef struct{
+    double min;
+    double max;
+}RANGE;
+typedef struct{
+    double objval;
+    int status;
+}OBJSTAT;
+typedef struct{
+    OBJSTAT min;
+    OBJSTAT max;
+}OBJSTAT_RANGE;
+typedef vector<OBJSTAT> objstatvec;
+typedef map<string, OBJSTAT_RANGE> rangemap;
+
+typedef vector<double> POINT;
+typedef vector<POINT> pointvec;
+
+typedef struct{
+    string query;
+    double from;
+    double to;
+    double step;
+}PLOT_ARGS;
+
+
+typedef struct{
+    strvec rows;
+    strvec cols;
+}MATRIX;
+typedef vector<MATRIX> mtxvec;
+
+
+typedef vector<stomap> solvec;
+typedef set<string> striset;
+typedef map<string, string> strmap;
+typedef vector<strvec> strlistvec;
+
+//------------------GFA---------------------
+typedef struct{//w/gfa/ gfva rangemap
+    OBJSTAT act;
+    OBJSTAT inact;
+    int level;//confidence level for flux activity state
+}FLUXACT;
+typedef struct{//w/gfa/
+    int direc; //1: dirp, -1: dirm, 0: both
+    FLUXACT dirp; //direction flux>0
+    FLUXACT dirm; //direction flux<0
+    int dirlev;//confidence level for direction, dirp-dirm
+}FLUXDIR;
+typedef map<string, FLUXDIR> reac_rangemap;//w/gfa/
+typedef map<string, FLUXACT> gene_rangemap;//w/gfa/
+
+typedef vector <int> intvec; //w/
+typedef vector <double> flovec; //w/
+typedef map<string, argmap> strstr2int;//w/
+typedef map<string, flomap> strstr2flo;//w/
+typedef map<string, strvec> gene_reactions; //w/ gene to reactions
+
+//------------------GNI---------------------
+typedef map<string, strvec> reac2nts; //w/gni/ nutrient to reactions
+
+typedef struct{//w/gni/
+    double drop; //objvalue of drop
+    string status; //obj status
+    double bm; //flux of BIOMASS of wild type
+    double level;// level=drop/bm   
+}BLPSOL;
+
+typedef struct{//w/gni/
+    strvec rkos; //knockout reactions for a gene
+    strvec sn; //nutrients of GNI-SN
+    strvec sp; //nutrients of GNI-SP
+    BLPSOL bsol;
+    stomap medium;//growth medium
+}SGNI;
+typedef map<string, SGNI> gene_sgni;//w/gni/
+
+typedef struct{//w/gni/
+    string Gn; //gene name
+    strvec rkos; //knockout reactions for a gene
+    double drop; //objvalue of drop
+    double level;// level=drop/bm
+}ESSG;
+typedef vector<ESSG> ess_gene;//w/gni/
+
+
+typedef struct{//w/gni/
+    double Np; //number of positive essential for this nt
+    double Nn; //number of negative essential for this nt
+    double Pp; //pvalue for k=Np
+    double Pn; //pvalue for k=Nn 
+}NTPVAL;
+typedef map<string, NTPVAL> nt_pval;//w/gni/
+
+typedef struct{//w/gni/
+    strvec rkos; //knockout reactions for a gene
+//    int Ness; //number of esstial medium
+//    double pval; //p-value for degree of essentiality
+    nt_pval nts;
+}WGNI;
+typedef map<string, WGNI> gene_wgni;//w/gni/
+typedef struct{//w/gni/
+    string Gn; //gene name
+    strvec rkos; //knockout reactions for a gene
+    int Ness; //number of esstial medium
+    double pval; //p-value for degree of essentiality
+    nt_pval nts;
+}WGNI1;
+typedef vector<WGNI1> gene_wgni1;//w/gni/
+
+typedef vector<intvec> randmeds;//w/gni/
+
+typedef struct{//w/gni/
+    bool col;//indicator of a column
+    double ub; //knockout reactions for a gene
+    double lb;
+    stomap* sto;
+}RC;
+typedef map<string, RC> kobds;//w/gni/
+
+typedef struct{//w/gni/
+    double ub; //knockout reactions for a gene
+    double lb;
+}Bnd;
+typedef map<string, Bnd> reacbds;//w/gni/
+
+//------------------DPA---------------------
+typedef map<string, strvec> met_genes; //w/dpa/ metabolite to genes
+typedef struct{//w/dpa/
+    strvec rkos; //knockout reactions for a gene
+    strvec mets; //associated metabolites
+}DPAGene;
+typedef map<string, DPAGene> gene_mets;//w/dpa/ gene to metabolites
+typedef struct{//w/dpa/
+    strstr2flo upsig; //signals of upregulated genes
+    strstr2flo dwsig; //signals of downregulated genes
+}metarr_sig;//w/dpa/ metabolite and array to signal
+
+//------------------signalling---------------------
+typedef struct{//w/
+    strvec activators;//w/signalling
+    stomap inhibitors;//w/signalling
+}SigSet;
+typedef map<string, SigSet> RxnSig;//w/
+
+#endif	/* _TYPES_H */
+
+
+

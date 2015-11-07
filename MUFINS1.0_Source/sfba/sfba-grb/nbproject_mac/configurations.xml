@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="glpk" displayName="glpk" projectFiles="true">
+      <itemPath>glpk/Makefile</itemPath>
+      <itemPath>glpk/amd.h</itemPath>
+      <itemPath>glpk/amd_1.c</itemPath>
+      <itemPath>glpk/amd_2.c</itemPath>
+      <itemPath>glpk/amd_aat.c</itemPath>
+      <itemPath>glpk/amd_control.c</itemPath>
+      <itemPath>glpk/amd_defaults.c</itemPath>
+      <itemPath>glpk/amd_dump.c</itemPath>
+      <itemPath>glpk/amd_info.c</itemPath>
+      <itemPath>glpk/amd_internal.h</itemPath>
+      <itemPath>glpk/amd_order.c</itemPath>
+      <itemPath>glpk/amd_post_tree.c</itemPath>
+      <itemPath>glpk/amd_postorder.c</itemPath>
+      <itemPath>glpk/amd_preprocess.c</itemPath>
+      <itemPath>glpk/amd_valid.c</itemPath>
+      <itemPath>glpk/colamd.c</itemPath>
+      <itemPath>glpk/colamd.h</itemPath>
+      <itemPath>glpk/glpapi.h</itemPath>
+      <itemPath>glpk/glpapi01.c</itemPath>
+      <itemPath>glpk/glpapi02.c</itemPath>
+      <itemPath>glpk/glpapi03.c</itemPath>
+      <itemPath>glpk/glpapi04.c</itemPath>
+      <itemPath>glpk/glpapi05.c</itemPath>
+      <itemPath>glpk/glpapi06.c</itemPath>
+      <itemPath>glpk/glpapi07.c</itemPath>
+      <itemPath>glpk/glpapi08.c</itemPath>
+      <itemPath>glpk/glpapi09.c</itemPath>
+      <itemPath>glpk/glpapi10.c</itemPath>
+      <itemPath>glpk/glpapi11.c</itemPath>
+      <itemPath>glpk/glpapi12.c</itemPath>
+      <itemPath>glpk/glpapi13.c</itemPath>
+      <itemPath>glpk/glpapi14.c</itemPath>
+      <itemPath>glpk/glpapi15.c</itemPath>
+      <itemPath>glpk/glpapi16.c</itemPath>
+      <itemPath>glpk/glpapi17.c</itemPath>
+      <itemPath>glpk/glpapi18.c</itemPath>
+      <itemPath>glpk/glpapi19.c</itemPath>
+      <itemPath>glpk/glpavl.c</itemPath>
+      <itemPath>glpk/glpavl.h</itemPath>
+      <itemPath>glpk/glpbfd.c</itemPath>
+      <itemPath>glpk/glpbfd.h</itemPath>
+      <itemPath>glpk/glpbfx.c</itemPath>
+      <itemPath>glpk/glpbfx.h</itemPath>
+      <itemPath>glpk/glpcpx.c</itemPath>
+      <itemPath>glpk/glpdmp.c</itemPath>
+      <itemPath>glpk/glpdmp.h</itemPath>
+      <itemPath>glpk/glpdmx.c</itemPath>
+      <itemPath>glpk/glpenv.h</itemPath>
+      <itemPath>glpk/glpenv01.c</itemPath>
+      <itemPath>glpk/glpenv02.c</itemPath>
+      <itemPath>glpk/glpenv03.c</itemPath>
+      <itemPath>glpk/glpenv04.c</itemPath>
+      <itemPath>glpk/glpenv05.c</itemPath>
+      <itemPath>glpk/glpenv06.c</itemPath>
+      <itemPath>glpk/glpenv07.c</itemPath>
+      <itemPath>glpk/glpenv08.c</itemPath>
+      <itemPath>glpk/glpfhv.c</itemPath>
+      <itemPath>glpk/glpfhv.h</itemPath>
+      <itemPath>glpk/glpgmp.c</itemPath>
+      <itemPath>glpk/glpgmp.h</itemPath>
+      <itemPath>glpk/glphbm.c</itemPath>
+      <itemPath>glpk/glphbm.h</itemPath>
+      <itemPath>glpk/glpini01.c</itemPath>
+      <itemPath>glpk/glpini02.c</itemPath>
+      <itemPath>glpk/glpios.h</itemPath>
+      <itemPath>glpk/glpios01.c</itemPath>
+      <itemPath>glpk/glpios02.c</itemPath>
+      <itemPath>glpk/glpios03.c</itemPath>
+      <itemPath>glpk/glpios04.c</itemPath>
+      <itemPath>glpk/glpios05.c</itemPath>
+      <itemPath>glpk/glpios06.c</itemPath>
+      <itemPath>glpk/glpios07.c</itemPath>
+      <itemPath>glpk/glpios08.c</itemPath>
+      <itemPath>glpk/glpios09.c</itemPath>
+      <itemPath>glpk/glpios10.c</itemPath>
+      <itemPath>glpk/glpios11.c</itemPath>
+      <itemPath>glpk/glpios12.c</itemPath>
+      <itemPath>glpk/glpipm.c</itemPath>
+      <itemPath>glpk/glpipm.h</itemPath>
+      <itemPath>glpk/glpk.h</itemPath>
+      <itemPath>glpk/glplib.h</itemPath>
+      <itemPath>glpk/glplib01.c</itemPath>
+      <itemPath>glpk/glplib02.c</itemPath>
+      <itemPath>glpk/glplib03.c</itemPath>
+      <itemPath>glpk/glplpf.c</itemPath>
+      <itemPath>glpk/glplpf.h</itemPath>
+      <itemPath>glpk/glplpx01.c</itemPath>
+      <itemPath>glpk/glplpx02.c</itemPath>
+      <itemPath>glpk/glplpx03.c</itemPath>
+      <itemPath>glpk/glpluf.c</itemPath>
+      <itemPath>glpk/glpluf.h</itemPath>
+      <itemPath>glpk/glplux.c</itemPath>
+      <itemPath>glpk/glplux.h</itemPath>
+      <itemPath>glpk/glpmat.c</itemPath>
+      <itemPath>glpk/glpmat.h</itemPath>
+      <itemPath>glpk/glpmpl.h</itemPath>
+      <itemPath>glpk/glpmpl01.c</itemPath>
+      <itemPath>glpk/glpmpl02.c</itemPath>
+      <itemPath>glpk/glpmpl03.c</itemPath>
+      <itemPath>glpk/glpmpl04.c</itemPath>
+      <itemPath>glpk/glpmpl05.c</itemPath>
+      <itemPath>glpk/glpmpl06.c</itemPath>
+      <itemPath>glpk/glpmps.c</itemPath>
+      <itemPath>glpk/glpnet.h</itemPath>
+      <itemPath>glpk/glpnet01.c</itemPath>
+      <itemPath>glpk/glpnet02.c</itemPath>
+      <itemPath>glpk/glpnet03.c</itemPath>
+      <itemPath>glpk/glpnet04.c</itemPath>
+      <itemPath>glpk/glpnet05.c</itemPath>
+      <itemPath>glpk/glpnet06.c</itemPath>
+      <itemPath>glpk/glpnet07.c</itemPath>
+      <itemPath>glpk/glpnet08.c</itemPath>
+      <itemPath>glpk/glpnet09.c</itemPath>
+      <itemPath>glpk/glpnpp.h</itemPath>
+      <itemPath>glpk/glpnpp01.c</itemPath>
+      <itemPath>glpk/glpnpp02.c</itemPath>
+      <itemPath>glpk/glpnpp03.c</itemPath>
+      <itemPath>glpk/glpnpp04.c</itemPath>
+      <itemPath>glpk/glpnpp05.c</itemPath>
+      <itemPath>glpk/glpqmd.c</itemPath>
+      <itemPath>glpk/glpqmd.h</itemPath>
+      <itemPath>glpk/glprgr.c</itemPath>
+      <itemPath>glpk/glprgr.h</itemPath>
+      <itemPath>glpk/glprng.h</itemPath>
+      <itemPath>glpk/glprng01.c</itemPath>
+      <itemPath>glpk/glprng02.c</itemPath>
+      <itemPath>glpk/glpscf.c</itemPath>
+      <itemPath>glpk/glpscf.h</itemPath>
+      <itemPath>glpk/glpscl.c</itemPath>
+      <itemPath>glpk/glpsdf.c</itemPath>
+      <itemPath>glpk/glpspm.c</itemPath>
+      <itemPath>glpk/glpspm.h</itemPath>
+      <itemPath>glpk/glpspx.h</itemPath>
+      <itemPath>glpk/glpspx01.c</itemPath>
+      <itemPath>glpk/glpspx02.c</itemPath>
+      <itemPath>glpk/glpsql.c</itemPath>
+      <itemPath>glpk/glpsql.h</itemPath>
+      <itemPath>glpk/glpssx.h</itemPath>
+      <itemPath>glpk/glpssx01.c</itemPath>
+      <itemPath>glpk/glpssx02.c</itemPath>
+      <itemPath>glpk/glpstd.h</itemPath>
+      <itemPath>glpk/glptsp.c</itemPath>
+      <itemPath>glpk/glptsp.h</itemPath>
+      <itemPath>glpk/log</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>Const.h</itemPath>
+      <itemPath>DPA.h</itemPath>
+      <itemPath>Driver.h</itemPath>
+      <itemPath>DriverGrb.h</itemPath>
+      <itemPath>Elements.h</itemPath>
+      <itemPath>GFA.h</itemPath>
+      <itemPath>GNI.h</itemPath>
+      <itemPath>Gurobi.h</itemPath>
+      <itemPath>Matrix.h</itemPath>
+      <itemPath>Model.h</itemPath>
+      <itemPath>MtxLP.h</itemPath>
+      <itemPath>RPN.h</itemPath>
+      <itemPath>Round.h</itemPath>
+      <itemPath>SplitLP.h</itemPath>
+      <itemPath>Text.h</itemPath>
+      <itemPath>TxtParser.h</itemPath>
+      <itemPath>Types.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>DPA.cpp</itemPath>
+      <itemPath>Driver.cpp</itemPath>
+      <itemPath>DriverGrb.cpp</itemPath>
+      <itemPath>Elements.cpp</itemPath>
+      <itemPath>GFA.cpp</itemPath>
+      <itemPath>GNI.cpp</itemPath>
+      <itemPath>Gurobi.cpp</itemPath>
+      <itemPath>Matrix.cpp</itemPath>
+      <itemPath>Model.cpp</itemPath>
+      <itemPath>MtxLP.cpp</itemPath>
+      <itemPath>RPN.cpp</itemPath>
+      <itemPath>RecordParser.cpp</itemPath>
+      <itemPath>SplitLP.cpp</itemPath>
+      <itemPath>Text.cpp</itemPath>
+      <itemPath>TxtParser.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>/Library/gurobi600/mac64/include</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/Library/gurobi600/mac64/lib</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibLibItem>gurobi_c++</linkerLibLibItem>
+            <linkerLibLibItem>gurobi_g++4.2</linkerLibLibItem>
+          </linkerLibItems>
+          <commandLine>-lgurobi60 -lpthread -lm</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="Const.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DPA.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DPA.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Driver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Driver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DriverGrb.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DriverGrb.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Elements.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Elements.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GFA.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GFA.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GNI.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GNI.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Gurobi.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Gurobi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Matrix.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Matrix.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Model.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Model.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MtxLP.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MtxLP.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RPN.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RPN.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RecordParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Round.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SplitLP.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SplitLP.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Text.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Text.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TxtParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TxtParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Types.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/Makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/amd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/amd_1.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_2.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_aat.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_control.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_defaults.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_dump.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_info.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_internal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/amd_order.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_post_tree.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_postorder.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_preprocess.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_valid.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/colamd.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/colamd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpapi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpapi01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi07.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi08.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi09.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi10.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi11.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi12.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi13.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi14.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi15.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi16.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi17.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi18.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi19.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpavl.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpavl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpbfd.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpbfd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpbfx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpbfx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpcpx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpdmp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpdmp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpdmx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpenv01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv07.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv08.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpfhv.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpfhv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpgmp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpgmp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glphbm.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glphbm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpini01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpini02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpios01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios07.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios08.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios09.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios10.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios11.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios12.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpipm.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpipm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpk.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glplib.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glplib01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplib02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplib03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplpf.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplpf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glplpx01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplpx02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplpx03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpluf.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpluf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glplux.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplux.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpmat.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmat.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmps.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpnet01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet07.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet08.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet09.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpqmd.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpqmd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glprgr.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glprgr.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glprng.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glprng01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glprng02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpscf.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpscf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpscl.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpsdf.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpspm.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpspm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpspx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpspx01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpspx02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpsql.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpsql.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpssx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpssx01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpssx02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpstd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glptsp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glptsp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/log" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <commandlineTool>gcc</commandlineTool>
+          <useLinkerLibraries>false</useLinkerLibraries>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <commandlineTool>g++</commandlineTool>
+          <incDir>
+            <pElem>/Library/gurobi600/mac64/include</pElem>
+          </incDir>
+          <commandLine>-stdlib=libstdc++ -std=c++11</commandLine>
+          <useLinkerLibraries>false</useLinkerLibraries>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sfba-grb</output>
+          <linkerAddLib>
+            <pElem>/Library/gurobi600/mac64/lib</pElem>
+          </linkerAddLib>
+          <commandlineTool>g++</commandlineTool>
+          <linkerLibItems>
+            <linkerLibLibItem>gurobi_c++</linkerLibLibItem>
+            <linkerLibLibItem>gurobi_g++4.2</linkerLibLibItem>
+          </linkerLibItems>
+          <commandLine>-lgurobi60 -lpthread -lm -stdlib=libstdc++</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="Const.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DPA.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DPA.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Driver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Driver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DriverGrb.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DriverGrb.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Elements.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Elements.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GFA.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GFA.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GNI.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GNI.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Gurobi.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Gurobi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Matrix.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Matrix.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Model.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Model.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MtxLP.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MtxLP.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RPN.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RPN.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RecordParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Round.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SplitLP.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SplitLP.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Text.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Text.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TxtParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TxtParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Types.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/Makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/amd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/amd_1.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_2.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_aat.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_control.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_defaults.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_dump.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_info.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_internal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/amd_order.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_post_tree.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_postorder.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_preprocess.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/amd_valid.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/colamd.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/colamd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpapi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpapi01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi07.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi08.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi09.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi10.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi11.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi12.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi13.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi14.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi15.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi16.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi17.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi18.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpapi19.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpavl.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpavl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpbfd.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpbfd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpbfx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpbfx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpcpx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpdmp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpdmp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpdmx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpenv01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv07.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpenv08.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpfhv.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpfhv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpgmp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpgmp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glphbm.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glphbm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpini01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpini02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpios01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios07.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios08.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios09.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios10.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios11.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpios12.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpipm.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpipm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpk.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glplib.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glplib01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplib02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplib03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplpf.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplpf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glplpx01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplpx02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplpx03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpluf.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpluf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glplux.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glplux.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpmat.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmat.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmpl06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpmps.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpnet01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet06.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet07.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet08.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnet09.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp03.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp04.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpnpp05.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpqmd.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpqmd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glprgr.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glprgr.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glprng.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glprng01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glprng02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpscf.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpscf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpscl.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpsdf.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpspm.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpspm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpspx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpspx01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpspx02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpsql.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpsql.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpssx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glpssx01.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpssx02.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glpstd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/glptsp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="glpk/glptsp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="glpk/log" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

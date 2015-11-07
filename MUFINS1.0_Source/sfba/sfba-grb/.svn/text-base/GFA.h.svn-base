@@ -1,0 +1,71 @@
+/* 
+ * File:   GFA.h
+ * Author: John
+ *
+ * Created on 06 January 2011, 09:57
+ */
+
+#ifndef GFA_H
+#define	GFA_H
+
+#include "MtxLP.h"
+#include "SplitLP.h"
+#include "TxtParser.h"
+#include "Gurobi.h"
+
+
+
+class GFA {
+
+//private:
+public:
+    //strvec tisName; //w/ tissue name
+    strvec tisName;// tiss names
+    argmap tisIdx; //w/ tis to index of expList
+    expression expList; //w/ gene/enzyme expression list
+    expression_f expList_f;//w/ for float ratio expression
+    double eps; //w/ threshold for judging positive flux
+    gene_reactions geneR; //w/ gene to reactions for current model
+
+
+public:
+    GFA();
+    ~GFA();
+
+//    void set_gfa_eps(double gfa_eps);
+    void read_expression(string expfile, string err_msg); //w/
+    void read_expression_f(string expfile, string err_msg);//w/
+    void ini_gmodel(string tiss, Model* model);
+//    inline void ini_gmodel(string tiss, Model* model){gmodel[tiss].model=*model;};
+    
+    inline int get_eps(){return eps;};
+    inline int get_tiss_index(string tiss){return tisIdx[tiss];};
+    inline bool exist_gene(string Gn){return expList.find(Gn)!=expList.end();};
+    inline int get_gene_exp(string Gn, int Ti){return expList[Gn][Ti];};
+    inline strvec get_geneReacs(string Gn){return geneR[Gn];};
+
+    void split_model_rev(Model* tmod);//w/
+    void set_gfa_model(int Ti, Model* tmod, stomap *obj, flomap* Rstate); //w/
+    int eval_reaction_state(Reaction* reac, int Ti, flomap* Rstate);//w/
+    double eval_reaction_state_f(Reaction* reac, int Ti, flomap* Rstate);//w/
+    int rule2state(strvec rules, int *k, int Ti, int size);//w/
+    double rule2state_f(strvec rules, int *k, int Ti, int size);//w/
+    int tri_bool_logic(int a, int b, string op);//w/
+    double tri_bool_logic_f(double a, double b, string op);//w/
+
+    FLUXDIR compute_reac_fluxact(string Rn, Model* model, MtxLP* lp, stomap *obj, bool presolve);//w/
+    FLUXACT compute_gene_fluxact(reac_rangemap *Rrm, strvec Rs, Model* model, MtxLP* lp, stomap *obj, bool presolve);//w/
+    FLUXACT get_fluxact_dir(reac_rangemap *Rrm, string Rn, Model* model, MtxLP* lp, stomap *obj, bool presolve);//w/
+    int get_expvalue(string genename, int Ti);//w/
+    double get_expvalue_f(string genename, int Ti);//w/
+
+    FLUXDIR compute_reac_fluxact_grb(string Rn, Model* model, GRB_Mod* grbmod);//gfa/
+    FLUXACT compute_gene_fluxact_grb(reac_rangemap *Rrm, strvec Rs, Model* model, GRB_Mod* grbmod);//gfa/
+    FLUXACT get_fluxact_dir_grb(reac_rangemap *Rrm, string Rn, Model* model, GRB_Mod* grbmod);//gfa/
+    void get_args_gfa(Model* model, strvec &args, strvec &reacs, strvec &genes);
+};
+
+#endif	/* GFA_H */
+
+
+

@@ -1,0 +1,5 @@
+R1	M1_xt = M1	-999999.0	999999.0	g1	#	Reaction 	1
+R2	M1 = 2 M2	0.0	999999.0	g2	#	Reaction 	2
+R3	M2 = M3	0.0	999999.0	g3	#	Reaction 	3
+R4	3 M3 = M4	0.0	999999.0	g4	#	Reaction 	4
+R5	M4 = M4_xt	-999999.0	999999.0	g5	#	Reaction 	5

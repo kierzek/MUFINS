@@ -1,0 +1,7 @@
+g++ -MMD -std=c++0x -O2 -Isrc/asio/include -Isrc/asio -o obj/PetriNetAlgorithms.o -c src/PetriNetAlgorithms.cpp
+src/PetriNetAlgorithms.cpp:1125:1: fatal error: opening dependency file obj/PetriNetAlgorithms.d: Nie ma takiego pliku ani katalogu
+ }
+ ^
+compilation terminated.
+Makefile:24: polecenia dla obiektu 'obj/PetriNetAlgorithms.o' nie powiodły się
+make: *** [obj/PetriNetAlgorithms.o] Błąd 1

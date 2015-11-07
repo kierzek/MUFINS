@@ -1,0 +1,1 @@
+cc    -c -o glpapi01.o glpapi01.c

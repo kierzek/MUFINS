@@ -1,0 +1,2150 @@
+#include <map>
+
+#include "Driver.h"
+#include "Types.h"
+#include <time.h>
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//initialisation
+constmap MSG_DICT;
+void Driver::init_msg(){
+    MSG_DICT[GLP_OPT] = "OPTIMAL";
+    MSG_DICT[GLP_FEAS] = "FEASIBLE";
+    MSG_DICT[GLP_INFEAS] = "INFEASIBLE";
+    MSG_DICT[GLP_NOFEAS] = "NON-FEASIBLE";
+    MSG_DICT[GLP_UNBND] = "UNBOUNDED";
+    MSG_DICT[GLP_UNDEF] = "UNDEFINED";
+}
+string Driver::get_msg(int nmsg){
+    return MSG_DICT[nmsg];
+}
+
+constmap MSG_DICT_grb;//w/grb/
+void Driver::init_msg_grb(){//w/grb/
+    MSG_DICT_grb[GRB_LOADED] = "LOADED";
+    MSG_DICT_grb[GRB_OPTIMAL] = "OPTIMAL";
+    MSG_DICT_grb[GRB_INFEASIBLE] = "INFEASIBLE";
+    MSG_DICT_grb[GRB_INF_OR_UNBD] = "INF_OR_UNBD";
+    MSG_DICT_grb[GRB_UNBOUNDED] = "UNBOUNDED";
+    MSG_DICT_grb[GRB_CUTOFF] = "CUTOFF";
+    MSG_DICT_grb[GRB_ITERATION_LIMIT] = "ITERATION_LIMIT";
+    MSG_DICT_grb[GRB_NODE_LIMIT] = "NODE_LIMIT";
+    MSG_DICT_grb[GRB_TIME_LIMIT] = "TIME_LIMIT";
+    MSG_DICT_grb[GRB_SOLUTION_LIMIT] = "SOLUTION_LIMIT";
+    MSG_DICT_grb[GRB_INTERRUPTED] = "INTERRUPTED";
+    MSG_DICT_grb[GRB_SUBOPTIMAL] = "SUBOPTIMAL";
+    MSG_DICT_grb[GRB_NUMERIC] = "NUMERIC";
+}
+string Driver::get_msg_grb(int nmsg){//w/grb/
+    return MSG_DICT_grb[nmsg];
+}
+
+void Driver::init_args(){
+    //message levels
+    ARGMAP["off"] = GLP_MSG_OFF;
+    ARGMAP["on"] = GLP_MSG_ON;
+    ARGMAP["err"] = GLP_MSG_ERR;
+    ARGMAP["all"] = GLP_MSG_ALL;
+    ARGMAP["max"] = true;
+    ARGMAP["min"] = false;
+    //solvers
+    ARGMAP["simplex"] = SMPLX;
+    ARGMAP["milp"] = MILP;
+    ARGMAP["exact"] = EXACT;
+//    ARGMAP["intopt"] = INTPT;
+}
+int Driver::get_arg(string arg){
+    argmap::const_iterator it = ARGMAP.find(arg);
+    if (it == ARGMAP.end())
+        throw runtime_error(arg + ": unknown argument!");
+    return it->second;
+}
+
+
+
+
+
+Driver::Driver(){
+    out          = &cout;
+    err_msg      = "Error: ";
+    withcomments = WITHCOMMENTS;   //include comments into the output
+    write        = false;
+
+    problem      = PROBLEM;
+    max          = DEF_MAX;
+    kind         = SMPLX;             //MILP;//INTPT;//                //the solver algorithm is MILP
+    presolve     = true;              //the presolver will be used
+    msg_lev      = MSG_LEV;           //text output switched off
+    tm_lim       = TM_LIM;            //the number of iterations is unlimited
+
+    model = NULL;
+    lp = NULL;
+    N = new Matrix;
+    records = new strvec;
+    obj = new stomap;
+    gfa = new GFA;//w/gfa/
+    Rstate = new flomap;//w/gfa/
+    dosplit = false;
+    dotrim = false;
+    thermo = false;
+    T = TSt;
+    cmin = CMIN;
+    cmax = CMAX;
+    mip_gap = MIP_GAP;
+    vmax = VMAX;
+    xtag = EXT_TAG_3;
+    epsilon = EPSILON_FLUX;
+    withzeroes = true;
+    gni=new GNI();//w/gni/
+    dpa = new DPA;//w/dpa/
+    env=0;
+    env=new GRBEnv();//w/grb/
+    grbmod=new GRB_Mod(*env);//w/grb/
+
+    init_args();
+    init_msg();
+    init_msg_grb();//w/grb/
+    init_operators();
+}
+
+
+Driver::~Driver(){
+    if (model != NULL) delete model;
+    if (lp != NULL) delete lp;
+    if (out != &cout) delete out;
+    if (records != NULL) delete records;
+    if (obj != NULL) delete obj;
+    if (gfa != NULL) delete gfa;//w/gfa/
+    if (Rstate != NULL) delete Rstate;//w/gfa/
+    if (gni != NULL) delete gni;//w/gni/
+    if (dpa != NULL) delete dpa;//w/dpa/
+    if (env != NULL) delete env;//w/grb/
+    if (grbmod != NULL) delete grbmod;//w/grb/
+}
+
+
+void Driver::set_msg_lev(char* optarg){
+    msg_lev = get_arg(string(optarg));
+}
+
+void Driver::set_solver(char *arg){
+    kind = get_arg(string(arg));
+}
+
+void Driver::set_output(char* arg){
+    out = new ofstream(arg);
+}
+
+void Driver::set_T(char* optarg){
+    T = T0 + atof(optarg);
+    if (T < 0) throw runtime_error(err_msg + "temperature must be >= 0!");
+}
+
+void Driver::set_time(int lim){
+    if (lim < 0) throw runtime_error(err_msg + "time limit must be >= 0!");
+    this->tm_lim = lim;
+}
+
+void Driver::set_conc_range(char* arg){
+    strvec sminmax;
+    string is(arg);
+    split(&is, &sminmax, SPACE);
+    cmin = log(str2double(sminmax[0]));
+    if (sminmax.size() > 1)
+        cmax = log(str2double(sminmax[1]));
+}
+
+void Driver::set_epsilon(char* arg){
+    this->epsilon = str2double(arg);
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+//reading text files
+
+void Driver::read_model(){
+//parsing the input
+    if (infile.empty())
+        throw runtime_error(err_msg + "no input file specified!");
+    model = new Model;
+    parse_model(infile, model, xtag);
+}
+
+void Driver::read_bfile(){
+    if (bfile.empty())
+        records->push_back(CONTINUE);
+    else{
+        ifstream is(bfile.data());
+        split(is, records, ENDOFRECORD);
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//building LP
+
+void Driver::build(){
+    
+/*    if (problem == "tfba")lp = new TfbaLP(max, T, msg_lev, tm_lim, cmin, cmax);
+    else if (thermo)lp = new ThermoLP(max, T, msg_lev, tm_lim, cmin, cmax);
+    else*/
+    if (dosplit)lp = new SplitLP(max, kind, msg_lev, tm_lim);
+    else lp = new MtxLP(max, kind, msg_lev, tm_lim);
+    lp->setMipGap(mip_gap);
+    lp->setVMax(vmax);
+    lp->setEpsilon(epsilon);
+    
+    if (dotrim) {
+        N->trim(externals);
+        //cout << N->cols << endl;
+    }
+    lp->addMatrix(N);
+    lp->externalise(externals);
+    set_objective(target);
+}
+
+void Driver::build_gfa(){ //w/gfa/ build gfa model
+    if (dosplit)lp = new SplitLP(max, kind=MILP, msg_lev, tm_lim);
+    else lp = new MtxLP(max, kind, msg_lev, tm_lim);
+    if (dotrim) N->trim(externals);
+    lp->addMatrix(N, problem);
+//    lp->externalise(externals);
+}
+
+void Driver::set_objective(string line){
+    if (line.empty()) return;
+    obj->clear();
+    parse_sto(line, obj);
+}
+
+//w/gni/ get tissue name for a problem; one problem has one tissue
+void Driver::set_tiss(string line){
+    tiss.clear();
+    if (!line.empty()) tiss=line;
+}
+
+//w/dpa/ get array names for a problem, if not set all arraies well be used;
+void Driver::set_array(string line){
+    arrs.clear();
+    if (!line.empty()) split(&line, &arrs, SPACE);
+    else arrs=dpa->arrName;
+}
+
+void Driver::set_args(string line){
+//    if (line.empty()) return;
+    args.clear();
+    split(&line, &args, SPACE);
+}
+
+void Driver::set_externals(string line, bool on){
+//input: line of space-separated metabolite names, boolean
+//externalise if on=true, internalise if on=false
+    strvec vec;    
+    line.erase(line.find_last_not_of(" \n\r\t")+1);//trim the whitespaces
+    split(&line, &vec, SPACE);//parse the list
+    if (vec.empty())vec = lp->getRowNames();//if the list is empty, apply to all metabolites
+    lp->externalise(vec, on);//done
+}
+
+void Driver::set_externals_gfa(string line){//w/gfa/
+    externals.clear();
+    split(&line, &externals, SPACE);
+}
+
+strvec Driver::get_args(strvec& args, int type){
+    if (args.empty())
+        args = lp->getColNames(type);
+    else if (dotrim){
+        strvec rv;
+        elmap *map = N->map;
+        elmap::const_iterator end = map->end();
+        for (strvec::iterator it = args.begin(); it != args.end(); ++it){
+            if (map->find(lp->getID(*it)) != end)
+                rv.push_back(*it);
+        }
+        args = rv;
+    }
+    return args;
+}
+
+strvec Driver::get_args_gfva(strvec& args){//w/gfa/
+    strvec cols;
+    strvec reacs=model->get_reactions();
+    if (args.empty())
+        cols = reacs;
+    else{
+        for(int i=0;i<args.size();i++){
+            if(find(reacs.begin(),reacs.end(),args[i])!=reacs.end()) cols.push_back(args[i]);
+        }
+    }
+    return cols;
+}
+
+void Driver::get_list_args(strlistvec& rv, strvec& args, char delim){
+    if (args.empty()){
+        strvec genes = model->get_genes();
+        for (strvec::iterator it = genes.begin(); it != genes.end(); ++it)
+            rv.push_back(strvec(1, *it));
+        strvec reacs = lp->getColNames(CONT);
+        for (strvec::iterator it = reacs.begin(); it != reacs.end(); ++it)
+            rv.push_back(strvec(1, *it));
+    }
+    else{
+        for (strvec::iterator it = args.begin(); it != args.end(); ++it){
+            strvec arglist;
+            split(&*it, &arglist, delim);
+            rv.push_back(arglist);
+        }
+    }
+}
+
+void Driver::parse_plot_args(PLOT_ARGS &pa, strvec::const_iterator &it){
+    pa.query = *it++;
+    pa.from = str2double(*it++);
+    pa.to = str2double(*it++);
+    pa.step = str2double(*it++);
+    if ((pa.from > pa.to && pa.step > 0)) throw runtime_error("invalid range, from > to!");
+    if ((pa.from < pa.to && pa.step < 0)) throw runtime_error("invalid range, from < to!");
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//running
+
+void Driver::run(){
+    try{
+        void (Driver::*ptr_solve)();
+
+        if(!infile.empty()) read_model();//w/
+        read_bfile();
+        set_args(arg);
+        time_t t0 = time(NULL);
+        //non LP problems
+        if(problem == "dpasig"){ //w/dpa/---------------- <DPA metatoblite signal> -------------------------
+            dpa->read_arrayExpression(expfile, err_msg);
+            dpa->read_dpaplot(dpafile, err_msg);
+            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_dpa(this, *it)){//set assigned externals
+
+                    dpasig();
+
+                    *out << ENDOFRECORD << endl << endl;
+                }
+            }
+            if (withcomments) *out << COMMENT << "time spent: " << time(NULL) - t0  << endl;
+            out->flush();
+            return;
+        }
+        else if (problem == "show"){
+            *out << *model;
+            return;
+        }
+        else if (problem == "orphans"){
+            model->get_N(N);
+            strvec orphans;
+            N->get_orphans(orphans, args, externals);
+            if (withcomments) *out << COMMENT << orphans.size() << " orphans." << endl;
+            model->print_vec(orphans, out, withcomments);
+            *out << ENDOFRECORD << endl << endl;
+            return;
+        }
+        else if (problem == "cc"){
+            model->get_Nx(N);
+            strvec adj;
+            mtxvec comps;
+            N->connected_components(comps);
+            for (mtxvec::iterator it = comps.begin(); it != comps.end(); ++it){
+                MATRIX comp = *it;
+                if (withcomments) *out << COMMENT << comp.cols.size() << " reactions. " << endl;
+                model->print_vec(comp.cols, out, withcomments);
+                *out << endl;
+//                if (withcomments) *out << COMMENT << comp.rows.size() << " metabolites." << endl;
+//                model->print_vec(comp.rows, out, withcomments);
+//                *out << endl;
+            }
+            *out << ENDOFRECORD << endl << endl;
+            return;
+        }
+        //LP problems
+        if (problem == "uncons"){
+            model->get_Nt(N);
+            ptr_solve = &Driver::uncons;
+        }
+        else {
+            if (ext.empty()) model->get_externals(externals);
+            else split(&ext, &externals, SPACE);//parse the list of externals supplied with the command line
+
+            if (problem == "objvalue")
+                ptr_solve = &Driver::objval;
+            else if (problem == "objstat")
+                ptr_solve = &Driver::objstat;
+            else if (problem == "fba")
+                ptr_solve = &Driver::fba;
+            else if (problem == "ko")
+                ptr_solve = &Driver::ko;
+            else if (problem == "koGrb")//w/
+                ptr_solve = &Driver::koGrb;
+            else if (problem == "fva")
+                ptr_solve = &Driver::fva;
+            else if (problem == "fsa")
+                ptr_solve = &Driver::fsa;
+            else if (problem == "plot")
+                ptr_solve = &Driver::plot;
+            else if (problem == "plot3d")
+                ptr_solve = &Driver::plot3D;
+            else if (problem == "em"){
+                dosplit = true;
+                ptr_solve = &Driver::elmode;
+//                if (kind == SMPLX) kind = EXACT;
+            }
+            else if (problem == "live")
+                ptr_solve = &Driver::live;
+            else if (problem == "ess")
+                ptr_solve = &Driver::essentials;
+            else if (problem == "mss"){
+                dosplit = true;
+                ptr_solve = &Driver::mss;
+                kind = MILP;
+            }
+            else if (problem == "mps"){
+                dosplit = true;
+                ptr_solve = &Driver::mps;
+                kind = MILP;
+            }
+            else if(problem =="troff"){ //Zakrzewski's change
+                ptr_solve = &Driver::tradeoff; //Zakrzewski's change
+            } //Zakrzewski's change
+//            else if (problem == "tfba"){
+//                thermo = true;
+//                ptr_solve = &Driver::tfba;
+//            }
+            else if (problem == "bottlenecks")
+                ptr_solve = &Driver::bottlenecks;
+//            else if (problem == "tmfa"){
+//                thermo = true;
+//                ptr_solve = &Driver::tmfa;
+//            }
+//            else if (problem == "tva"){
+//                thermo = true;
+//                ptr_solve = &Driver::tva;
+//            }
+            else if (problem == "test"){
+                //thermo = true;
+                ptr_solve = &Driver::test;
+            }
+            else if (problem == "gfaa"){ //w/gfa/
+                max=1; kind=MILP;
+                ptr_solve = &Driver::gfaa;
+            }
+            else if (problem == "gfaaGrb"){ //w/gfa/
+                grbmod->setOptDir(GrbMax);
+                grbmod->setPara_mip();
+                ptr_solve = &Driver::gfaaGrb;
+            }
+            else if (problem == "gfva"){ //w/gfa/
+                max=1; kind=MILP;
+                ptr_solve = &Driver::gfva;
+            }
+            else if (problem == "gfvaGrb"){ //w/gfa/
+                grbmod->setOptDir(GrbMax);
+                grbmod->setPara_mip();
+                ptr_solve = &Driver::gfvaGrb;
+            }
+            else if (problem == "sgni"){ //w/gni/
+                max=1; kind=MILP;
+                ptr_solve = &Driver::sgni;
+            }
+            else if (problem == "sgniGrb"){ //w/gni/
+                grbmod->setOptDir(GrbMax);
+                grbmod->setPara_mip();
+                ptr_solve = &Driver::sgniGrb;
+            }
+            else if (problem == "wgni"){ //w/gni/
+                max=1; 
+//                ptr_solve = &Driver::wgni;
+            }
+            else if (problem == "wgniGrb"){ //w/gni/
+                grbmod->setOptDir(GrbMax);
+                grbmod->setPara_mip();
+//                ptr_solve = &Driver::wgniGrb;
+            }
+            else if (problem == "essGrb"){ //w/gni/
+                grbmod->setOptDir(GrbMax);
+//                grbmod->setPara_mip();
+                ptr_solve = &Driver::essGrb;
+            }
+            else if (problem == "dpaplot"){ //w/gni/
+                max=1;
+                ptr_solve = &Driver::dpaplot;
+            }
+            else if (problem == "dpaplotGrb"){ //w/gni/
+                grbmod->setOptDir(GrbMax);
+                ptr_solve = &Driver::dpaplotGrb;
+            }
+            else
+                throw runtime_error(string("No such program: ") + problem);
+        }
+
+        //if (withcomments) *out << COMMENT << problem << endl << endl;
+
+        //w/gfa/--------- gfva/gfba problem with Gurobi------------------------------------------
+        if (problem == "gfaaGrb"){
+            gfa->read_expression(expfile, err_msg);
+//            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_gfa(this, (*records)[0])){
+                    if(tiss.empty()) tiss=gfa->tisName[0];
+
+                    int Ti=gfa->get_tiss_index(tiss);
+                    gfa->set_gfa_model(Ti, model, obj, Rstate); //set tissue model
+                    grbmod->build_gfa(model);
+
+                    grbmod->externalise(externals, true);
+                    (*this.*ptr_solve)();
+                    grbmod->externalise(externals, false);
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write) grbmod->write("GRBmodel.LP");
+                }
+//            }
+        }
+        //w/gfa/--------- gfva/gfba problem ------------------------------------------
+        else if (problem == "gfaa"){
+            gfa->read_expression(expfile, err_msg);
+//            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_gfa(this, (*records)[0])){
+                    if(tiss.empty()) tiss=gfa->tisName[0];//set default tissue name
+
+                    int Ti=gfa->get_tiss_index(tiss);
+                    gfa->set_gfa_model(Ti, model, obj, Rstate); //set tissue model
+                    model->get_Nx(N);
+                    build_gfa();
+
+                    lp->externalise(externals, true);
+                    (*this.*ptr_solve)();
+                    lp->externalise(externals, false);
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write) lp->writeLP("LP.txt");
+                }
+//            }
+        }
+        //w/gfa/ Shlomi's method, get flux variability after fixing MILP binary
+        else if(problem == "gfvaGrb"){
+            gfa->read_expression(expfile, err_msg);
+//            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_gfa(this, (*records)[0])){
+                    if(tiss.empty()) tiss=gfa->tisName[0];
+
+                    int Ti=gfa->get_tiss_index(tiss);
+                    gfa->set_gfa_model(Ti, model, obj, Rstate); //set tissue model
+                    grbmod->build_gfa(model);
+
+                    grbmod->externalise(externals, true);
+                    (*this.*ptr_solve)();
+                    grbmod->externalise(externals, false);
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write) grbmod->write("GRBmodel.LP");
+                }
+//            }
+        }
+        else if(problem == "gfva"){//w/gfa/ Shlomi's method, get flux variability after fixing MILP binary
+            gfa->read_expression(expfile, err_msg);
+//            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_gfa(this, (*records)[0])){
+                    if(tiss.empty()) tiss=gfa->tisName[0];
+
+                    int Ti=gfa->get_tiss_index(tiss);
+                    gfa->set_gfa_model(Ti, model, obj, Rstate); //set tissue model
+                    model->get_Nx(N);
+                    build_gfa();
+
+                    lp->externalise(externals, true);
+                    (*this.*ptr_solve)();
+                    lp->externalise(externals, false);
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write) lp->writeLP("LP.txt");
+                }
+//            }
+        }
+        else if(problem == "sgni"){ //w/gni/---------------- <SrongGNI> ------------------------------
+            gni->gene_koreacs(model);
+//            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_gni(this, model, (*records)[0])){
+                    del_exts();
+                    gni->set_blp_model(model, obj);//set blp model
+                    gni->set_ntsa(externals);
+                    model->get_Nx(N);
+                    build_gfa();
+                    gni->fix_xt_abs(model,lp);
+//                    lp->externalise(externals, true);
+                    (*this.*ptr_solve)();
+//                    lp->externalise(externals, false);
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write) lp->writeLP("LP.txt");
+                }
+//            }
+        }
+        else if(problem == "sgniGrb"){ //w/gni/---------------- <SrongGNI> ------------------------------
+                gni->gene_koreacs(model);
+//                for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                    if (read_record_gni(this, model, (*records)[0])){
+                        del_exts();
+                        gni->set_blp_model(model, obj);//set blp model
+                        grbmod->build_sgni(model, obj);
+                        gni->set_ntsa(externals);
+                        gni->fix_xt_abs_grb(grbmod);
+
+                        (*this.*ptr_solve)();
+
+                        *out << ENDOFRECORD << endl << endl;
+                        if (write) grbmod->write("GRBmodel.LP");
+                    }
+//                }
+        }
+        else if(problem == "wgni"){ //w/gni/---------------- <WeakGNI> ------------------------------
+            gni->gene_koreacs(model);
+            del_exts();
+            Matrix* N1 =  new Matrix;
+            model->get_Nx(N1);
+            MtxLP* mlp = new MtxLP(max, kind, msg_lev, tm_lim);
+            mlp->addMatrix(N1);
+//            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_gni(this, model, (*records)[0])){
+                    gni->set_blp_model(model, obj);//set blp model
+                    gni->set_ntsa(externals);
+                    gni->fix_xt_abs(model,mlp);
+                    model->get_Nx(N);
+                    build_gfa();
+                    gni->fix_xt_abs(model,lp);
+//                    lp->externalise(externals, true);
+//                    (*this.*ptr_solve)(MtxLP* mlp);
+                    wgni(mlp);
+//                    lp->externalise(externals, false);
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write) lp->writeLP("LP.txt");
+                }
+//            }
+        }
+        else if(problem == "wgniGrb"){ //w/gni/---------------- <WeakGNI> ------------------------------
+                gni->gene_koreacs(model);
+                del_exts();
+                GRB_Mod* mod=new GRB_Mod(*env);
+                mod->build(model);
+                mod->setOptDir(GrbMax);
+//                for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                    if (read_record_gni(this, model, (*records)[0])){
+                        gni->set_blp_model(model, obj);//set blp model
+                        grbmod->build_sgni(model, obj);
+                        gni->set_ntsa(externals);
+                        gni->fix_xt_abs_grb(grbmod);
+                        gni->fix_xt_abs_grb(mod);
+  
+                        wgniGrb(mod);
+//                        wgniGrb1(mod);
+
+                        *out << ENDOFRECORD << endl << endl;
+                        if (write) grbmod->write("GRBmodel.LP");
+                    }
+//                }
+        }
+        else if(problem == "essGrb"){ //w/gni/---------------- <essGrb> ------------------------------
+                gni->gene_koreacs(model);       
+                for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                    if (read_record_gni(this, model, *it)){
+                        del_exts();
+                        grbmod->build(model);
+                        gni->map_xt_reac(model, externals);
+
+                        essGrb();
+
+                        *out << ENDOFRECORD << endl << endl;
+                        if (write) grbmod->write("GRBmodel.LP");
+                    }
+                }
+        }
+        else if(problem == "koGrb"){ //w/---------------- <koGrb> ------------------------------
+                for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                    del_exts();
+                    grbmod->build(model);
+                    if (read_record_Grb(this, *it)){
+                        grbmod->setObjs(obj);
+                        (*this.*ptr_solve)();
+
+                        *out << ENDOFRECORD << endl << endl;
+                        if (write) grbmod->write("GRBmodel.LP");
+                    }
+                }
+        }
+        else if(problem == "dpaplot"){ //w/dpa/---------------- <DPA producibility plot> -------------------------
+            dpa->gene_koreacs(model);
+//            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_gfa(this, (*records)[0])){//set assigned externals
+                    del_exts();
+                    model->get_Nx(N);
+                    build_gfa();
+//                    lp->externalise(externals, true);
+                    (*this.*ptr_solve)();
+//                    lp->externalise(externals, false);
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write) lp->writeLP("LP.txt");
+                }
+//            }
+        }
+        else if(problem == "dpaplotGrb"){ //w/dpa/---------------- <DPA producibility plot> -------------------------
+            dpa->gene_koreacs(model);
+//            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record_gfa(this, (*records)[0])){//set assigned externals
+                    del_exts();
+                    grbmod->build(model);
+
+                    (*this.*ptr_solve)();
+
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write) grbmod->write("GRBmodel.LP");
+                }
+//            }
+        }        
+        else{ //----------------other problem----------------------------------------
+            model->get_Nx(N);
+            build();
+            for (strvec::iterator it = records->begin(); it != records->end(); ++it){
+                if (read_record(this, *it)){
+                    //if (withcomments) *out << COMMENT << *obj << TAB << args << endl;
+                    lp->update();
+                    (*this.*ptr_solve)();
+                    *out << ENDOFRECORD << endl << endl;
+                    if (write)
+                        lp->writeLP("LP.txt");
+                }
+            }
+        }
+        if (withcomments) *out << COMMENT << "time spent: " << time(NULL) - t0  << endl;
+        out->flush();
+    }
+    catch (exception &e){
+        cerr << e.what() << endl;
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////
+//solvers
+void Driver::objval(){
+    *out << lp->getOptVal(obj, max, presolve);
+}
+
+void Driver::objstat(){
+    OBJSTAT objstat;
+    lp->getOptObjStat(objstat, obj, max, presolve);
+    *out << objstat;
+}
+
+void Driver::fba(){
+    stomap* sol = new stomap;
+    lp->getOptSol(sol, obj, max, (kind == MILP) ? INT : CONT, withzeroes, presolve);
+    if (withcomments) *out << COMMENT << *lp << ' ' << '(' << *obj << ')' << endl;
+    model->print_sto(sol, out, withcomments);
+    delete sol;    
+}
+
+void Driver::ko(){
+    objstatvec ovec;
+    strlistvec qlists, blocklists;
+    get_list_args(qlists, args);
+//    for(int i=0;i<qlists.size();i++) {//t/
+//        strvec list=qlists[i];
+//        for(int i=0;i<list.size();i++) cout<<list[i]<<endl;//t/
+//        cout<<endl;
+//    }//t/
+    model->reaclists_to_block(blocklists, qlists);
+//    for(int i=0;i<blocklists.size();i++) {//t/
+//        strvec list=blocklists[i];
+//        for(int i=0;i<list.size();i++) cout<<list[i]<<endl;//t/
+//        cout<<endl;
+//    }//t/
+    lp->ko(ovec, obj, blocklists, max, presolve);
+    for (int i = 0; i < ovec.size(); i++){
+        *out << qlists[i] << TAB << ovec[i];
+        if (withcomments) *out << TAB << COMMENT << blocklists[i];
+        *out << endl;
+    }
+}
+
+void Driver::fva(){
+    args = get_args(args);
+    va();
+}
+
+void Driver::va(){
+    rangemap *rm = new rangemap;
+    OBJSTAT objrange;
+    if (obj->size() > 0)
+        lp->getOptRanges(rm, objrange, obj, max, args, presolve);
+    else
+        lp->getRanges(rm, args, presolve);
+    if (withcomments) *out << COMMENT << objrange << " (" << *obj << ')' << endl;
+    print_rangemap(out, rm, model);
+    delete rm;
+}
+
+void Driver::fsa(){
+    double const1, const2;
+    stomap *rv = new stomap;
+
+    if (args.size() < 2) throw runtime_error("invalid number of arguments, must be at least two!");
+    strvec::iterator it = args.begin();
+    const1 = str2double(*it);
+    it = args.erase(it);
+    const2 = str2double(*it);
+    it = args.erase(it);
+    args = get_args(args);
+    
+    lp->getShifts(rv, obj, const1, const2, args, presolve);
+    if (withcomments) *out << COMMENT << *obj << endl;
+    model->print_sto(rv, out, withcomments);
+    delete rv;
+}
+
+void Driver::plot(){
+    if (args.size() != 4) throw runtime_error("invalid list of arguments, must be 'query from to step'!");
+    pointvec *plot = new pointvec;
+    strvec::const_iterator it = args.begin();
+    PLOT_ARGS yargs;
+    parse_plot_args(yargs, it);
+    lp->plot(plot, obj, yargs, max, presolve);
+    if (withcomments) *out << COMMENT << yargs.query << SPACE << TAB << *obj << endl;
+    *out << *plot;
+    delete plot;
+}
+
+void Driver::plot3D(){
+    if (args.size() != 8) throw runtime_error("invalid list of arguments, must be 'query from to step query from to step'!");
+    pointvec *plot = new pointvec;
+    strvec::const_iterator it = args.begin();
+    PLOT_ARGS xargs;
+    parse_plot_args(xargs, it);
+    PLOT_ARGS yargs;
+    parse_plot_args(yargs, it);
+    lp->plot3D(plot, obj, xargs, yargs, max, presolve);
+    if (withcomments) *out << COMMENT << xargs.query << SPACE << TAB << yargs.query << SPACE << TAB << *obj << endl;
+    *out << *plot;
+    delete plot;
+}
+
+void Driver::uncons(){
+    strvec uncons = lp->unconsRows(presolve);
+    if (withcomments) *out << COMMENT << uncons.size() << " unconserved metabolites." << endl;
+    model->print_vec(uncons, out, withcomments);
+}
+
+void Driver::elmode(){
+    if (kind == MILP) vmax = VMAX;
+    long num = INT_MAX;
+    switch(args.size()){
+        case 0: case 1: break;
+        case 3:
+            vmax = str2double(args[2]);
+            if (vmax < 1)
+                throw runtime_error(err_msg + "vmax must be >= 1");
+            lp->setVMax(vmax);
+            args.pop_back();
+        case 2:
+            num = (int)str2double(args[1]);
+            if (num < 0) num = INT_MAX;
+            args.pop_back();
+            break;
+        default:
+            throw runtime_error(err_msg + "invalid number of arguments, must be 0, 1 or 2!");
+    }
+    solvec solutions;
+    int n = 1;
+    ((SplitLP*)lp)->elModes(solutions, num, args);
+    for (solvec::iterator it = solutions.begin(); it != solutions.end(); ++it){
+        stomap sol = *it;
+        if (withcomments) *out << COMMENT << n++ << ": " << sol.size() << " reactions" << " (" << args << "):" << endl;
+        model->print_sto(&sol, out, withcomments);
+        *out << endl;
+    }
+}
+
+void Driver::live(){
+    args = get_args(args);
+    strvec lives = lp->getUnblockedVars(args, presolve);
+    if (withcomments) *out << COMMENT << lives.size() << " live reactions." << endl;
+    model->print_vec(lives, out, withcomments);
+}
+
+void Driver::essentials(){
+    args = get_args(args);
+    strvec essentials = lp->getEssentials(obj, args, max, presolve);
+    if (withcomments) *out << COMMENT << essentials.size() << " essential reactions." << endl;
+    model->print_vec(essentials, out, withcomments);
+}
+
+void Driver::mss(){
+    mxs(-1);
+}
+
+void Driver::mps(){
+    mxs(1);
+}
+
+void Driver::mxs(int dir){
+    solvec solutions;
+    double vmax = 1;
+    long nmax = LONG_MAX;
+    if (args.size() > 1)
+        vmax = str2double(args[1]);
+    if (args.size() > 0){
+        nmax = (long)str2double(args[0]);
+        if (nmax < 0) nmax = LONG_MAX;
+    }
+    lp->setVMax(vmax);
+    ((SplitLP*)lp)->minExchangeSets(solutions, obj, dir, nmax);
+    int n = 1;
+    string sres = dir < 0 ? "substrates" : "products";
+    for (solvec::iterator it = solutions.begin(); it != solutions.end(); ++it){
+        stomap sol = *it;
+        int npos = 0;
+        for (stomap::iterator jt = sol.begin(); jt != sol.end(); ++jt )
+            if (jt->second / dir > 0)
+                npos++;
+        if (withcomments) *out << COMMENT << n++ << ": " << npos << " " << sres << " (" << *obj << "):" << endl;
+        model->print_conv(&sol, out);
+        *out << endl;
+    }
+}
+
+//void Driver::tmfa(){
+//    stomap* sol = new stomap;
+//    const int ntypes = 4;
+//    int types[ntypes] = {CONT, LNCONC_TYPE, DELTA_TYPE, INT};
+//    string typenames[ntypes] = {"fluxes", "concentrations", "delta G-s", "integers"};
+//    lp->optimise(obj, max, presolve);
+//    if (withcomments) *out << COMMENT << *lp << ' ' << '(' << *obj << ')' << endl;
+//    for (int i = 0; i < ntypes - 1; ++i){
+//        lp->getSolution(sol, types[i], bool(i));
+//        if (withcomments) *out << COMMENT << sol->size() << " " << typenames[i]  << " (" << *obj << "):" << endl;
+//        model->print_sto(sol, out, !bool(i));
+//        *out << endl;
+//        sol->clear();
+//    }
+//    delete sol;
+//}
+
+void Driver::bottlenecks(){
+    lp->optimise(obj, max, presolve);
+    double objval = lp->getObjValue();
+    if (withcomments) *out << COMMENT << "result: " << objval << endl;
+    strvec bottlenecks;
+    if (objval == 0){
+        args = get_args(args);
+        bottlenecks = lp->getBottleNecks(obj, args, max, presolve);
+    }
+    if (withcomments){
+        string s = thermo ? " thermodynamic " : " directional ";
+        *out << COMMENT << bottlenecks.size() << s << "bottlenecks." << endl;
+    }       
+    model->print_vec(bottlenecks, out, withcomments);
+}
+//
+//void Driver::tva(){
+//    args = get_args(args, LNCONC_TYPE);
+//    va();
+//}
+
+void Driver::test(){
+
+}
+
+void Driver::tradeoff(){ //Method added by Zakrzewski
+    if(args.size() < 1 )throw runtime_error("invalid list of arguments. At least one arguments required (the second objective)");
+    if(args.size() > 2 )throw runtime_error("Too many arguments provided");
+    string secondObj  =  args[0];
+    //cout << "seoncdObj: " << secondObj;
+    double resolution = 100;
+    if(args.size() ==2) resolution = str2double(args[1]);
+    if(resolution <= 0)throw runtime_error("Resolution must be higher than zero");
+    stomap* sol = new stomap;
+     lp->getOptSol(sol, obj, max, (kind == MILP) ? INT : CONT, withzeroes, presolve);
+     double maximalFirstObj =lp->getObjValue();
+     //string firstObjName = target;// Provisional - it will not parse weighted objective correctly
+     string firstObjName = obj->begin()->first;
+     set_objective(secondObj);    
+    delete sol;
+    //cout << "\n" << "maxFirst Obj: " << maximalFirstObj;
+    pointvec *plot = new pointvec;
+    PLOT_ARGS yargs;
+    yargs.query = firstObjName;
+    yargs.from  =  0;
+    yargs.to    = maximalFirstObj;
+    yargs.step  = maximalFirstObj/resolution;
+    lp->plot(plot, obj, yargs, max, presolve);
+    if (withcomments) *out << COMMENT << yargs.query << SPACE << TAB << *obj << endl;
+    *out << *plot;
+    delete plot;
+}
+
+
+void Driver::gfaa(){//w/gfa/
+    strvec reacs, genes;
+//    get_args_gfa(reacs, genes);
+    gfa->get_args_gfa(model, args, reacs, genes);
+    //---------------------flux activity for reactions-----------------------
+    reac_rangemap *Rrm = new reac_rangemap;
+    for(int i=0;i<reacs.size();i++){// compute flux activity and direction for reactions
+    	string Rn=reacs[i];
+        (*Rrm)[Rn]=gfa->compute_reac_fluxact(Rn, model, lp, obj, presolve);
+    }
+    
+    //---------------------flux activity for genes---------------------------
+    gene_rangemap *Grm = new gene_rangemap;
+    for(int i=0;i<genes.size();i++){
+    	string Gn=genes[i];
+        strvec Rs=gfa->get_geneReacs(Gn);
+        (*Grm)[Gn]=gfa->compute_gene_fluxact(Rrm, Rs, model, lp, obj, presolve);
+    }
+//    print_rangemap_gfva(out, Rrm, Grm, reacs, model, gfa, gfa->get_tiss_index(tiss), Rstate);
+    print_rangemap_gfva_tab(out, Rrm, Grm, reacs, model, gfa, tiss, gfa->get_tiss_index(tiss), Rstate);
+}
+
+void Driver::gfaaGrb(){//w/gfa/
+//    grbmod->write("X_grbmod_gfa.LP");//t/
+    strvec reacs, genes;
+    gfa->get_args_gfa(model, args, reacs, genes);
+    //---------------------flux activity for reactions-----------------------
+    reac_rangemap *Rrm = new reac_rangemap;
+    for(int i=0;i<reacs.size();i++){// compute flux activity and direction for reactions
+    	string Rn=reacs[i];
+        (*Rrm)[Rn]=gfa->compute_reac_fluxact_grb(Rn, model, grbmod);
+    }
+
+    //---------------------flux activity for genes---------------------------
+    gene_rangemap *Grm = new gene_rangemap;
+    for(int i=0;i<genes.size();i++){
+    	string Gn=genes[i];
+        strvec Rs=gfa->get_geneReacs(Gn);
+        (*Grm)[Gn]=gfa->compute_gene_fluxact_grb(Rrm, Rs, model, grbmod);
+    }
+//    print_rangemap_gfva(out, Rrm, Grm, reacs, model, gfa, gfa->get_tiss_index(tiss), Rstate);
+    print_rangemap_gfva_tab(out, Rrm, Grm, reacs, model, gfa,  tiss, gfa->get_tiss_index(tiss), Rstate);
+    delete Rrm;
+    delete Grm;
+}
+
+void Driver::gfva(){//w/gfa/
+    max=GLP_MAX;
+    args = get_args_gfva(args);
+//    for(int i=0;i<args.size();i++) cout<<args[i]<<endl;//tst/
+    rangemap *rm = new rangemap;
+    OBJSTAT objrange;
+    if (obj->size() > 0){
+        lp->getOptRanges_gfa(rm, objrange, obj, args, presolve);
+    }else
+        lp->getRanges(rm, args, presolve);
+    if (withcomments) *out << COMMENT << objrange << " (" << *obj << ')' << endl;
+    print_rangemap_gfva(out, rm, model, Rstate);
+    delete rm;
+}
+
+void Driver::gfvaGrb(){//w/gfa/
+    args = get_args_gfva(args);
+//    for(int i=0;i<args.size();i++) cout<<args[i]<<endl;//t/
+    rangemap *rm = new rangemap;
+    OBJSTAT objrange;
+//    if (obj->size() > 0){
+    grbmod->getOptRanges_gfa(rm, objrange, args);
+//    }else
+//        lp->getRanges(rm, args, presolve);
+    if (withcomments) *out << COMMENT << objrange << " (" << *obj << ')' << endl;
+    print_rangemap_gfva(out, rm, model, Rstate);
+    delete rm;
+}
+
+void Driver::sgni(){//w/gni/ strong gni
+    strvec gns;
+    if(args.size()>0){
+        gns=args;
+    }else gns=gni->genes;
+    for(int i=0;i<gns.size();i++){
+        string Gn=gns[i];
+        strvec rkos=gni->getRkos(Gn);
+        sgniOut[Gn].rkos=rkos;
+        kobds ko_rc;
+        stomap ko_obj;
+//        printSystem(lp);//t/
+        gni->ko_blp(lp, obj, rkos, ko_rc, ko_obj);
+//        printSystem(lp);//t/
+        BLPSOL bsol;
+        stomap medium;//growth medium
+        blp_fba(lp, bsol, medium);
+        sgniOut[Gn].bsol=bsol;
+        sgniOut[Gn].medium=medium;        
+        //-----------------------------------------------------
+        if(bsol.status=="OPTIMAL" && bsol.level>=0.2){//if the gene is essential under the growth medium
+            for (stomap::iterator it = medium.begin(); it != medium.end(); ++it){
+                string nt=it->first;
+                string ce="ce_"+nt;
+                int ceval=it->second;
+                if(ceval==0){//judging if GNI-SN (Strong Negative)
+                    lp->setColBnds(ce, 1,1);
+                    blp_fba(lp, bsol);
+                    if(bsol.status!="OPTIMAL" || bsol.level<0.2)
+                        sgniOut[Gn].sn.push_back(nt);
+//                    blp->setColBnds(ce, 0,1);
+                    lp->setColKind(ce, INT);
+                }
+                else if(ceval==1){//judging if GNI-SP (Strong Positive)
+                    lp->setColBnds(ce, 0,0);
+                    blp_fba(lp, bsol);
+                    if(bsol.status!="OPTIMAL" || bsol.level<0.2)
+                        sgniOut[Gn].sp.push_back(nt);
+//                    blp->setColBnds(ce, 0,1);
+                    lp->setColKind(ce, INT);
+                }
+            }
+        }
+        gni->rko_blp(lp, obj, ko_rc, ko_obj);
+    }
+    print_sgni(out, sgniOut);
+}
+
+void Driver::sgniGrb(){//w/gni/ strong gni using Gurobi
+//    grbmod->write("X_grbmod.LP");//t/
+    strvec gns;
+    if(args.size()>0){
+        gns=args;
+    }else gns=gni->genes;
+    for(int i=0;i<gns.size();i++){
+        string Gn=gns[i];
+        strvec rkos=gni->getRkos(Gn);
+        sgniOut[Gn].rkos=rkos;
+//        grbKoRow kor;
+//        grbKoCol koc;
+//        grbmod->ko_blp(rkos, rnts, kor, koc);
+        grbKos kos;
+        grbmod->ko_blp(rkos, gni->rnts, kos);
+
+//        char di = (char)(((int)'0')+i);//t/
+//        string dig=string(1,di);//t/
+//        grbmod->write("X_grbmod_ko"+dig+".LP");//t/
+
+        BLPSOL bsol;
+        stomap medium;//growth medium
+        blp_fba_grb(grbmod, bsol, medium);
+        sgniOut[Gn].bsol=bsol;
+        sgniOut[Gn].medium=medium;
+        //-----------------------------------------------------
+        if(bsol.status=="OPTIMAL" && bsol.level>=0.2){//if the gene is essential under the growth medium
+            for (stomap::iterator it = medium.begin(); it != medium.end(); ++it){
+                string nt=it->first;
+                string ce="ce_"+nt;
+                int ceval=it->second;
+                if(ceval==0){//judging if GNI-SN (Strong Negative)
+                    grbmod->setVarBnds(ce, 1, 1);
+                    blp_fba_grb(grbmod, bsol);
+                    if(bsol.status!="OPTIMAL" || bsol.level<0.2)
+                        sgniOut[Gn].sn.push_back(nt);
+                    grbmod->setVarBnds(ce, 0, 1);
+                }
+                else if(ceval==1){//judging if GNI-SP (Strong Positive)
+                    grbmod->setVarBnds(ce, 0, 0);
+                    blp_fba_grb(grbmod, bsol);
+                    if(bsol.status!="OPTIMAL" || bsol.level<0.2)
+                        sgniOut[Gn].sp.push_back(nt);
+                    grbmod->setVarBnds(ce, 0, 1);
+                }
+            }
+        }
+//        grbmod->rko_blp(kor, koc);
+        grbmod->rko_blp(kos);
+//        grbmod->write("X_grbmod_rko"+dig+".LP");//t/
+    }
+    print_sgni(out, sgniOut);
+}
+
+void Driver::wgni(MtxLP* mlp){//w/gni/ weak gni using Gurobi
+    stomap *mobj = new stomap;
+    (*mobj)["BIOMASS"]=1;
+    objstatvec wtbm;//BIOMASS fba for wild type over all rmeds
+    randmeds rmeds=gni->rand_meds();
+    for(int s=0;s<rmeds.size();s++){
+        intvec rmed=rmeds[s];
+        OBJSTAT solwt=fba_med(mlp,rmed,mobj);
+        wtbm.push_back(solwt);
+    }
+
+    strvec gns;
+    if(args.size()>0){
+        gns=args;
+    }else gns=gni->genes;
+//    for (gene_reactions::iterator it = geneR.begin(); it != geneR.end(); ++it){
+    for(int i=0;i<gns.size();i++){
+        string Gn=gns[i];
+        strvec rkos=gni->getRkos(Gn);
+
+        if(rkos.size()<1) continue;
+        kobds ko_rc;
+        stomap ko_obj;
+//        printSystem(lp);//t/
+        gni->ko_blp(lp, obj, rkos, ko_rc, ko_obj);
+
+        BLPSOL bsol;
+        stomap medium;//growth medium
+        kind=MILP;
+        blp_fba(lp, bsol, medium);
+        if(bsol.status=="OPTIMAL" && bsol.level>=0.2){//if the gene is essential under a growth medium
+            WGNI1 wgni;
+            wgni.Gn=Gn;
+            wgni.rkos=rkos;
+            wgni.Ness=0;
+
+            kobds mko_rc;
+            gni->ko_mlp(mlp, rkos, mko_rc);
+
+            for(int s=0;s<rmeds.size();s++){
+                intvec rmed=rmeds[s];
+                OBJSTAT solko=fba_med(mlp,rmed,mobj);
+                if(wtbm[s].status==GLP_OPT && solko.status==GLP_OPT){
+                    double level;
+                    if(wtbm[s].objval-solko.objval<1e-10) level=0;
+                    else level=(wtbm[s].objval-solko.objval)/wtbm[s].objval;
+                    if(level>=0.2){
+                        wgni.Ness++;
+                        for(int i=0;i<rmed.size();i++){
+                            string nt=gni->nts[i];
+                            if(rmed[i]==1) wgni.nts[nt].Np++;
+                            else wgni.nts[nt].Nn++;
+                        }
+                    }
+                }
+            }
+//            wgni.pval=wgni.Ness==0?1:gsl_cdf_binomial_Q(wgni.Ness-1, 0.01, rmeds.size());
+            wgniOut1.push_back(wgni);
+            gni->rko_mlp(mlp, mko_rc);
+
+        }
+        gni->rko_blp(lp, obj, ko_rc, ko_obj);
+    }//-------------------------------------------------------------------------------
+    sort(wgniOut1.begin(), wgniOut1.end(), myfunc_wgni);
+    print_wgni1(out, wgniOut1, gni->nts, rmeds.size());
+}
+
+void Driver::wgniGrb(GRB_Mod* mod){//w/gni/ weak gni using Gurobi
+//    grbmod->write("X_grbmod.LP");//t/
+//    mod->write("X_mod.LP");//t/
+    mod->setObj("BIOMASS", 1);
+    objstatvec wtbm;//BIOMASS fba for wild type over all rmeds
+    randmeds rmeds=gni->rand_meds();
+    for(int s=0;s<rmeds.size();s++){
+        intvec rmed=rmeds[s];
+        OBJSTAT solwt=fba_med_grb(mod,rmed);
+        wtbm.push_back(solwt);
+//        for(int i=0;i<rmed.size();i++){//t/
+//            cout<<rmed[i]<<',';
+//        }
+//        cout<<endl;//t/
+    }
+
+    strvec gns;
+    if(args.size()>0){
+        gns=args;
+    }else gns=gni->genes;
+//    for (gene_reactions::iterator it = geneR.begin(); it != geneR.end(); ++it){
+    for(int i=0;i<gns.size();i++){
+        string Gn=gns[i];
+        strvec rkos=gni->getRkos(Gn);
+
+        if(rkos.size()<1) continue;
+//        grbKoRow kor;
+//        grbKoCol koc;
+//        grbmod->ko_blp(rkos, rnts, kor, koc);
+        grbKos kos;
+        grbmod->ko_blp(rkos, gni->rnts, kos);
+//        char di = (char)(((int)'0')+i);//t/
+//        string dig=string(1,di);//t/
+//        grbmod->write("X_grbmod_ko"+dig+".LP");//t/
+
+        BLPSOL bsol;
+        stomap medium;//growth medium
+        blp_fba_grb(grbmod, bsol, medium);
+        if(bsol.status=="OPTIMAL" && bsol.level>=0.2){//if the gene is essential under a growth medium
+            WGNI1 wgni;
+            wgni.Gn=Gn;
+            wgni.rkos=rkos;
+            wgni.Ness=0;
+//            grbKoCol mkoc;
+//            mod->ko_mlp(rkos, mkoc);
+//            mod->write("X_mod_ko"+dig+".LP");//t/
+
+            for(int i=0;i<rkos.size();i++){//ko_mlp
+                string Rn=rkos[i];
+                mod->setVarBnds(Rn, 0, 0);
+            }
+
+
+            for(int s=0;s<rmeds.size();s++){
+                intvec rmed=rmeds[s];
+                OBJSTAT solko=fba_med_grb(mod,rmed);
+                if(wtbm[s].status==GRB_OPTIMAL && solko.status==GRB_OPTIMAL){
+                    double level;
+                    if(wtbm[s].objval-solko.objval<1e-10) level=0;
+                    else level=(wtbm[s].objval-solko.objval)/wtbm[s].objval;
+                    if(level>=0.2){
+                        wgni.Ness++;
+                        for(int i=0;i<rmed.size();i++){
+                            string nt=gni->nts[i];
+                            if(rmed[i]==1) wgni.nts[nt].Np++;
+                            else wgni.nts[nt].Nn++;
+                        }
+                    }
+                }
+            }
+//            wgni.pval=wgni.Ness==0?1:gsl_cdf_binomial_Q(wgni.Ness-1, 0.01, rmeds.size());
+            wgniOut1.push_back(wgni);
+//            mod->rko_mlp(mkoc);
+//            mod->write("X_mod_rko"+dig+".LP");//t/
+
+            for(int i=0;i<rkos.size();i++){//rko_mlp
+                string Rn=rkos[i];
+                Reaction* reac=model->get_reac(Rn);
+                double lb=reac->get_lb();
+                double ub=reac->get_ub();
+                mod->setVarBnds(Rn, lb, ub);
+            }
+
+        }
+//        grbmod->rko_blp(kor, koc);
+        grbmod->rko_blp(kos);
+//        grbmod->write("X_grbmod_rko"+dig+".LP");//t/
+    }//-------------------------------------------------------------------------------
+    sort(wgniOut1.begin(), wgniOut1.end(), myfunc_wgni);
+    print_wgni1(out, wgniOut1, gni->nts, rmeds.size());
+}                     
+
+
+void Driver::wgniGrb1(GRB_Mod* mod){//w/gni/ weak gni using Gurobi without judging if the gene is essential under a growth medium
+//    strvec gns1;//t/test number of essential genes which have koreactions
+//    gns1=args;
+//    for(int i=0;i<gns1.size();i++){
+//        string Gn=gns1[i];
+//        strvec rkos=gni->getRkos(Gn);
+//        if(rkos.size()>0) *out<<Gn<<endl;
+//        rkos.clear();
+//    }//t/
+
+//    grbmod->write("X_grbmod.LP");//t/
+//    mod->write("X_mod.LP");//t/
+    gni->map_xt_reac(model, externals);
+    
+    string nts_p[6]={"MO2_xt", "O2_xt", "CO2_xt", "PI_xt", "FE3_xt", "CO-II_xt"};//set these nts to be present
+    strvec ntsp, ntsa;
+    ntsp.assign(nts_p,nts_p+6);
+//    for(int i=0;i<ntsp.size();i++) cout<<ntsp[i]<<endl;//t/
+//    cout<<endl;//t/
+    for(int i=0;i<externals.size();i++){//get absent nts excepting present nts from externals
+        string nt=externals[i];
+        if(find(ntsp.begin(),ntsp.end(),nt)==ntsp.end()) ntsa.push_back(nt);
+    }
+//    for(int i=0;i<ntsa.size();i++) cout<<ntsa[i]<<endl;//t/
+    gni->fix_xt_abs_grb(ntsa, mod);
+//    gni->fix_xt_abs(externals, mod);//set all external nutrients to be absent
+    
+//    mod->write("X_mod_ntsa.LP");//t/
+
+    mod->setObj("BIOMASS", 1);
+    objstatvec wtbm;//BIOMASS fba for wild type over all rmeds
+    randmeds rmeds=gni->rand_meds();
+    for(int s=0;s<rmeds.size();s++){
+        intvec rmed=rmeds[s];
+        OBJSTAT solwt=fba_med_grb(mod,rmed);
+        wtbm.push_back(solwt);
+//        for(int i=0;i<rmed.size();i++){//t/
+//            cout<<rmed[i]<<',';
+//        }
+//        cout<<endl;//t/
+    }
+
+    strvec gns;
+    if(args.size()>0){
+        gns=args;
+    }else gns=gni->genes;
+//    for (gene_reactions::iterator it = geneR.begin(); it != geneR.end(); ++it){
+    for(int i=0;i<gns.size();i++){
+        string Gn=gns[i];
+        strvec rkos=gni->getRkos(Gn);
+        
+        if(rkos.size()<1) continue;
+
+        WGNI1 wgni;
+        wgni.Gn=Gn;
+        wgni.rkos=rkos;
+        wgni.Ness=0;
+//            grbKoCol mkoc;
+//            mod->ko_mlp(rkos, mkoc);
+//            mod->write("X_mod_ko"+dig+".LP");//t/
+
+        for(int i=0;i<rkos.size();i++){//ko_mlp
+            string Rn=rkos[i];
+            mod->setVarBnds(Rn, 0, 0);
+        }
+
+
+        for(int s=0;s<rmeds.size();s++){
+            intvec rmed=rmeds[s];
+            OBJSTAT solko=fba_med_grb(mod,rmed);
+            if(wtbm[s].status==GRB_OPTIMAL && solko.status==GRB_OPTIMAL){
+                double level;
+                if(wtbm[s].objval-solko.objval<1e-10) level=0;
+                else level=(wtbm[s].objval-solko.objval)/wtbm[s].objval;
+                if(level>=0.2){
+                     wgni.Ness++;
+                    for(int i=0;i<rmed.size();i++){
+                        string nt=gni->nts[i];
+                        if(rmed[i]==1) wgni.nts[nt].Np++;
+                        else wgni.nts[nt].Nn++;
+                    }
+                }
+            }
+        }
+//        wgni.pval=wgni.Ness==0?1:gsl_cdf_binomial_Q(wgni.Ness-1, 0.01, rmeds.size());
+        wgniOut1.push_back(wgni);
+//            mod->rko_mlp(mkoc);
+//            mod->write("X_mod_rko"+dig+".LP");//t/
+
+        for(int i=0;i<rkos.size();i++){//rko_mlp
+            string Rn=rkos[i];
+            Reaction* reac=model->get_reac(Rn);
+            double lb=reac->get_lb();
+            double ub=reac->get_ub();
+            mod->setVarBnds(Rn, lb, ub);
+        }
+
+    }//-------------------------------------------------------------------------------
+//    sort(wgniOut1.begin(), wgniOut1.end(), myfunc_wgni);
+    print_wgni1(out, wgniOut1, gni->nts, rmeds.size());
+}
+
+void Driver::essGrb(){//w/gni/ get essential genes under defined growth medium
+//    grbmod->write("X_grbmod.LP");//t/
+    gni->fix_nts(externals, grbmod);
+    grbmod->setObj("BIOMASS", 1);
+//    grbmod->write("X_TB-Viv_fixnts.LP");//t/
+    OBJSTAT solwt=grbmod->optimize();//BIOMASS fba for wild type
+
+    strvec gns;
+    if(args.size()>0){
+        gns=args;
+    }else gns=gni->genes;
+//    for (gene_reactions::iterator it = geneR.begin(); it != geneR.end(); ++it){
+    for(int i=0;i<gns.size();i++){
+        string Gn=gns[i];
+        strvec rkos=gni->getRkos(Gn);
+
+        ESSG essg;
+        essg.Gn=Gn;
+        essg.rkos=rkos;
+
+//            grbKoCol mkoc;
+//            grbmod->ko_mlp(rkos, mkoc);
+//            grbmod->write("X_mod_ko"+dig+".LP");//t/
+
+        for(int i=0;i<rkos.size();i++){//ko_mlp
+            string Rn=rkos[i];
+            grbmod->setVarBnds(Rn, 0, 0);
+        }
+
+
+        OBJSTAT solko=grbmod->optimize();
+        if(solwt.status==GRB_OPTIMAL && solko.status==GRB_OPTIMAL){
+            double drop=solwt.objval-solko.objval;
+            double level;
+            if(drop<1e-10){drop=0; level=0;}
+            else level=(solwt.objval-solko.objval)/solwt.objval;
+            if(level>=0.2){
+                essg.drop=drop;
+                essg.level=level;
+                essgOut.push_back(essg);
+            }
+        }
+
+//            grbmod->rko_mlp(mkoc);
+//            grbmod->write("X_mod_rko"+dig+".LP");//t/
+
+        for(int i=0;i<rkos.size();i++){//rko_mlp
+            string Rn=rkos[i];
+            Reaction* reac=model->get_reac(Rn);
+            double lb=reac->get_lb();
+            double ub=reac->get_ub();
+            grbmod->setVarBnds(Rn, lb, ub);
+        }
+
+    }//-------------------------------------------------------------------------------
+//    sort(wgniOut1.begin(), wgniOut1.end(), myfunc_wgni);
+    print_essg(out, essgOut, gni->nts);
+}
+
+void Driver::koGrb(){//w/gni/ get essential genes under defined growth medium
+
+    strlistvec qlists, blocklists;//currently only able to use one gene or double genes
+    get_list_args(qlists, args);
+    model->reaclists_to_block(blocklists, qlists);
+
+    for(int i=0;i<blocklists.size();i++) {//t/
+        strvec list=blocklists[i];
+        OBJSTAT solko;
+        strvec rkos; //knoctout reactions
+        if (!list.empty()){
+            for(int i=0;i<list.size();i++) rkos.push_back(list[i]);//t/
+         
+        //            grbKoCol mkoc;
+        //            grbmod->ko_mlp(rkos, mkoc);
+        //            grbmod->write("X_mod_ko"+dig+".LP");//t/
+
+            for(int i=0;i<rkos.size();i++){//ko_mlp
+                string Rn=rkos[i];
+                grbmod->setVarBnds(Rn, 0, 0);
+            }
+            solko=grbmod->optimize();
+
+        //            grbmod->rko_mlp(mkoc);
+        //            grbmod->write("X_mod_rko"+dig+".LP");//t/
+
+            for(int i=0;i<rkos.size();i++){//rko_mlp
+                string Rn=rkos[i];
+                Reaction* reac=model->get_reac(Rn);
+                double lb=reac->get_lb();
+                double ub=reac->get_ub();
+                grbmod->setVarBnds(Rn, lb, ub);
+            }
+            *out << qlists[i] << TAB << solko;
+            if (withcomments) *out << TAB << COMMENT << list;
+            *out << endl;
+        }
+        else{
+            *out << qlists[i] << TAB << "NA: NA";
+            if (withcomments) *out << TAB << COMMENT << list;
+            *out << endl;
+        }
+
+    }
+}
+
+void Driver::dpaplot(){//w/dpa/compute producibility plot using glpk
+   objstatvec solwt;//fba for wild type over all metabolites
+   strvec mets;
+   if(args.size()>0){
+        mets=args;
+    }else mets=lp->getRowNames();
+   for(int m=0;m<mets.size();m++){
+       string met=mets[m];
+       OBJSTAT stat;
+       obj->clear();
+       (*obj)[met]=1;
+       lp->getOptObjStat(stat, obj, max, presolve);
+       solwt.push_back(stat);
+       lp->update();
+   }
+   //--------------------------------------------------------
+    met_genes metG;
+    gene_mets geneM;
+    strstr2flo metgeneDf;//w/dpa/ metabolite and gene to difference flux
+    strstr2flo metgeneF;//w/dpa/ metabolite and gene to producibility
+    strvec gns=dpa->genes;
+//    for (gene_reactions::iterator it = geneR.begin(); it != geneR.end(); ++it){
+    for(int i=0;i<gns.size();i++){
+        string Gn=gns[i];
+        strvec rkos=dpa->getRkos(Gn);
+
+        if(rkos.size()<1) continue;
+
+            geneM[Gn].rkos=rkos;
+            kobds mko_rc;
+            dpa->ko_mlp(lp, rkos, mko_rc);
+
+            for(int m=0;m<mets.size();m++){
+                string met=mets[m];
+                OBJSTAT solko;
+                obj->clear();
+                (*obj)[met]=1;
+                lp->getOptObjStat(solko, obj, max, presolve);
+                if(solwt[m].status==GLP_OPT && solko.status==GLP_OPT){
+                    double Df;
+                    Df=abs(solwt[m].objval-solko.objval);
+                    metgeneDf[met][Gn]=Df;
+                    metgeneF[met][Gn]=solko.objval;
+                    if(Df>0.001) {
+                        metG[met].push_back(Gn);
+                        geneM[Gn].mets.push_back(met);
+                    }
+                }
+                lp->update();
+            }
+            dpa->rko_mlp(lp, mko_rc);
+    }//--------------------------------------------------------
+
+    print_dpaplot(out, metG, geneM, metgeneDf, metgeneF, mets, gns);
+}
+
+void Driver::dpaplotGrb(){//w/dpa/compute producibility plot using glpk
+   objstatvec solwt;//fba for wild type over all metabolites
+   strvec metsAll=model->get_metabolites();
+   strvec mets;
+   if(args.size()>0){
+        mets=args;
+    }
+   else{
+       for(int m=0;m<metsAll.size();m++)
+           if(find(externals.begin(),externals.end(),metsAll[m])==externals.end()) mets.push_back(metsAll[m]);
+   }
+
+   for(int m=0;m<mets.size();m++){
+       string met=mets[m];
+       grbmod->setObj(met);
+       OBJSTAT stat=grbmod->optimize();
+       solwt.push_back(stat);
+       grbmod->externalise(met,false);
+   }
+   //--------------------------------------------------------
+    met_genes metG;
+    gene_mets geneM;
+    strstr2flo metgeneDf;//w/dpa/ metabolite and gene to difference flux
+    strstr2flo metgeneF;//w/dpa/ metabolite and gene to producibility
+    strvec gns=dpa->genes;
+//    for (gene_reactions::iterator it = geneR.begin(); it != geneR.end(); ++it){
+    for(int i=0;i<gns.size();i++){
+        string Gn=gns[i];
+        strvec rkos=dpa->getRkos(Gn);
+
+        if(rkos.size()<1) continue;
+
+        geneM[Gn].rkos=rkos;
+
+        for(int i=0;i<rkos.size();i++){//ko_mlp
+            string Rn=rkos[i];
+            grbmod->setVarBnds(Rn, 0, 0);
+        }
+
+        for(int m=0;m<mets.size();m++){
+            string met=mets[m];
+            grbmod->setObj(met);
+            OBJSTAT solko=grbmod->optimize();
+            if(solwt[m].status==GRB_OPTIMAL && solko.status==GRB_OPTIMAL){
+                double Df;
+                Df=abs(solwt[m].objval-solko.objval);
+                metgeneDf[met][Gn]=Df;
+                metgeneF[met][Gn]=solko.objval;
+                if(Df>0.001) {
+                    metG[met].push_back(Gn);
+                    geneM[Gn].mets.push_back(met);
+                }
+            }
+            grbmod->externalise(met,false);
+        }
+        for(int i=0;i<rkos.size();i++){//rko_mlp
+            string Rn=rkos[i];
+            Reaction* reac=model->get_reac(Rn);
+            double lb=reac->get_lb();
+            double ub=reac->get_ub();
+            grbmod->setVarBnds(Rn, lb, ub);
+        }
+    }//--------------------------------------------------------
+
+    print_dpaplot(out, metG, geneM, metgeneDf, metgeneF, mets, gns);
+}
+
+void Driver::dpasig(){//w/dpa/compute metabolite signals using glpk
+    metarr_sig metsig;
+    dpa->compute_signal(arrs, metsig);
+    print_dpasig(out, dpa->mets, arrs, metsig);
+}
+
+void Driver::blp_fba(MtxLP* blp, BLPSOL &bsol, stomap &medium){//w/gni/
+    stomap* sol = new stomap;//-------------------------------------
+    blp->getOptSol(sol, obj, max, ALLKIND, true, presolve);//w/withzeroes=true;
+    bsol.drop=blp->getObjValue();
+    bsol.status=get_msg(blp->getStatus());
+    bsol.bm=(*sol)["BIOMASS"];
+    if(bsol.drop<1e-10) bsol.level=0;
+    else bsol.level=bsol.drop/bsol.bm;//growth drop percentage over BIOMASS of wild
+    for(int i=0;i<gni->nts.size();i++){
+        string nt=gni->nts[i];
+        string ce="ce_"+nt;
+        medium[nt]=(*sol)[ce];
+    }
+//    model->print_sto(sol, out, withcommegni->nts);//t/
+    delete sol;
+}
+
+
+void Driver::blp_fba(MtxLP* blp, BLPSOL &bsol){//w/gni/
+    stomap* sol = new stomap;//-------------------------------------
+    blp->getOptSol(sol, obj, max, ALLKIND, true, presolve);//w/withzeroes=true;
+    bsol.drop=blp->getObjValue();
+    bsol.status=get_msg(blp->getStatus());
+    bsol.bm=(*sol)["BIOMASS"];
+    if(bsol.drop<1e-10) bsol.level=0;
+    else bsol.level=bsol.drop/bsol.bm;//growth drop percentage over BIOMASS of wild type
+    delete sol;
+}
+
+void Driver::blp_fba_grb(GRB_Mod *bmod, BLPSOL &bsol, stomap &medium){//w/gni/
+    OBJSTAT sol=bmod->optimize();
+    bsol.drop=sol.objval;
+    bsol.status=get_msg_grb(sol.status);
+    GRBVar bm=bmod->getVar("BIOMASS");
+    bsol.bm=bm.get(GRB_DoubleAttr_X);
+    if(bsol.drop<1e-10) bsol.level=0;
+    else bsol.level=bsol.drop/bsol.bm;//growth drop percentage over BIOMASS of wild
+    for(int i=0;i<gni->nts.size();i++){
+        string nt=gni->nts[i];
+        string ce="ce_"+nt;
+        GRBVar var=bmod->getVar(ce);
+        medium[nt]=var.get(GRB_DoubleAttr_X);
+    }
+}
+
+void Driver::blp_fba_grb(GRB_Mod *bmod, BLPSOL &bsol){//w/gni/
+    OBJSTAT sol=bmod->optimize();
+    bsol.drop=sol.objval;
+    bsol.status=get_msg_grb(sol.status);
+    GRBVar bm=bmod->getVar("BIOMASS");
+    bsol.bm=bm.get(GRB_DoubleAttr_X);
+    if(bsol.drop<1e-10) bsol.level=0;
+    else bsol.level=bsol.drop/bsol.bm;//growth drop percentage over BIOMASS of wild
+}
+
+
+OBJSTAT Driver::fba_med(MtxLP* mlp, intvec rmed, stomap *mobj){//w/gni/
+    for(int i=0;i<rmed.size();i++){
+        string nt=gni->nts[i];
+        int e=rmed[i];
+        strvec reacs=gni->getNtR(nt);
+        for(int i=0;i<reacs.size();i++){
+            string Rn=reacs[i];
+//                if(find(rkos.begin(),rkos.end(),Rn)==rkos.end()){
+            if(mlp->find_col(Rn.data())!=0){//check if Rn deleted
+                Reaction* reac=model->get_reac(Rn);
+                double ub=reac->get_ub();
+                if(e==0) mlp->setColBnds(Rn, 0,0);
+                else mlp->setColBnds(Rn, 0,ub);
+            }
+        }
+    }
+    OBJSTAT msol;
+    kind=SMPLX;
+    stomap* sol = new stomap;//-------------------------------------
+    mlp->getOptSol(sol, mobj, max, (kind == MILP) ? INT : CONT, true, presolve);//w/withzeroes=true;
+    msol.objval=mlp->getObjValue();
+    msol.status=mlp->getStatus();
+//    model->print_sto(sol, out, withcommegni->nts);//t/
+    delete sol;
+    return msol;
+}
+
+OBJSTAT Driver::fba_med_grb(GRB_Mod *mod, intvec rmed){//w/gni/
+//    mod->write("X_mod.LP");//t/
+//    GRBVar var=mod->getVar("R932");//t/
+//    cout<<var.get(GRB_StringAttr_VarName)<<endl;//t/
+//    int S=rmed.size();//t/
+    for(int i=0;i<rmed.size();i++){
+        string nt=gni->nts[i];
+        int e=rmed[i];
+        strvec reacs=gni->getNtR(nt);
+        for(int i=0;i<reacs.size();i++){
+            string Rn=reacs[i];
+//                if(find(rkos.begin(),rkos.end(),Rn)==rkos.end()){
+            if(mod->hasVar(Rn)){//check if Rn deleted
+                Reaction* reac=model->get_reac(Rn);
+                double ub=reac->get_ub();
+                double lb=reac->get_lb();
+                if(e==0) mod->setVarBnds(Rn, lb<0?lb:0, ub>0?0:ub);
+                else mod->setVarBnds(Rn, lb, ub);
+                //                if(e==0) mod->setVarBnds(Rn, 0, 0);
+            }
+        }
+    }
+    OBJSTAT msol;
+    //-------------------------------------
+    msol=mod->optimize();
+    return msol;
+}
+
+
+//w/gfa/ get reactions and genes of current model (after trim)
+void Driver::get_args_gfa(strvec &reacs, strvec &genes){
+//    strvec Reactions = lp->getColNames(); //get reactions of current model
+    strvec Reactions = model->get_reactions(); //get reactions of current model
+    argmap Rmap,Gmap;
+    for(int i=0;i<Reactions.size();i++)
+        Rmap[Reactions[i]]=1;
+
+    strvec Genes; //get genes which associate current reactions
+    
+    for(int i=0;i<Reactions.size();i++){
+    	string Rn=Reactions[i];
+    	Reaction* reac=model->get_reac(Rn);
+        strvec* Rule=reac->get_rule();
+        for(int j=0;j<Rule->size();j++){
+            string Gn=(*Rule)[j];
+            if(Gn!=AND && Gn!=OR){
+            	if(gfa->exist_gene(Gn)){
+		            gfa->get_geneReacs(Gn).push_back(Rn);
+		            if(Gmap.find(Gn)==Gmap.end()){
+		                Gmap[Gn]=1;
+		                Genes.push_back(Gn);
+		            }  
+            	}
+            }
+        }
+    }
+
+    if(args.size()>0){
+        for(int i=0;i<args.size();i++){
+            argmap::iterator Rit=Rmap.find(args[i]);
+            argmap::iterator Git=Gmap.find(args[i]);
+            if(Rit!=Rmap.end())
+                reacs.push_back(Rit->first);         
+            else if(Git!=Gmap.end())
+                genes.push_back(Git->first);
+            else throw runtime_error("argument error: "+args[i]+"is not found in current model!");
+        }
+    }
+    else{
+        reacs=Reactions;
+        genes=Genes;
+    }
+}
+
+//w/gni/ delete externals from stos of reacs
+void Driver::del_exts(){
+    for(int i=0;i<externals.size();i++){
+        string En=externals[i];
+        Element* ext=model->find_element(En);
+        stomap* sto=ext->get_sto();
+        for(stomap::iterator it=sto->begin();it!=sto->end();it++){
+            string Rn=it->first;
+            Reaction* reac=model->get_reac(Rn);
+//            Element* reac=model->find_element(Rn);
+            stomap* stoR=reac->get_sto();
+            stoR->erase(En);
+        }
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////
+//output
+ostream &operator << (ostream &out, OBJSTAT objstat){
+    double objval=(abs(objstat.objval)<1e-7)?0:objstat.objval;//w/
+    if(objstat.grb==1) out << objval << COLON << SPACE << Driver::get_msg_grb(objstat.status);//w/
+    else out << objval << COLON << SPACE << Driver::get_msg(objstat.status);//w/
+
+    return out;
+}
+
+ostream &operator << (ostream &out, OBJSTAT_RANGE range){
+    out << range.min << TAB << range.max;
+    return out;
+}
+
+ostream &operator << (ostream &out, rangemap &rm){
+    for (rangemap::iterator it = rm.begin(); it != rm.end(); ++it)
+        out << it->first << TAB << it->second << endl;
+    return out;
+}
+
+void print_rangemap(ostream *out, rangemap *rm, Model* model){
+    for (rangemap::iterator it = rm->begin(); it != rm->end(); ++it){
+        string name = it->first;
+        if (name[0] == '-')name = name.substr(1);
+        if (name[0] == '[')name = name.substr(1, name.size() -2);
+        *out << it->first << TAB << it->second << TAB << COMMENT << model->find_element(name)->get_info() << endl;
+    }
+}
+
+void print_rangemap_gfva(ostream *out, rangemap *rm, Model* model, flomap* Rstate){//w/gfa/
+    for (rangemap::iterator it = rm->begin(); it != rm->end(); ++it){
+        string name = it->first;
+        double state=(*Rstate)[name];
+        if (name[0] == '-')name = name.substr(1);
+        if (name[0] == '[')name = name.substr(1, name.size() -2);
+        *out << it->first << TAB << it->second << TAB <<"STATE = "<<state<< TAB << COMMENT << model->find_element(name)->get_info() << endl;
+    }
+}
+
+ostream &operator << (ostream &out, MtxLP &lp){
+    OBJSTAT objstat;
+    lp.getObjStat(objstat);
+    out << objstat;
+    return out;
+}
+
+
+ostream &operator << (ostream &out, FLUXACT activity){//w/gfa/
+    out <<"ACT = "<< activity.act << TAB <<"INACT = "<< activity.inact<< TAB <<"ACT_LEV = "<<activity.level;
+    return out;
+}
+
+
+//w/gfa/ print reaction activity, its directionality, and flux activity for genes
+void print_rangemap_gfva(ostream *out, reac_rangemap *Rrm, gene_rangemap *Grm, strvec reacs, Model* model, GFA* gfa, int Ti, flomap* Rstate){
+        *out <<"Flux-activity state for reactions:"<<endl;
+	for(int i=0;i<reacs.size();i++){
+    	string Rn=reacs[i];
+    	reac_rangemap::iterator it=Rrm->find(Rn);
+    	if(it!=(*Rrm).end()){
+    		double state=(*Rstate)[Rn];
+	        FLUXDIR flux=it->second;
+	        if(flux.direc==0){
+	            *out << Rn <<" (+)"<< TAB << flux.dirp << TAB <<"STATE = "<<state<< TAB << COMMENT << model->find_element(Rn)->get_info() << endl;
+	            *out << Rn <<" (-)"<< TAB << flux.dirm << TAB <<"STATE = "<<state<< TAB << COMMENT << model->find_element(Rn)->get_info() << endl;
+	        }
+	        else if(flux.direc==1){
+	            *out << Rn <<" (+)"<< TAB << flux.dirp << TAB <<"STATE = "<<state<< TAB << COMMENT << model->find_element(Rn)->get_info() << endl;
+	        }
+	        else if(flux.direc==-1){
+	            *out << Rn <<" (-)"<< TAB << flux.dirm << TAB <<"STATE = "<<state<< TAB << COMMENT << model->find_element(Rn)->get_info() << endl;
+	        }
+    	}
+    }
+	*out <<endl<<"Flux-activity state for genes:"<<endl;
+    for (gene_rangemap::iterator it = Grm->begin(); it != Grm->end(); ++it){
+        string Gn = it->first;
+        FLUXACT gact=it->second;
+        int gexp=gfa->get_gene_exp(Gn, Ti);
+        *out << Gn << TAB << gact << TAB <<"EXP_LEV = "<<gexp<< TAB <<"POST_REGULATION = ";
+        if(gact.level>0 && gexp<=0) *out<<"up"<<endl;
+        else if(gact.level<0 && gexp>=0) *out<<"down"<<endl;
+        else *out<<"no"<<endl;
+    }
+}
+
+//w/gfa/ print reaction activity, its directionality, and flux activity for genes
+void print_rangemap_gfva_tab(ostream *out, reac_rangemap *Rrm, gene_rangemap *Grm, strvec reacs, Model* model, GFA* gfa, string tiss, int Ti, flomap* Rstate){
+    *out <<"Flux-activity analysis results for expression profile of "<<tiss<<endl<<endl;
+    *out <<"Flux-activity state for reactions:"<<endl;
+    *out <<"Reac(direc)"<<TAB<<"Active"<<TAB<<"Inactive"<<TAB<<"ACT_LEV"<<TAB<<"State"<<TAB<<"Comment"<<endl;
+    for(int i=0;i<reacs.size();i++){
+    string Rn=reacs[i];
+    reac_rangemap::iterator it=Rrm->find(Rn);
+    if(it!=(*Rrm).end()){
+            double state=(*Rstate)[Rn];
+            FLUXDIR flux=it->second;
+            if(flux.direc==0){
+                *out << Rn <<" (+)"<<TAB<<flux.dirp.act<<TAB<<flux.dirp.inact<<TAB<<flux.dirp.level<<TAB<<state<< TAB<< COMMENT <<model->find_element(Rn)->get_info() << endl;
+                *out << Rn <<" (-)"<<TAB<<flux.dirm.act<<TAB<<flux.dirm.inact<<TAB<<flux.dirm.level<<TAB<<state<< TAB<< COMMENT <<model->find_element(Rn)->get_info() << endl;
+            }
+            else if(flux.direc==1){
+                *out << Rn <<" (+)"<<TAB<<flux.dirp.act<<TAB<<flux.dirp.inact<<TAB<<flux.dirp.level<<TAB<<state<< TAB<< COMMENT <<model->find_element(Rn)->get_info() << endl;
+            }
+            else if(flux.direc==-1){
+                *out << Rn <<" (-)"<<TAB<<flux.dirm.act<<TAB<<flux.dirm.inact<<TAB<<flux.dirm.level<<TAB<<state<< TAB<< COMMENT <<model->find_element(Rn)->get_info() << endl;
+            }
+    }
+    }
+    *out <<TABEND<<endl<<endl;
+    *out <<"Flux-activity state for genes:"<<endl;
+//    *out <<"Number of genes: "<<Grm->size()<<endl;//t/
+    *out <<"Gene"<<TAB<<"Active"<<TAB<<"Inactive"<<TAB<<"ACT_LEV"<<TAB<<"EXP_LEV"<<TAB<<"Postregulation"<<endl;
+
+    for (gene_rangemap::iterator it = Grm->begin(); it != Grm->end(); ++it){
+        string Gn = it->first;
+        FLUXACT gact=it->second;
+        int gexp=gfa->get_gene_exp(Gn, Ti);
+        *out <<Gn<<TAB<<gact.act<<TAB<<gact.inact<<TAB<<gact.level<<TAB<<gexp<<TAB;
+        if(gact.level>0 && gexp<=0) *out<<"up"<<endl;
+        else if(gact.level<0 && gexp>=0) *out<<"down"<<endl;
+        else *out<<"no"<<endl;
+    }
+}
+
+
+ void print_sgni(ostream *out, gene_sgni &sgniOut){//w/gni/
+     for (gene_sgni::iterator it = sgniOut.begin(); it != sgniOut.end(); ++it){
+         string Gn=it->first;
+         SGNI gni=it->second;
+         BLPSOL bsol=gni.bsol;
+         stomap medium=gni.medium;
+         *out <<"Gene:"<<TAB<<Gn<<endl;
+         *out <<"KO Reactions:";
+         for(int i=0;i<gni.rkos.size();i++) *out <<TAB<<gni.rkos[i];
+         *out <<endl;
+         *out <<"BLP Result:"<<TAB<<"Drop = "<<bsol.drop<<":"<<bsol.status<<TAB<<"Level = "<<bsol.level<<endl;
+         *out <<"Growth Medium:"<<endl;
+         for (stomap::iterator it = medium.begin(); it != medium.end(); ++it){
+             *out <<it->first<<" : "<<it->second<<endl;
+         }
+         if(!gni.sp.empty()){
+             *out <<"Nutrients of GNI-SP:";
+             for(int i=0;i<gni.sp.size();i++) *out <<TAB<<gni.sp[i];
+             *out <<endl;
+         }
+         if(!gni.sn.empty()){
+             *out <<"Nutrients of GNI-SN:";
+             for(int i=0;i<gni.sn.size();i++) *out <<TAB<<gni.sn[i];
+             *out <<endl;
+         }
+         *out <<endl;
+     }
+ }
+
+//void print_wgni(ostream *out, gene_wgni &wgniOut, strvec nts){//w/gni/
+//    for (gene_wgni::iterator it = wgniOut.begin(); it != wgniOut.end(); ++it){
+//         string Gn=it->first;
+//         WGNI gni=it->second;
+//         nt_pval ntp=gni.nts;
+//         *out <<"Gene:"<<TAB<<Gn<<endl;
+//         *out <<"KO Reactions:";
+//         for(int i=0;i<gni.rkos.size();i++) *out <<TAB<<gni.rkos[i];
+//         *out <<endl;
+//         *out <<"Nutrients:"<<endl;
+//         int size=nts.size();
+//         unsigned int M=pow(2,size);
+//         for(int i=0;i<size;i++){
+//              string nt=nts[i];
+//              int N=ntp[nt].Np+ntp[nt].Nn;
+////              double Pp=pval_bin(N,0.5,ntp[nt].Np);
+////              double Pn=pval_bin(N,0.5,ntp[nt].Nn);
+////              double Pp=alglib::binomialcdistribution(ntp[nt].Np-1, N, 0.5);
+////              double Pn=alglib::binomialcdistribution(ntp[nt].Nn-1, N, 0.5);
+//              double Pp=hypergeometric_cdf(ntp[nt].Np, M/2, M/2, N);
+//              double Pn=hypergeometric_cdf(ntp[nt].Nn, M/2, M/2, N);
+//              *out <<nt<<TAB<<"GNI-WP: "<<"Number = "<<ntp[nt].Np<<", "<<"Pvalue = "<<Pp<<TAB<<"GNI-WN: "<<"Number = "<<ntp[nt].Nn<<", "<<"Pvalue = "<<Pn<<endl;
+//         }
+//         *out <<endl;
+//    }
+//}
+
+
+void print_wgni1(ostream *out, gene_wgni1 &wgniOut1, strvec nts, int Nsam){//w/gni/
+    *out <<"The analysis results of weak GNI with sample size of "<<Nsam<<endl<<endl;
+//    for (gene_wgni1::iterator it = wgniOut1.begin(); it != wgniOut1.end(); ++it){
+    for(int i=0;i<wgniOut1.size();i++){
+         WGNI1 wgni=wgniOut1[i];
+         if(wgni.Ness==0) continue;//donot output if Ness==0
+         nt_pval ntp=wgni.nts;
+         *out <<"Gene:"<<TAB<<wgni.Gn<<endl;
+         *out <<"KO Reactions:";
+         for(int i=0;i<wgni.rkos.size();i++) *out <<TAB<<wgni.rkos[i];
+         *out <<endl;
+         *out <<"Number of Essential medium = "<<wgni.Ness<<endl;
+         *out <<"Nutrients:"<<endl;
+         int size=nts.size();
+         for(int i=0;i<size;i++){
+              string nt=nts[i];
+              *out <<nt<<TAB<<"GNI-WP: "<<"Number = "<<ntp[nt].Np<<TAB<<"GNI-WN: "<<"Number = "<<ntp[nt].Nn<<endl;
+         }
+         *out <<endl;
+    }
+
+}
+
+void print_essg(ostream *out, ess_gene &essgOut, strvec nts){//w/gni/
+    *out <<"The analysis results of essential genes with following nutrients: "<<endl;
+    for(int i=0;i<nts.size();i++)  *out <<nts[i]<<TAB;
+    *out <<endl<<endl;
+    for(int i=0;i<essgOut.size();i++){
+         ESSG essg=essgOut[i];
+         *out <<"Gene:"<<TAB<<essg.Gn<<endl;
+         *out <<"KO Reactions:";
+         for(int i=0;i<essg.rkos.size();i++) *out <<TAB<<essg.rkos[i];
+         *out <<endl;
+         *out <<"Result:"<<TAB<<"Drop = "<<essg.drop<<TAB<<"Level = "<<essg.level<<endl;
+         *out <<endl;
+    }
+    *out <<"List of essential genes: "<<endl;
+    for(int i=0;i<essgOut.size();i++){
+         ESSG essg=essgOut[i];
+         *out <<essg.Gn<<TAB;
+    }
+    *out <<endl;
+}
+
+//bool myfunc_wgni (WGNI1 i, WGNI1 j) { return (i.pval<j.pval); }//w/gni/
+bool myfunc_wgni (WGNI1 i, WGNI1 j) { return (i.Ness>j.Ness); }//w/gni/
+
+void print_dpaplot(ostream *out, met_genes &metG, gene_mets &geneM, strstr2flo &metgeneDf, strstr2flo &metgeneF, strvec &mets, strvec &gns){//w/dpa/
+    *out <<"Metabolites to genes: "<<endl<<endl;
+    for (met_genes::iterator it = metG.begin(); it != metG.end(); ++it){
+        string met=it->first;
+        strvec genes=it->second;
+        *out <<met;
+        for(int i=0;i<genes.size();i++) *out <<TAB<<genes[i];
+        *out <<endl;
+    }
+    *out <<TABEND<<endl<<endl;
+
+    *out <<"Genes to metabolites: "<<endl;
+    for (gene_mets::iterator it = geneM.begin(); it != geneM.end(); ++it){
+        *out <<endl;
+        string Gn=it->first;
+        DPAGene dpag=it->second;
+        *out <<"Gene:"<<TAB<<Gn<<endl;
+        *out <<"KO Reactions:";
+        for(int i=0;i<dpag.rkos.size();i++) *out <<TAB<<dpag.rkos[i];
+        *out <<endl;
+        *out <<"Metabolites:";
+        for(int i=0;i<dpag.mets.size();i++) *out <<TAB<<dpag.mets[i];
+        *out <<endl;
+    }
+    *out <<TABEND<<endl<<endl;
+
+    *out <<"Matrix of absolute flux difference: "<<endl<<endl;
+    for(int i=0;i<gns.size();i++) *out <<TAB<<gns[i];
+    *out <<endl;
+    for(int i=0;i<mets.size();i++){
+        string met=mets[i];
+        *out <<met;
+        for(int j=0;j<gns.size();j++){
+            string Gn=gns[j];
+            *out <<TAB<<metgeneDf[met][Gn];
+        }
+        *out <<endl;
+    }
+    *out <<TABEND<<endl<<endl;
+
+    *out <<"Matrix of producibility of inactivated genes: "<<endl<<endl;
+    for(int i=0;i<gns.size();i++) *out <<TAB<<gns[i];
+    *out <<endl;
+    for(int i=0;i<mets.size();i++){
+        string met=mets[i];
+        *out <<met;
+        for(int j=0;j<gns.size();j++){
+            string Gn=gns[j];
+            *out <<TAB<<metgeneF[met][Gn];
+        }
+        *out <<endl;
+    }
+}
+
+
+void print_dpasig(ostream *out, strvec &mets, strvec &arrs, metarr_sig &metsig){
+    strstr2flo upsig=metsig.upsig;
+    strstr2flo dwsig=metsig.dwsig;
+    *out <<"Metabolite signals from microarray data: ";
+    for(int i=0;i<arrs.size();i++) *out <<TAB<<arrs[i];
+    *out <<endl<<endl;
+
+    *out <<"Signals for up-regulated genes: "<<endl<<endl;
+    for(int i=0;i<arrs.size();i++) *out <<TAB<<arrs[i];
+    *out <<endl;
+    for(int i=0;i<mets.size();i++){
+        string met=mets[i];
+        *out <<met;
+        for(int j=0;j<arrs.size();j++){
+            string arr=arrs[j];
+            *out <<TAB<<upsig[met][arr];
+        }
+        *out <<endl;
+    }
+    *out <<TABEND<<endl<<endl;
+
+    *out <<"Signals for down-regulated genes: "<<endl<<endl;
+    for(int i=0;i<arrs.size();i++) *out <<TAB<<arrs[i];
+    *out <<endl;
+    for(int i=0;i<mets.size();i++){
+        string met=mets[i];
+        *out <<met;
+        for(int j=0;j<arrs.size();j++){
+            string arr=arrs[j];
+            *out <<TAB<<dwsig[met][arr];
+        }
+        *out <<endl;
+    }
+}
+

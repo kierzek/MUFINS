@@ -1,0 +1,58 @@
+#!/usr/bin/python
+
+# Extracting PN node trajectory from output file. The file ready for plotting with gnuplot is printed to standard output.
+# 29/03/2013
+
+import sys
+
+if len(sys.argv)!=4 :
+  print "VERSION: 1.0 29/03/2013"
+  print ""
+  print "USAGE: nodetrj file place k"
+  print "where:"
+  print "file - name of pnfba *.out.xls file" 
+  print "place - name of Petri Net place"
+  print "k - the script will extract every k-th data point (use 1 for all points)."
+  print ""
+  print "The script extracts node trajectory. The output contains time and number of tokens and is ready to be plotted with gnuplot or other software."
+  print ""
+  exit(0)
+
+name1 = sys.argv[2] 
+idx1 = -1
+k = int(sys.argv[3])
+
+try :
+ f = open(sys.argv[1])
+except IOError :
+ print "ERROR: " + sys.argv[1] + " cannot be opened. Check file name."
+ exit(0)
+
+line = f.readline() 
+line = line.strip()     
+fields = line.split("\t")
+for i in range(0,len(fields)) :
+    if fields[i] == name1 :
+        idx1 = i
+
+if idx1 == (-1) :
+  print "There is no node with name " + sys.argv[2] + " in the file " + sys.argv[1]
+  exit(0)
+
+# Loop over lines
+print
+print "#Trajectory 0"
+i = 1
+j = 1
+for line in f :
+  line = line.strip()
+  fields = line.split("\t")
+  if fields[0] == "Trajectory" :
+       print
+       print "#Trajectory " + str(i)
+       i = i + 1
+       continue
+  if j%k == 0 :
+   print fields[1] + "\t" + fields[idx1]
+  j = j + 1
+

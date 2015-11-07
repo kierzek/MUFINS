@@ -1,0 +1,50 @@
+The analysis results of weak GNI with sample size of 16
+
+Gene:	g1
+KO Reactions:	R1
+Number of Essential medium = 6
+Nutrients:
+M1_xt	GNI-WP: Number = 4	GNI-WN: Number = 2
+M2_xt	GNI-WP: Number = 6	GNI-WN: Number = 0
+M3_xt	GNI-WP: Number = 4	GNI-WN: Number = 2
+M4_xt	GNI-WP: Number = 3	GNI-WN: Number = 3
+
+Gene:	g2
+KO Reactions:	R6
+Number of Essential medium = 6
+Nutrients:
+M1_xt	GNI-WP: Number = 4	GNI-WN: Number = 2
+M2_xt	GNI-WP: Number = 6	GNI-WN: Number = 0
+M3_xt	GNI-WP: Number = 4	GNI-WN: Number = 2
+M4_xt	GNI-WP: Number = 3	GNI-WN: Number = 3
+
+Gene:	g4
+KO Reactions:	R2	R3
+Number of Essential medium = 2
+Nutrients:
+M1_xt	GNI-WP: Number = 0	GNI-WN: Number = 2
+M2_xt	GNI-WP: Number = 2	GNI-WN: Number = 0
+M3_xt	GNI-WP: Number = 2	GNI-WN: Number = 0
+M4_xt	GNI-WP: Number = 1	GNI-WN: Number = 1
+
+Gene:	g3
+KO Reactions:	R5
+Number of Essential medium = 2
+Nutrients:
+M1_xt	GNI-WP: Number = 0	GNI-WN: Number = 2
+M2_xt	GNI-WP: Number = 2	GNI-WN: Number = 0
+M3_xt	GNI-WP: Number = 2	GNI-WN: Number = 0
+M4_xt	GNI-WP: Number = 1	GNI-WN: Number = 1
+
+Gene:	g6
+KO Reactions:	R4
+Number of Essential medium = 1
+Nutrients:
+M1_xt	GNI-WP: Number = 1	GNI-WN: Number = 0
+M2_xt	GNI-WP: Number = 1	GNI-WN: Number = 0
+M3_xt	GNI-WP: Number = 0	GNI-WN: Number = 1
+M4_xt	GNI-WP: Number = 0	GNI-WN: Number = 1
+
+;
+
+#time spent: 0

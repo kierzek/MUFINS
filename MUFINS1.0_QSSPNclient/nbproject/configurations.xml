@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="src">
+        <df name="glpk">
+          <in>amd_1.c</in>
+          <in>amd_2.c</in>
+          <in>amd_aat.c</in>
+          <in>amd_control.c</in>
+          <in>amd_defaults.c</in>
+          <in>amd_dump.c</in>
+          <in>amd_info.c</in>
+          <in>amd_order.c</in>
+          <in>amd_post_tree.c</in>
+          <in>amd_postorder.c</in>
+          <in>amd_preprocess.c</in>
+          <in>amd_valid.c</in>
+          <in>colamd.c</in>
+          <in>glpapi01.c</in>
+          <in>glpapi02.c</in>
+          <in>glpapi03.c</in>
+          <in>glpapi04.c</in>
+          <in>glpapi05.c</in>
+          <in>glpapi06.c</in>
+          <in>glpapi07.c</in>
+          <in>glpapi08.c</in>
+          <in>glpapi09.c</in>
+          <in>glpapi10.c</in>
+          <in>glpapi11.c</in>
+          <in>glpapi12.c</in>
+          <in>glpapi13.c</in>
+          <in>glpapi14.c</in>
+          <in>glpapi15.c</in>
+          <in>glpapi16.c</in>
+          <in>glpapi17.c</in>
+          <in>glpapi18.c</in>
+          <in>glpapi19.c</in>
+          <in>glpavl.c</in>
+          <in>glpbfd.c</in>
+          <in>glpbfx.c</in>
+          <in>glpcpx.c</in>
+          <in>glpdmp.c</in>
+          <in>glpdmx.c</in>
+          <in>glpenv01.c</in>
+          <in>glpenv02.c</in>
+          <in>glpenv03.c</in>
+          <in>glpenv04.c</in>
+          <in>glpenv05.c</in>
+          <in>glpenv06.c</in>
+          <in>glpenv07.c</in>
+          <in>glpenv08.c</in>
+          <in>glpfhv.c</in>
+          <in>glpgmp.c</in>
+          <in>glphbm.c</in>
+          <in>glpini01.c</in>
+          <in>glpini02.c</in>
+          <in>glpios01.c</in>
+          <in>glpios02.c</in>
+          <in>glpios03.c</in>
+          <in>glpios04.c</in>
+          <in>glpios05.c</in>
+          <in>glpios06.c</in>
+          <in>glpios07.c</in>
+          <in>glpios08.c</in>
+          <in>glpios09.c</in>
+          <in>glpios10.c</in>
+          <in>glpios11.c</in>
+          <in>glpios12.c</in>
+          <in>glpipm.c</in>
+          <in>glplib01.c</in>
+          <in>glplib02.c</in>
+          <in>glplib03.c</in>
+          <in>glplpf.c</in>
+          <in>glplpx01.c</in>
+          <in>glplpx02.c</in>
+          <in>glplpx03.c</in>
+          <in>glpluf.c</in>
+          <in>glplux.c</in>
+          <in>glpmat.c</in>
+          <in>glpmpl01.c</in>
+          <in>glpmpl02.c</in>
+          <in>glpmpl03.c</in>
+          <in>glpmpl04.c</in>
+          <in>glpmpl05.c</in>
+          <in>glpmpl06.c</in>
+          <in>glpmps.c</in>
+          <in>glpnet01.c</in>
+          <in>glpnet02.c</in>
+          <in>glpnet03.c</in>
+          <in>glpnet04.c</in>
+          <in>glpnet05.c</in>
+          <in>glpnet06.c</in>
+          <in>glpnet07.c</in>
+          <in>glpnet08.c</in>
+          <in>glpnet09.c</in>
+          <in>glpnpp01.c</in>
+          <in>glpnpp02.c</in>
+          <in>glpnpp03.c</in>
+          <in>glpnpp04.c</in>
+          <in>glpnpp05.c</in>
+          <in>glpqmd.c</in>
+          <in>glprgr.c</in>
+          <in>glprng01.c</in>
+          <in>glprng02.c</in>
+          <in>glpscf.c</in>
+          <in>glpscl.c</in>
+          <in>glpsdf.c</in>
+          <in>glpspm.c</in>
+          <in>glpspx01.c</in>
+          <in>glpspx02.c</in>
+          <in>glpsql.c</in>
+          <in>glpssx01.c</in>
+          <in>glpssx02.c</in>
+          <in>glptsp.c</in>
+        </df>
+        <in>AlgebraicExpression.cpp</in>
+        <in>Cache.cpp</in>
+        <in>Driver.cpp</in>
+        <in>Elements.cpp</in>
+        <in>Matrix.cpp</in>
+        <in>MetabolismClient.cpp</in>
+        <in>Model.cpp</in>
+        <in>MtxLP.cpp</in>
+        <in>PetriNet.cpp</in>
+        <in>PetriNetAlgorithms.cpp</in>
+        <in>RPN.cpp</in>
+        <in>RecordParser.cpp</in>
+        <in>SplitLP.cpp</in>
+        <in>Text.cpp</in>
+        <in>TfbaLP.cpp</in>
+        <in>ThermoLP.cpp</in>
+        <in>Trajectory.cpp</in>
+        <in>TxtParser.cpp</in>
+        <in>json_reader.cpp</in>
+        <in>json_value.cpp</in>
+        <in>json_writer.cpp</in>
+        <in>main.cpp</in>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-O2"/>
+        <element flagsID="1" commonFlags="-std=c++0x -O2"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <cTool>
+            <incDir>
+              <pElem>.</pElem>
+            </incDir>
+          </cTool>
+          <ccTool>
+            <incDir>
+              <pElem>src/asio/include</pElem>
+              <pElem>src/asio</pElem>
+              <pElem>.</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="src/AlgebraicExpression.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/Cache.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/Driver.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/Elements.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/Matrix.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/MetabolismClient.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/Model.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/MtxLP.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/PetriNet.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/PetriNetAlgorithms.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/RPN.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/RecordParser.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/SplitLP.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/Text.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/TfbaLP.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/ThermoLP.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/Trajectory.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/TxtParser.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/glpk/amd_1.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_2.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_aat.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_control.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_defaults.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_dump.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_info.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_order.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_post_tree.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_postorder.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_preprocess.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/amd_valid.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/colamd.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi03.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi04.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi05.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi06.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi07.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi08.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi09.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi10.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi11.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi12.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi13.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi14.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi15.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi16.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi17.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi18.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpapi19.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpavl.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpbfd.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpbfx.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpcpx.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpdmp.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpdmx.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpenv01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpenv02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpenv03.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpenv04.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpenv05.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpenv06.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpenv07.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpenv08.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpfhv.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpgmp.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glphbm.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpini01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpini02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios03.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios04.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios05.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios06.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios07.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios08.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios09.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios10.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios11.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpios12.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpipm.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glplib01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glplib02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glplib03.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glplpf.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glplpx01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glplpx02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glplpx03.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpluf.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glplux.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpmat.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpmpl01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpmpl02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpmpl03.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpmpl04.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpmpl05.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpmpl06.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpmps.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet03.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet04.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet05.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet06.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet07.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet08.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnet09.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnpp01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnpp02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnpp03.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnpp04.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpnpp05.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpqmd.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glprgr.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glprng01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glprng02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpscf.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpscl.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpsdf.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpspm.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpspx01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpspx02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpsql.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpssx01.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glpssx02.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/glpk/glptsp.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="src/json_reader.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/json_value.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/json_writer.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

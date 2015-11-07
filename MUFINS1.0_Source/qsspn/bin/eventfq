@@ -1,0 +1,57 @@
+#!/usr/bin/python
+
+# 28/03/2013
+# Calculating the frequency of event occurrances in multiple trajectories. For each event in pnfba file the number of times it fires in multiple trajectories
+# is calculated.
+#
+
+import sys
+
+if len(sys.argv)!=3 :
+  print "VERSION: 1.0 28/03/2013"
+  print ""
+  print "USAGE: eventfq pnfba_file result_file"
+  print "where:"
+  print "pnfba_file - name of pnfba *pnfba input file" 
+  print "result_file - name of pnfba *out.xls file containing trajectories"
+  print ""
+  print "For each transition in the pnfba file the model calculates how many times it fires in the sample of trajectories stored in output file."
+  print ""
+  exit(0)
+
+event = {}
+fname1 = sys.argv[1]
+fname2 = sys.argv[2]
+
+try :
+ f = open(sys.argv[1])
+except IOError :
+ print "ERROR: " + sys.argv[1] + " cannot be opened. Check file name."
+ exit(0)
+
+for line in f :
+   line = line.strip() 
+   fields = line.split()
+   if len(fields)>0 :
+     if fields[0] == "INTERACTION" :
+        event[fields[1]] = 0
+
+f.close()
+
+try :
+ f = open(sys.argv[2])
+except IOError :
+ print "ERROR: " + sys.argv[2] + " cannot be opened. Check file name."
+ exit(0)  
+
+for line in f :
+   line = line.strip()
+   fields = line.split()
+   if fields[2] in event :
+     event[fields[2]] = event[fields[2]] + 1
+f.close()
+
+for i in event.keys() :
+   print i + "\t" + str(event[i])
+
+  

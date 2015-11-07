@@ -1,0 +1,12 @@
+NR1	M1_xt = M1	0	100		#	Nutrient M1
+NR2	M2_xt = M2	0	100		#	Nutrient M2
+NR3	M3_xt = M3	0	100		#	Nutrient M3
+NR4	M4_xt = M4	0	100		#	Nutrient M4
+R1	M1 + 2 M2 = M5 + M6	0	100	g1	#	Reaction 1
+R2	M3 = 2 M1 + M7	-100	100	g4	#	Reaction 2
+R3	M4 = M1 + M7	-100	100	g4	#	Reaction 3
+R4	M6 = M7	0	100	g6	#	Reaction 4
+R5	2 M6 = M5 + M8	-100	100	g3	#	Reaction 5
+R6	M7 = M5 + M8	-100	100	g2	#	Reaction 6
+BIOMASS	2 M5 + M8 = M_BIOMASS	0	1000		#	Biomass
+GROWTH	M_BIOMASS = M_BIOMASS_xt	0	1000		#	Growth

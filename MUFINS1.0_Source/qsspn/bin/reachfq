@@ -1,0 +1,74 @@
+#!/usr/bin/python
+
+# Implemented by Andrzej M. Kierzek 29/11/2014
+# Calculating a frequency of place reachability in multiple trajectories.
+#
+# BEHAVIOUR: In how many trajectories the place "Name" reaches marking of abs(N). 
+
+import sys
+
+if len(sys.argv)!=4 :
+  print "**************************************************"
+  print "**   reachfq version 1.2 29/11/2014             **"
+  print "**************************************************"
+  print ""
+  print "USAGE: reachfq file place N"
+  print 
+  print "where:"
+  print "file - name of pnfba output file" 
+  print "place - name of Petri Net place"
+  print "N - target place marking (real number)"
+  print ""
+  print "The command analyses simulation output and calculates "
+  print "the frequency of trajectories in which named place " 
+  print "reached N. If N is ngeative absolute value is used."
+  print 
+  exit(0)
+
+fname = sys.argv[1]
+place = sys.argv[2]
+N = float(sys.argv[3])
+
+count = 0
+idx = 0
+Ntrj = 0
+placeNotReached = True
+placeNotFound = True
+
+try :
+ f = open(sys.argv[1])
+except IOError :
+ print "ERROR: " + sys.argv[1] + " cannot be opened. Check file name."
+ exit(0)
+
+header = f.readline()
+header = header.strip()
+columns = header.split("\t")
+
+for c in columns :
+  if c == place :
+   placeNotFound = False   
+   break
+  idx = idx + 1
+
+if placeNotFound :
+  print "ERROR: No data for " + place + " in the output file. Check place name and output file header."
+  exit(0)
+
+Ntrj = Ntrj + 1
+ 
+for line in f :
+   line = line.strip() 
+   fields = line.split("\t")
+   if fields[0] == "Trajectory" :
+     Ntrj = Ntrj + 1
+     placeNotReached = True
+     continue
+   if abs(float(fields[idx])) >= abs(N) and placeNotReached :
+     count = count + 1
+     placeNotReached = False
+
+print "Total number of trajectories in the output file: " + str(Ntrj)
+print "The number of trajectories reaching " + str(N) + " or more on " + place + ": " + str(count)
+print "Frequency: " + str(float(count)/float(Ntrj))
+ 

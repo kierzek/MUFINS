@@ -1,0 +1,256 @@
+/*
+ * File:   main.cpp
+ * Author: Albert Gevorgyan
+ *
+ * Created on 14 January 2010, 11:32
+ */
+
+#include <iostream>
+#include <stdlib.h>//w/gni/
+#include <time.h>//w/gni/
+#include "Driver.h"
+
+//options
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
+#include "getopt.h"
+struct option longopts[] = {
+    {"infile", 1, NULL, 'i'},
+    {"expfile", 1, NULL, 'j'}, //w/gfa/
+    {"dpafile", 1, NULL, 'u'}, //w/dpa/
+    {"gfa_eps", 1, NULL, 'h'}, //w/gfa/ positive threshold for active flux
+    {"samsize", 1, NULL, 'n'}, //w/gni/ sample size for wgni
+    {"file", 1, NULL, 'f'},
+    {"bfile", 1, NULL, 'b'},
+    {"problem", 1, NULL, 'p'},
+    {"objective", 1, NULL, 'o'},
+    {"msg", 1, NULL, 'g'},
+    {"limit", 1, NULL, 'l'},
+    {"arguments", 1, NULL, 'a'},
+    {"solver", 1, NULL, 's'},
+    {"comments", 0, NULL, 'c'},
+    {"minimise", 0, NULL, 'm'},
+    {"write", 0, NULL, 'w'},
+    {"trim", 0, NULL, 't'},
+    {"externals", 1, NULL, 'x'},
+//    {"deltag", 0, NULL, 'd'},
+//    {"temperature", 1, NULL, 'k'},
+//    {"concentrations", 1, NULL, 'q'},
+    {"mip_gap", 1, NULL, 'y'},
+    {"Vmax", 1, NULL, 'V'},
+    {"Xtag", 1, NULL, 'X'},
+    {"epsilon", 1, NULL, 'E'},
+    {"zeroes", 0, NULL, 'z'},
+    {0, 0, 0, 0}
+};
+#define OPTSTRING   ":i:j:u:h:n:b:p:a:o:g:l:k:f:s:x:y:V:X:E:mctw"//w/
+
+
+void print_options(char**);
+
+
+int main(int argc, char** argv) {
+
+    if (argc < 2)
+        print_options(argv);
+
+    Driver* driver = new Driver;
+
+    try{
+        int opt;
+        while ((opt = getopt_long_only(argc, argv, OPTSTRING, longopts, NULL)) != EOF){
+            switch (opt){
+                case 'i':
+                    driver->infile = optarg;
+                    break;
+                case 'j': //w/gfa/
+                    driver->expfile = optarg;
+                    break;
+                case 'u': //dpa/
+                    driver->dpafile = optarg;
+                break;
+                case 'h': //w/gfa/
+                    driver->gfa->eps = str2double(optarg);
+                    break;
+                case 'n': //w/gfa/
+                    driver->gni->Nsam = str2int(optarg);
+                    break;
+                case 'f':
+                    driver->set_output(optarg);
+                    break;
+                case 'b':
+                    driver->bfile = optarg;
+                    break;
+                case 'p':
+                    driver->problem = optarg;
+                    break;
+                case 'o':
+                    driver->target = optarg;
+                    break;
+                case 'g':
+                    driver->set_msg_lev(optarg);
+                    break;
+                case 'l':
+                    driver->set_time(atoi(optarg));
+                    break;
+                case 'm':
+                    driver->max = false;
+                    break;
+                case 'c':
+                    driver->withcomments = true;
+                    break;
+                case 'a':
+                    driver->arg = optarg;
+                    break;
+                case 's':
+                    driver->set_solver(optarg);
+                    break;
+                case 'w':
+                    driver->write = true;
+                    break;
+                case 't':
+                    driver->dotrim = true;
+                    break;
+                case 'x':
+                    driver->ext = optarg;
+                    break;
+                case 'd':
+                    driver->thermo = true;
+                    break;
+                case 'k':
+                    driver->set_T(optarg);
+                    break;
+                case 'q':
+                    driver->set_conc_range(optarg);
+                    break;
+                case 'y':
+                    driver->mip_gap = str2double(optarg);
+                    break;
+                case 'V':
+                    driver->vmax = str2double(optarg);
+                    cout << "VMAX:" << ' ' << driver->vmax << endl;
+                    break;
+                case 'X':
+                    driver->xtag = optarg;
+                    break;
+                case 'E':
+                    driver->set_epsilon(optarg);
+                    break;
+                case 'z':
+                    driver->withzeroes = false;
+                    break;
+            }
+        }
+    }
+    catch (exception &e){
+        cerr << e.what() << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    srand ( time(NULL) );//w/gni/
+    //srand ( 11 );//w/gni/
+    try {//w/grb/ 
+
+        driver->run();
+    } catch(GRBException e) {
+        cout << "Error code = " << e.getErrorCode() << endl;
+        cout << e.getMessage() << endl;
+    } catch(...) {
+        cout << "Exception during optimization" << endl;
+    }
+    delete driver;
+    exit(EXIT_SUCCESS);
+}
+
+void print_options(char** argv){
+    char* program = argv[0];
+    printf("%s\n", program);
+    printf("USAGE:%s -i model_file [-p problem_type] [-o obj_fun] [-a arg_list] [-s solver_algorithm]\
+    [-b problem_file] [-f output_file] [-x ext_list]  [-g msg_level] [-l time_limit]  [-m]  [-t] [-c] [-w]\
+    [-V max_rate] [-y gap_tolerance] [-k temperature] [-q conc_range] [-d read_deltag] \n", program);
+    printf("-infile    (-i) The name of the model file in flux analyser like format.\n");
+    printf("-expfile   (-j) The name of the expression file\n"); //w/gfa/
+    printf("-dpafile   (-u) The name of the dpaplot output file\n"); //w/dpa/
+    printf("-problem   (-p) The analysis program:\n");
+    printf("    show        - show the model contents\n");
+    printf("    objvalue    - objective function value\n");
+    printf("    objstat     - objective function value and status\n");
+    printf("    fba         - FBA\n");
+    printf("    fva         - FVA\n");
+    printf("    fsa         - FSA\n");
+    printf("    em          - elementary modes\n");    
+    printf("    ko          - knockout genes/enzymes or reactions\n");
+    printf("    koGrb       - knockout genes/enzymes or reactions with Gurobi\n");//w/
+    printf("    ess         - essential reactions\n");
+    printf("    essGrb     - essential reactions with Gurobi\n");//w/gni/
+    printf("    live        - live reactions\n");
+    printf("    plot        - plot objective function against another flux\n");
+    printf("    plot3d      - plot against 2 fluxes\n");
+    printf("    mss         - minimal substrate sets\n");
+    printf("    mps         - minimal product sets\n");
+    printf("    gfaa        - genome-scale flux activity analysis\n"); //w/gfa/
+    printf("    gfva        - genome-scale FVA\n"); //w/gfa/
+    printf("    gfaaGrb     - genome-scale flux activity analysis with Gurobi solver\n"); //w/gni/
+    printf("    gfvaGrb     - genome-scale FVA with Gurobi solver\n"); //w/gni/
+    printf("    sgni        - strong GNI analysis\n");//w/gni/
+    printf("    wgni        - weak GNI analysis\n");//w/gni/
+    printf("    sgniGrb     - strong GNI analysis with Gurobi solver\n");//w/gni/
+    printf("    wgniGrb     - weak GNI analysis with Gurobi solver\n");//w/gni/
+    printf("    dpaplot     - DPA analysis of producibility plot\n");//w/dpa/
+    printf("    dpaplotGrb  - DPA analysis of producibility plot with Gurobi solver\n");//w/dpa/
+    printf("    dpasig      - DPA analysis of metabolite signals \n");//w/dpa/
+//    printf("    bottlenecks - directional or thermodynamic bottlenecks\n");
+    printf("    uncons      - unconserved metabolites\n");
+    printf("    orphans     - orphan metabolites\n");
+    printf("    cc          - connected components\n");
+    printf("    troff       - tradeoff between two objectives\n");// Zakrzewski's change
+    printf("-objective (-o) Objective function, defined as a linear expression including reaction and/or metabolite names.\n");
+    printf("-arguments (-a) Space-delimited list of problem-specific arguments.\n");
+    printf("-solver    (-s) Solver: simplex, exact or MILP.\n");
+    printf("-bfile     (-b) Problem file with definitions of additional constraints, objective and problem-specific arguments\n");
+    printf("-file      (-f) Output file (stdout by default)\n");
+    printf("-externals (-x) List of external metabolites.\n");
+    printf("-msg       (-g) Messages during solution.\n");
+    printf("-limit     (-l) Time limit in milliseconds.\n");
+    printf("-comments  (-c) Comments in the output on/off.\n");
+    printf("-minimise  (-m) Define optimisation direction as minimisation, on/off (maximisation by default).\n");
+    printf("-trim      (-t) Reduce the stoichiometry matrix before solving LP.\n");
+    printf("-write     (-w) Write the LP to the file 'LP.txt', on/off.\n");
+    printf("-Vmax      (-V) maximal flux rate in the model (for MILP).\n");
+    printf("-epsilon   (-E) round-off error tolerance threshold.\n");
+    printf("-mip_gap   (-y) relative mip gap tolerance (for MILP).\n");
+    printf("-gfa_eps (-h) positive threshold for active flux.\n");//w/gfa/
+    printf("-samsize (-h) media sample size for wgni.\n");//w/gni/
+
+    exit(EXIT_SUCCESS);
+}
+
+
+/*
+     printf("AMKFBA upgraded with GLPK-4.41.\n");
+     printf("USAGE:%s -i input_file -p program -obj opt_target further options\n",argc[0]);
+     printf("-i The name of the file in flux analyser like format\n");
+     printf("-f The file containing the list of command line options (one option per line)\n");
+     printf("-p The analysis program:\n");
+     printf("    fba         - single FBA run\n");
+     printf("    objvalue    - Compute objective function value and print it\n");
+     printf("                  as a single number to stdout\n");
+     printf("    objstat     - compute objective function value and status\n");
+     printf("                  and print as one line output\n");
+     printf("    metabolites - print metabolite list\n");
+     printf("    genes       - print gene list\n");
+     printf("    reactions4gene - print input file lines of reactions which \n");
+     printf("                     are inactivated by the gene\n");
+     printf("    fametlist   - print metabolite list in FluxAnalyser format\n");
+     printf("    kogene      - knockout gene and run FBA\n");
+     printf("    genes2reactions - print gene/reaction associations\n");
+     printf("    g2rMatrix - print gene protein associations in sparse matrix format\n");
+     printf("-obj Optimisation target name. It may be reaction or metabolite name\n");
+     printf("-bfile flux (column) bounds file\n");
+     printf("-rbfile rate (row) bounds file\n");
+     printf("-ko gene name - the gene to be inactivated\n");
+     printf("-min - compute minimal value of the objective function\n");
+     printf("-metext - set metabolite as external");
+     printf("\n");
+ */

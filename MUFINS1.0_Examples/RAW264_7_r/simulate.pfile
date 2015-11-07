@@ -1,0 +1,27 @@
+!max: M_no_e_xt
+R_biomass	0.028	0.0281	# Value used by Brodbar et al 2012 for NOS2 simulation. This reproduces R_NOS2 maximal flux of 0.0399 (0.0388927) reported in the paper. Not stoch. of 2 in R_NOS2 reaction. The M_no_e_xt flux in 0.077
+mek_inhibitor	0.0	0.0	# Treatment with inhibitor of erk phosphorylation by mec1
+lps_input	0.0	100.0	# LPS treatment
+cd14_input	0.0	100.0	# cd14_xt = cd14. Constitutive expression of cd14
+r145	0.0	0.005	# jnk = inos. We assume that jnk is less potent transcriptional activator of inos than erk
+r102	0.0	0.005	# hif1 = inos. We assume that jnk is less potent transcriptional activator of inos than erk
+r208	0.0	0.005	# pkc_a_b = erk_1_2. We assume that pkc_a_b is less potein erk1  kinase than mek
+;
+!max: M_no_e_xt
+R_biomass	0.028	0.0281	# Value used by Brodbar et al 2012 for NOS2 simulation. This reproduces R_NOS2 maximal flux of 0.0399 (0.0388927) reported in the paper. Not stoch. of 2 in R_NOS2 reaction. The M_no_e_xt flux in 0.077
+mek_inhibitor	100.0	100.0	# Treatment with inhibitor of erk phosphorylation by mec1
+lps_input	0.0	100.0	# LPS treatment
+cd14_input	0.0	100.0	# cd14_xt = cd14. Constitutive expression of cd14.
+r145	0.0	0.005	# jnk = inos. We assume that jnk is less potent transcriptional activator of inos than erk
+r102	0.0	0.005	# hif1 = inos. We assume that jnk is less potent transcriptional activator of inos than erk
+r208	0.0	0.005	# pkc_a_b = erk_1_2. We assume that pkc_a_b is less potein erk1  kinase than mek
+;
+!max: M_no_e_xt
+R_biomass	0.028	0.0281	# Value used by Brodbar et al 2012 for NOS2 simulation. This reproduces R_NOS2 maximal flux of 0.0399 (0.0388927) reported in the paper. Not stoch. of 2 in R_NOS2 reaction. The M_no_e_xt flux in 0.077
+mek_inhibitor	0.0	0.0	# Treatment with inhibitor of erk phosphorylation by mec1
+lps_input	0.0	0.0	# LPS treatment
+cd14_input	0.0	100.0	# cd14_xt = cd14. Constitutive expression of cd14
+r145	0.0	0.005	# jnk = inos. We assume that jnk is less potent transcriptional activator of inos than erk
+r102	0.0	0.005	# hif1 = inos. We assume that jnk is less potent transcriptional activator of inos than erk
+r208	0.0	0.005	# pkc_a_b = erk_1_2. We assume that pkc_a_b is less potein erk1  kinase than mek
+;

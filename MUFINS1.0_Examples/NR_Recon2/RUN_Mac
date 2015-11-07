@@ -1,0 +1,11 @@
+#!/bin/sh
+cd "`dirname "$0"`"
+./bin/spept2qsspn NR_Recon2.v3.1.spept 1e9 > NR_Recon2.v3.1.qsspn
+time ./bin/qsspn NR_Recon2.v3.1.qsspn NR_Recon2.v3.1.ctrl.txt
+echo ''
+./bin/qsspn
+echo ''
+echo 'SIMULATION FINISHED'
+echo 'Press any key to close this window.'
+read a
+

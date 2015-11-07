@@ -1,0 +1,13 @@
+called: g++
+	/home/jsroka/repozytoria/SparkLP/QSSPN/QSSPNclientBuff2/v3.3
+	g++
+	-MMD
+	-std=c++0x
+	-O2
+	-Isrc/asio/include
+	-Isrc/asio
+	-o
+	obj/PetriNetAlgorithms.o
+	-c
+	src/PetriNetAlgorithms.cpp
+

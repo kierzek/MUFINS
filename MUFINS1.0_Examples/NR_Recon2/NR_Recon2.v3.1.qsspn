@@ -1,0 +1,440 @@
+
+SUBSTANCES
+   PXR 0 1e9 1
+   CYP3A4_gene 0 1e9 1
+   Glucose_regeneration_flux 0 1e9 1
+   timer 0 1e9 1
+   Lactate_consumption_flux 0 1e9 1
+   ligand2 0 1e9 1
+   CYP3A4_deg 0 1e9 1
+   estradiol 0 1e9 3
+   estradiol_degradation_flux 0 1e9 1
+   CYP3A4_mRNA_deg 0 1e9 1
+   PXR_active 0 1e9 1
+   GR_mRNA 0 1e9 1
+   cortisol_deg 0 1e9 1
+   cortisol_blood 0 1e9 1
+   PXR_gene 0 1e9 1
+   GR_mRNA_deg 0 1e9 1
+   cortisol 0 1e9 1
+   Hepatocytes 0 1e9 1
+   PXR_deg 0 1e9 1
+   clock 1 1e9 1
+   RBC 0 1e9 1
+   PXR_mRNA_deg 0 1e9 1
+   Lactate 0 1e9 3
+   Glucose 0 1e9 1
+   estradiol_source 0 1e9 1
+   CYP3A4_mRNA 0 1e9 1
+   GR_cort 0 1e9 1
+   CYP3A4 0 1e9 3
+   Glucose_regeneration 0 1e9 2
+   GR_deg 0 1e9 1
+   PXR_mRNA 0 1e9 1
+   GR 0 1e9 1
+   estradiol_degradation 0 1e9 2
+   LIVER_TURNOVER 1 1e9 3
+   GR_gene 0 1e9 1
+END
+
+REACTIONS
+  INTERACTION PXR_degradation 1.0 FAST 0.0
+      SUBSTRATE PXR
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR_deg
+      CONSUMED PXR
+  END
+  INTERACTION R_EX_lac_L_LPAREN_e_RPAREN_ 1.0 FLUX 0.0
+      SUBSTRATE Glucose_regeneration
+         ACTIVITY 2
+           0 0.0
+           1 1.0
+         END
+      END
+      PRODUCT Lactate_consumption_flux
+  END
+  INTERACTION PXR_transcription_GRcort 1.0 FAST 0.0
+      SUBSTRATE PXR_gene
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE GR_cort
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR_mRNA
+  END
+  INTERACTION CYP3A4_transcription_PXRcort 1.0 FAST 0.0
+      SUBSTRATE PXR_active
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE CYP3A4_gene
+         ACTIVITY 0
+         END
+      END
+      PRODUCT CYP3A4_mRNA
+  END
+  INTERACTION CYP3A4_mRNA_degradation 1.0 FAST 0.0
+      SUBSTRATE CYP3A4_mRNA
+         ACTIVITY 0
+         END
+      END
+      PRODUCT CYP3A4_mRNA_deg
+      CONSUMED CYP3A4_mRNA
+  END
+  INTERACTION cortisol_degradation_CYP3A4 1.0 FAST 0.0
+      SUBSTRATE CYP3A4
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE cortisol
+         ACTIVITY 0
+         END
+      END
+      PRODUCT cortisol_deg
+      CONSUMED cortisol
+  END
+  INTERACTION estriadol_uptake 0.000645789 FAST 0.0
+      SUBSTRATE estradiol_source
+         ACTIVITY 0
+         END
+      END
+      PRODUCT estradiol
+  END
+  INTERACTION clock 1.0 FAST 0.0
+      SUBSTRATE clock
+         ACTIVITY 0
+         END
+      END
+      PRODUCT timer
+  END
+  INTERACTION GR_degradation 1.0 FAST 0.0
+      SUBSTRATE GR
+         ACTIVITY 0
+         END
+      END
+      PRODUCT GR_deg
+      CONSUMED GR
+  END
+  INTERACTION perturbation 1.0 RESET 0.0
+      SUBSTRATE timer
+         ACTIVITY 2
+            0.0 0.0
+            500.0 1.0
+         END
+      END
+      PRODUCT_STOICHIOMETRY cortisol_blood 0.5
+      PRODUCT_STOICHIOMETRY timer 0.0
+      PRODUCT_STOICHIOMETRY clock 0.0
+      CONSUMED timer
+  END
+  INTERACTION PXR_transcription 1.0 FAST 0.0
+      SUBSTRATE PXR_gene
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR_mRNA
+  END
+  INTERACTION CYP3A4_degradation 1.0 FAST 0.0
+      SUBSTRATE CYP3A4
+         ACTIVITY 0
+         END
+      END
+      PRODUCT CYP3A4_deg
+      CONSUMED CYP3A4
+  END
+  INTERACTION F2 1.54321e-05 FAST 0.0
+      SUBSTRATE RBC
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE Glucose
+         ACTIVITY 0
+         END
+      END
+      PRODUCT Lactate
+      CONSUMED Glucose
+  END
+  INTERACTION cortisol_uptake 1000.0 FAST 0.0
+      SUBSTRATE cortisol_blood
+         ACTIVITY 0
+         END
+      END
+      PRODUCT cortisol
+  END
+  INTERACTION PXR_mRNA_degradation 1.0 FAST 0.0
+      SUBSTRATE PXR_mRNA
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR_mRNA_deg
+      CONSUMED PXR_mRNA
+  END
+  INTERACTION F3 -0.01666667 FAST 0.0
+      SUBSTRATE Hepatocytes
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE Lactate
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE Lactate_consumption_flux
+         ACTIVITY 0
+         END
+      END
+      CONSUMED Lactate
+  END
+  INTERACTION CYP3A4_transcription 1.0 FAST 0.0
+      SUBSTRATE CYP3A4_gene
+         ACTIVITY 0
+         END
+      END
+      PRODUCT CYP3A4_mRNA
+  END
+  INTERACTION GR_translation 1.0 FAST 0.0
+      SUBSTRATE GR_mRNA
+         ACTIVITY 0
+         END
+      END
+      PRODUCT GR
+  END
+  INTERACTION F1 0.01666667 FAST 0.0
+      SUBSTRATE Hepatocytes
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE Glucose_regeneration_flux
+         ACTIVITY 0
+         END
+      END
+      PRODUCT Glucose
+  END
+  INTERACTION R_RE3013R 1.0 FLUX 0.0
+      SUBSTRATE estradiol_degradation
+         ACTIVITY 2
+           0 0.0
+           1 1.0
+         END
+      END
+      PRODUCT estradiol_degradation_flux
+  END
+  INTERACTION CYP3A4_translation 1.0 FAST 0.0
+      SUBSTRATE CYP3A4_mRNA
+         ACTIVITY 0
+         END
+      END
+      PRODUCT CYP3A4
+  END
+  INTERACTION NET_GLUCOSE_FLUX -2.76 FAST 0.0
+      PRODUCT Glucose
+  END
+  INTERACTION PXR_cort_association 1.0 FAST 0.0
+      SUBSTRATE cortisol
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE PXR
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR_active
+      CONSUMED cortisol
+      CONSUMED PXR
+  END
+  INTERACTION GR_cort_degradation 1.0 FAST 0.0
+      SUBSTRATE GR_cort
+         ACTIVITY 0
+         END
+      END
+      PRODUCT cortisol
+      PRODUCT GR_deg
+      CONSUMED GR_cort
+  END
+  INTERACTION PXR_ligand2_association 1.0 FAST 0.0
+      SUBSTRATE ligand2
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE PXR
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR_active
+      CONSUMED ligand2
+      CONSUMED PXR
+  END
+  INTERACTION PXR_ligand2_disassociation 1.0 FAST 0.0
+      SUBSTRATE PXR_active
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR
+      PRODUCT ligand2
+      CONSUMED PXR_active
+  END
+  INTERACTION F4 -16666.66667 FAST 0.0
+      SUBSTRATE estradiol_degradation_flux
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE Hepatocytes
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE estradiol
+         ACTIVITY 0
+         END
+      END
+      CONSUMED estradiol
+  END
+  INTERACTION PXR_cort_degradation 1.0 FAST 0.0
+      SUBSTRATE PXR_active
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR_deg
+      PRODUCT cortisol
+      CONSUMED PXR_active
+  END
+  INTERACTION GR_mRNA_degradation 1.0 FAST 0.0
+      SUBSTRATE GR_mRNA
+         ACTIVITY 0
+         END
+      END
+      PRODUCT GR_mRNA_deg
+      CONSUMED GR_mRNA
+  END
+  INTERACTION GR_cort_disassociation 1.0 FAST 0.0
+      SUBSTRATE GR_cort
+         ACTIVITY 0
+         END
+      END
+      PRODUCT GR
+      PRODUCT cortisol
+      CONSUMED GR_cort
+  END
+  INTERACTION PXR_cort_disassociation 1.0 FAST 0.0
+      SUBSTRATE PXR_active
+         ACTIVITY 0
+         END
+      END
+      PRODUCT cortisol
+      PRODUCT PXR
+      CONSUMED PXR_active
+  END
+  INTERACTION GR_transcription_GRcort 1.0 FAST 0.0
+      SUBSTRATE GR_cort
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE GR_gene
+         ACTIVITY 0
+         END
+      END
+      PRODUCT GR_mRNA
+  END
+  INTERACTION GR_cort_association 1.0 FAST 0.0
+      SUBSTRATE GR
+         ACTIVITY 0
+         END
+      END
+      SUBSTRATE cortisol
+         ACTIVITY 0
+         END
+      END
+      PRODUCT GR_cort
+      CONSUMED GR
+      CONSUMED cortisol
+  END
+  INTERACTION PXR_ligand2_degradation 1.0 FAST 0.0
+      SUBSTRATE PXR_active
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR_deg
+      PRODUCT ligand2
+      CONSUMED PXR_active
+  END
+  INTERACTION GR_transcription 1.0 FAST 0.0
+      SUBSTRATE GR_gene
+         ACTIVITY 0
+         END
+      END
+      PRODUCT GR_mRNA
+  END
+  INTERACTION R_EX_glc_LPAREN_e_RPAREN_ 1.0 FLUX 0.0
+      SUBSTRATE Glucose_regeneration
+         ACTIVITY 2
+           0 0.0
+           1 1.0
+         END
+      END
+      PRODUCT Glucose_regeneration_flux
+  END
+  INTERACTION PXR_translation 1.0 FAST 0.0
+      SUBSTRATE PXR_mRNA
+         ACTIVITY 0
+         END
+      END
+      PRODUCT PXR
+  END
+END
+
+GSMN
+   MODEL Recon2_PIPES
+   EXT_TAG _xt
+   FLUX R_EX_lac_L_LPAREN_e_RPAREN_ R_EX_lac_L_LPAREN_e_RPAREN_
+   FLUX R_RE3013R R_EX_estradiol_LPAREN_e_RPAREN_
+   FLUX R_EX_glc_LPAREN_e_RPAREN_ R_EX_glc_LPAREN_e_RPAREN_
+   METABOLITE Glucose_regeneration M_glc_D_e_xt
+      ACTIVITY 2
+         0.0 0.0
+         0.001 1.0
+      END
+   END
+   METABOLITE estradiol_degradation M_C05301_c
+      ACTIVITY 2
+         0.0 0
+         0.001 1
+      END
+   END
+   ENZYME estradiol R_EX_estradiol_LPAREN_e_RPAREN_
+      ACTIVITY 2
+         0 0 1000.0
+         0.0001 -1.31E-08 1000.0
+      END
+   END
+   ENZYME Lactate R_EX_lac_L_LPAREN_e_RPAREN_
+      ACTIVITY 2
+         0 0 1000.0
+         0.001 -0.0565 1000.0
+      END
+   END
+   ENZYME CYP3A4 list
+      ACTIVITY 2
+         0.0 0.0 0.0
+         1500 0.0 1000.0
+      END
+      LIST 9
+         R_P4503A4 1.0
+         R_P4501B1r 1.0
+         R_P4502A6 1.0
+         R_RE3013C 1.0
+         R_RE3013R 1.0
+         R_P4502C19 1.0
+         R_P4502F1 1.0
+         R_P4503A5 1.0
+         R_P4503A7r 1.0
+      END
+   END
+   ENZYME LIVER_TURNOVER R_biomass_reaction
+      ACTIVITY 2
+         0 0.0 0.0
+         1 0.007 1000.0
+      END
+   END
+END

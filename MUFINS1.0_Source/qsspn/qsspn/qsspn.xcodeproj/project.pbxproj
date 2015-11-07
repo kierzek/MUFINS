@@ -1,0 +1,886 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE7038AF1A6A4B00008DC502 /* AlgebraicExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7037EE1A6A4B00008DC502 /* AlgebraicExpression.cpp */; };
+		FE7038B01A6A4B00008DC502 /* Driver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7037F31A6A4B00008DC502 /* Driver.cpp */; };
+		FE7038B11A6A4B00008DC502 /* Elements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7037F51A6A4B00008DC502 /* Elements.cpp */; };
+		FE7038B21A6A4B00008DC502 /* amd_1.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7037FB1A6A4B00008DC502 /* amd_1.c */; };
+		FE7038B31A6A4B00008DC502 /* amd_2.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7037FC1A6A4B00008DC502 /* amd_2.c */; };
+		FE7038B41A6A4B00008DC502 /* amd_aat.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7037FD1A6A4B00008DC502 /* amd_aat.c */; };
+		FE7038B51A6A4B00008DC502 /* amd_control.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7037FE1A6A4B00008DC502 /* amd_control.c */; };
+		FE7038B61A6A4B00008DC502 /* amd_defaults.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7037FF1A6A4B00008DC502 /* amd_defaults.c */; };
+		FE7038B71A6A4B00008DC502 /* amd_dump.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038001A6A4B00008DC502 /* amd_dump.c */; };
+		FE7038B81A6A4B00008DC502 /* amd_info.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038011A6A4B00008DC502 /* amd_info.c */; };
+		FE7038B91A6A4B00008DC502 /* amd_order.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038031A6A4B00008DC502 /* amd_order.c */; };
+		FE7038BA1A6A4B00008DC502 /* amd_post_tree.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038041A6A4B00008DC502 /* amd_post_tree.c */; };
+		FE7038BB1A6A4B00008DC502 /* amd_postorder.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038051A6A4B00008DC502 /* amd_postorder.c */; };
+		FE7038BC1A6A4B00008DC502 /* amd_preprocess.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038061A6A4B00008DC502 /* amd_preprocess.c */; };
+		FE7038BD1A6A4B00008DC502 /* amd_valid.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038071A6A4B00008DC502 /* amd_valid.c */; };
+		FE7038BE1A6A4B00008DC502 /* colamd.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038081A6A4B00008DC502 /* colamd.c */; };
+		FE7038BF1A6A4B00008DC502 /* glpapi01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70380B1A6A4B00008DC502 /* glpapi01.c */; };
+		FE7038C01A6A4B00008DC502 /* glpapi02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70380C1A6A4B00008DC502 /* glpapi02.c */; };
+		FE7038C11A6A4B00008DC502 /* glpapi03.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70380D1A6A4B00008DC502 /* glpapi03.c */; };
+		FE7038C21A6A4B00008DC502 /* glpapi04.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70380E1A6A4B00008DC502 /* glpapi04.c */; };
+		FE7038C31A6A4B00008DC502 /* glpapi05.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70380F1A6A4B00008DC502 /* glpapi05.c */; };
+		FE7038C41A6A4B00008DC502 /* glpapi06.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038101A6A4B00008DC502 /* glpapi06.c */; };
+		FE7038C51A6A4B00008DC502 /* glpapi07.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038111A6A4B00008DC502 /* glpapi07.c */; };
+		FE7038C61A6A4B00008DC502 /* glpapi08.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038121A6A4B00008DC502 /* glpapi08.c */; };
+		FE7038C71A6A4B00008DC502 /* glpapi09.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038131A6A4B00008DC502 /* glpapi09.c */; };
+		FE7038C81A6A4B00008DC502 /* glpapi10.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038141A6A4B00008DC502 /* glpapi10.c */; };
+		FE7038C91A6A4B00008DC502 /* glpapi11.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038151A6A4B00008DC502 /* glpapi11.c */; };
+		FE7038CA1A6A4B00008DC502 /* glpapi12.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038161A6A4B00008DC502 /* glpapi12.c */; };
+		FE7038CB1A6A4B00008DC502 /* glpapi13.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038171A6A4B00008DC502 /* glpapi13.c */; };
+		FE7038CC1A6A4B00008DC502 /* glpapi14.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038181A6A4B00008DC502 /* glpapi14.c */; };
+		FE7038CD1A6A4B00008DC502 /* glpapi15.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038191A6A4B00008DC502 /* glpapi15.c */; };
+		FE7038CE1A6A4B00008DC502 /* glpapi16.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70381A1A6A4B00008DC502 /* glpapi16.c */; };
+		FE7038CF1A6A4B00008DC502 /* glpapi17.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70381B1A6A4B00008DC502 /* glpapi17.c */; };
+		FE7038D01A6A4B00008DC502 /* glpapi18.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70381C1A6A4B00008DC502 /* glpapi18.c */; };
+		FE7038D11A6A4B00008DC502 /* glpapi19.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70381D1A6A4B00008DC502 /* glpapi19.c */; };
+		FE7038D21A6A4B00008DC502 /* glpavl.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70381E1A6A4B00008DC502 /* glpavl.c */; };
+		FE7038D31A6A4B00008DC502 /* glpbfd.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038201A6A4B00008DC502 /* glpbfd.c */; };
+		FE7038D41A6A4B00008DC502 /* glpbfx.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038221A6A4B00008DC502 /* glpbfx.c */; };
+		FE7038D51A6A4B00008DC502 /* glpcpx.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038241A6A4B00008DC502 /* glpcpx.c */; };
+		FE7038D61A6A4B00008DC502 /* glpdmp.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038251A6A4B00008DC502 /* glpdmp.c */; };
+		FE7038D71A6A4B00008DC502 /* glpdmx.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038271A6A4B00008DC502 /* glpdmx.c */; };
+		FE7038D81A6A4B00008DC502 /* glpenv01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038291A6A4B00008DC502 /* glpenv01.c */; };
+		FE7038D91A6A4B00008DC502 /* glpenv02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70382A1A6A4B00008DC502 /* glpenv02.c */; };
+		FE7038DA1A6A4B00008DC502 /* glpenv03.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70382B1A6A4B00008DC502 /* glpenv03.c */; };
+		FE7038DB1A6A4B00008DC502 /* glpenv04.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70382C1A6A4B00008DC502 /* glpenv04.c */; };
+		FE7038DC1A6A4B00008DC502 /* glpenv05.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70382D1A6A4B00008DC502 /* glpenv05.c */; };
+		FE7038DD1A6A4B00008DC502 /* glpenv06.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70382E1A6A4B00008DC502 /* glpenv06.c */; };
+		FE7038DE1A6A4B00008DC502 /* glpenv07.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70382F1A6A4B00008DC502 /* glpenv07.c */; };
+		FE7038DF1A6A4B00008DC502 /* glpenv08.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038301A6A4B00008DC502 /* glpenv08.c */; };
+		FE7038E01A6A4B00008DC502 /* glpfhv.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038311A6A4B00008DC502 /* glpfhv.c */; };
+		FE7038E11A6A4B00008DC502 /* glpgmp.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038331A6A4B00008DC502 /* glpgmp.c */; };
+		FE7038E21A6A4B00008DC502 /* glphbm.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038351A6A4B00008DC502 /* glphbm.c */; };
+		FE7038E31A6A4B00008DC502 /* glpini01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038371A6A4B00008DC502 /* glpini01.c */; };
+		FE7038E41A6A4B00008DC502 /* glpini02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038381A6A4B00008DC502 /* glpini02.c */; };
+		FE7038E51A6A4B00008DC502 /* glpios01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70383A1A6A4B00008DC502 /* glpios01.c */; };
+		FE7038E61A6A4B00008DC502 /* glpios02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70383B1A6A4B00008DC502 /* glpios02.c */; };
+		FE7038E71A6A4B00008DC502 /* glpios03.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70383C1A6A4B00008DC502 /* glpios03.c */; };
+		FE7038E81A6A4B00008DC502 /* glpios04.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70383D1A6A4B00008DC502 /* glpios04.c */; };
+		FE7038E91A6A4B00008DC502 /* glpios05.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70383E1A6A4B00008DC502 /* glpios05.c */; };
+		FE7038EA1A6A4B00008DC502 /* glpios06.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70383F1A6A4B00008DC502 /* glpios06.c */; };
+		FE7038EB1A6A4B00008DC502 /* glpios07.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038401A6A4B00008DC502 /* glpios07.c */; };
+		FE7038EC1A6A4B00008DC502 /* glpios08.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038411A6A4B00008DC502 /* glpios08.c */; };
+		FE7038ED1A6A4B00008DC502 /* glpios09.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038421A6A4B00008DC502 /* glpios09.c */; };
+		FE7038EE1A6A4B00008DC502 /* glpios10.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038431A6A4B00008DC502 /* glpios10.c */; };
+		FE7038EF1A6A4B00008DC502 /* glpios11.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038441A6A4B00008DC502 /* glpios11.c */; };
+		FE7038F01A6A4B00008DC502 /* glpios12.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038451A6A4B00008DC502 /* glpios12.c */; };
+		FE7038F11A6A4B00008DC502 /* glpipm.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038461A6A4B00008DC502 /* glpipm.c */; };
+		FE7038F21A6A4B00008DC502 /* glplib01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70384A1A6A4B00008DC502 /* glplib01.c */; };
+		FE7038F31A6A4B00008DC502 /* glplib02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70384B1A6A4B00008DC502 /* glplib02.c */; };
+		FE7038F41A6A4B00008DC502 /* glplib03.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70384C1A6A4B00008DC502 /* glplib03.c */; };
+		FE7038F51A6A4B00008DC502 /* glplpf.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70384D1A6A4B00008DC502 /* glplpf.c */; };
+		FE7038F61A6A4B00008DC502 /* glplpx01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70384F1A6A4B00008DC502 /* glplpx01.c */; };
+		FE7038F71A6A4B00008DC502 /* glplpx02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038501A6A4B00008DC502 /* glplpx02.c */; };
+		FE7038F81A6A4B00008DC502 /* glplpx03.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038511A6A4B00008DC502 /* glplpx03.c */; };
+		FE7038F91A6A4B00008DC502 /* glpluf.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038521A6A4B00008DC502 /* glpluf.c */; };
+		FE7038FA1A6A4B00008DC502 /* glplux.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038541A6A4B00008DC502 /* glplux.c */; };
+		FE7038FB1A6A4B00008DC502 /* glpmat.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038561A6A4B00008DC502 /* glpmat.c */; };
+		FE7038FC1A6A4B00008DC502 /* glpmpl01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038591A6A4B00008DC502 /* glpmpl01.c */; };
+		FE7038FD1A6A4B00008DC502 /* glpmpl02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70385A1A6A4B00008DC502 /* glpmpl02.c */; };
+		FE7038FE1A6A4B00008DC502 /* glpmpl03.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70385B1A6A4B00008DC502 /* glpmpl03.c */; };
+		FE7038FF1A6A4B00008DC502 /* glpmpl04.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70385C1A6A4B00008DC502 /* glpmpl04.c */; };
+		FE7039001A6A4B00008DC502 /* glpmpl05.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70385D1A6A4B00008DC502 /* glpmpl05.c */; };
+		FE7039011A6A4B00008DC502 /* glpmpl06.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70385E1A6A4B00008DC502 /* glpmpl06.c */; };
+		FE7039021A6A4B00008DC502 /* glpmps.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70385F1A6A4B00008DC502 /* glpmps.c */; };
+		FE7039031A6A4B00008DC502 /* glpnet01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038611A6A4B00008DC502 /* glpnet01.c */; };
+		FE7039041A6A4B00008DC502 /* glpnet02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038621A6A4B00008DC502 /* glpnet02.c */; };
+		FE7039051A6A4B00008DC502 /* glpnet03.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038631A6A4B00008DC502 /* glpnet03.c */; };
+		FE7039061A6A4B00008DC502 /* glpnet04.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038641A6A4B00008DC502 /* glpnet04.c */; };
+		FE7039071A6A4B00008DC502 /* glpnet05.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038651A6A4B00008DC502 /* glpnet05.c */; };
+		FE7039081A6A4B00008DC502 /* glpnet06.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038661A6A4B00008DC502 /* glpnet06.c */; };
+		FE7039091A6A4B00008DC502 /* glpnet07.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038671A6A4B00008DC502 /* glpnet07.c */; };
+		FE70390A1A6A4B00008DC502 /* glpnet08.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038681A6A4B00008DC502 /* glpnet08.c */; };
+		FE70390B1A6A4B00008DC502 /* glpnet09.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038691A6A4B00008DC502 /* glpnet09.c */; };
+		FE70390C1A6A4B00008DC502 /* glpnpp01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70386B1A6A4B00008DC502 /* glpnpp01.c */; };
+		FE70390D1A6A4B00008DC502 /* glpnpp02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70386C1A6A4B00008DC502 /* glpnpp02.c */; };
+		FE70390E1A6A4B00008DC502 /* glpnpp03.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70386D1A6A4B00008DC502 /* glpnpp03.c */; };
+		FE70390F1A6A4B00008DC502 /* glpnpp04.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70386E1A6A4B00008DC502 /* glpnpp04.c */; };
+		FE7039101A6A4B00008DC502 /* glpnpp05.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70386F1A6A4B00008DC502 /* glpnpp05.c */; };
+		FE7039111A6A4B00008DC502 /* glpqmd.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038701A6A4B00008DC502 /* glpqmd.c */; };
+		FE7039121A6A4B00008DC502 /* glprgr.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038721A6A4B00008DC502 /* glprgr.c */; };
+		FE7039131A6A4B00008DC502 /* glprng01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038751A6A4B00008DC502 /* glprng01.c */; };
+		FE7039141A6A4B00008DC502 /* glprng02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038761A6A4B00008DC502 /* glprng02.c */; };
+		FE7039151A6A4B00008DC502 /* glpscf.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038771A6A4B00008DC502 /* glpscf.c */; };
+		FE7039161A6A4B00008DC502 /* glpscl.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038791A6A4B00008DC502 /* glpscl.c */; };
+		FE7039171A6A4B00008DC502 /* glpsdf.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70387A1A6A4B00008DC502 /* glpsdf.c */; };
+		FE7039181A6A4B00008DC502 /* glpspm.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70387B1A6A4B00008DC502 /* glpspm.c */; };
+		FE7039191A6A4B00008DC502 /* glpspx01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70387E1A6A4B00008DC502 /* glpspx01.c */; };
+		FE70391A1A6A4B00008DC502 /* glpspx02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE70387F1A6A4B00008DC502 /* glpspx02.c */; };
+		FE70391B1A6A4B00008DC502 /* glpsql.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038801A6A4B00008DC502 /* glpsql.c */; };
+		FE70391C1A6A4B00008DC502 /* glpssx01.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038831A6A4B00008DC502 /* glpssx01.c */; };
+		FE70391D1A6A4B00008DC502 /* glpssx02.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038841A6A4B00008DC502 /* glpssx02.c */; };
+		FE70391E1A6A4B00008DC502 /* glptsp.c in Sources */ = {isa = PBXBuildFile; fileRef = FE7038861A6A4B00008DC502 /* glptsp.c */; };
+		FE70391F1A6A4B00008DC502 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE70388B1A6A4B00008DC502 /* json_reader.cpp */; };
+		FE7039201A6A4B00008DC502 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE70388C1A6A4B00008DC502 /* json_value.cpp */; };
+		FE7039211A6A4B00008DC502 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE70388E1A6A4B00008DC502 /* json_writer.cpp */; };
+		FE7039221A6A4B00008DC502 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038901A6A4B00008DC502 /* main.cpp */; };
+		FE7039231A6A4B00008DC502 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038911A6A4B00008DC502 /* Matrix.cpp */; };
+		FE7039241A6A4B00008DC502 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038931A6A4B00008DC502 /* Model.cpp */; };
+		FE7039251A6A4B00008DC502 /* MtxLP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038951A6A4B00008DC502 /* MtxLP.cpp */; };
+		FE7039261A6A4B00008DC502 /* PetriNet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038971A6A4B00008DC502 /* PetriNet.cpp */; };
+		FE7039271A6A4B00008DC502 /* PetriNetAlgorithms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038991A6A4B00008DC502 /* PetriNetAlgorithms.cpp */; };
+		FE7039281A6A4B00008DC502 /* RecordParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE70389B1A6A4B00008DC502 /* RecordParser.cpp */; };
+		FE7039291A6A4B00008DC502 /* RPN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE70389E1A6A4B00008DC502 /* RPN.cpp */; };
+		FE70392A1A6A4B00008DC502 /* SplitLP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038A01A6A4B00008DC502 /* SplitLP.cpp */; };
+		FE70392B1A6A4B00008DC502 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038A21A6A4B00008DC502 /* Text.cpp */; };
+		FE70392C1A6A4B00008DC502 /* TfbaLP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038A41A6A4B00008DC502 /* TfbaLP.cpp */; };
+		FE70392D1A6A4B00008DC502 /* ThermoLP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038A61A6A4B00008DC502 /* ThermoLP.cpp */; };
+		FE70392E1A6A4B00008DC502 /* Trajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038A81A6A4B00008DC502 /* Trajectory.cpp */; };
+		FE70392F1A6A4B00008DC502 /* TxtParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7038AA1A6A4B00008DC502 /* TxtParser.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FE7037E21A6A4AE9008DC502 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FE7037E41A6A4AE9008DC502 /* qsspn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qsspn; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE7037EE1A6A4B00008DC502 /* AlgebraicExpression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlgebraicExpression.cpp; path = ../../src/AlgebraicExpression.cpp; sourceTree = "<group>"; };
+		FE7037EF1A6A4B00008DC502 /* AlgebraicExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgebraicExpression.h; path = ../../src/AlgebraicExpression.h; sourceTree = "<group>"; };
+		FE7037F01A6A4B00008DC502 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = ../../src/autolink.h; sourceTree = "<group>"; };
+		FE7037F11A6A4B00008DC502 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../../src/config.h; sourceTree = "<group>"; };
+		FE7037F21A6A4B00008DC502 /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Const.h; path = ../../src/Const.h; sourceTree = "<group>"; };
+		FE7037F31A6A4B00008DC502 /* Driver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Driver.cpp; path = ../../src/Driver.cpp; sourceTree = "<group>"; };
+		FE7037F41A6A4B00008DC502 /* Driver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Driver.h; path = ../../src/Driver.h; sourceTree = "<group>"; };
+		FE7037F51A6A4B00008DC502 /* Elements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Elements.cpp; path = ../../src/Elements.cpp; sourceTree = "<group>"; };
+		FE7037F61A6A4B00008DC502 /* Elements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Elements.h; path = ../../src/Elements.h; sourceTree = "<group>"; };
+		FE7037F71A6A4B00008DC502 /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = features.h; path = ../../src/features.h; sourceTree = "<group>"; };
+		FE7037F81A6A4B00008DC502 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forwards.h; path = ../../src/forwards.h; sourceTree = "<group>"; };
+		FE7037FA1A6A4B00008DC502 /* amd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amd.h; sourceTree = "<group>"; };
+		FE7037FB1A6A4B00008DC502 /* amd_1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_1.c; sourceTree = "<group>"; };
+		FE7037FC1A6A4B00008DC502 /* amd_2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_2.c; sourceTree = "<group>"; };
+		FE7037FD1A6A4B00008DC502 /* amd_aat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_aat.c; sourceTree = "<group>"; };
+		FE7037FE1A6A4B00008DC502 /* amd_control.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_control.c; sourceTree = "<group>"; };
+		FE7037FF1A6A4B00008DC502 /* amd_defaults.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_defaults.c; sourceTree = "<group>"; };
+		FE7038001A6A4B00008DC502 /* amd_dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_dump.c; sourceTree = "<group>"; };
+		FE7038011A6A4B00008DC502 /* amd_info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_info.c; sourceTree = "<group>"; };
+		FE7038021A6A4B00008DC502 /* amd_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amd_internal.h; sourceTree = "<group>"; };
+		FE7038031A6A4B00008DC502 /* amd_order.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_order.c; sourceTree = "<group>"; };
+		FE7038041A6A4B00008DC502 /* amd_post_tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_post_tree.c; sourceTree = "<group>"; };
+		FE7038051A6A4B00008DC502 /* amd_postorder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_postorder.c; sourceTree = "<group>"; };
+		FE7038061A6A4B00008DC502 /* amd_preprocess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_preprocess.c; sourceTree = "<group>"; };
+		FE7038071A6A4B00008DC502 /* amd_valid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amd_valid.c; sourceTree = "<group>"; };
+		FE7038081A6A4B00008DC502 /* colamd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = colamd.c; sourceTree = "<group>"; };
+		FE7038091A6A4B00008DC502 /* colamd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colamd.h; sourceTree = "<group>"; };
+		FE70380A1A6A4B00008DC502 /* glpapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpapi.h; sourceTree = "<group>"; };
+		FE70380B1A6A4B00008DC502 /* glpapi01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi01.c; sourceTree = "<group>"; };
+		FE70380C1A6A4B00008DC502 /* glpapi02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi02.c; sourceTree = "<group>"; };
+		FE70380D1A6A4B00008DC502 /* glpapi03.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi03.c; sourceTree = "<group>"; };
+		FE70380E1A6A4B00008DC502 /* glpapi04.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi04.c; sourceTree = "<group>"; };
+		FE70380F1A6A4B00008DC502 /* glpapi05.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi05.c; sourceTree = "<group>"; };
+		FE7038101A6A4B00008DC502 /* glpapi06.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi06.c; sourceTree = "<group>"; };
+		FE7038111A6A4B00008DC502 /* glpapi07.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi07.c; sourceTree = "<group>"; };
+		FE7038121A6A4B00008DC502 /* glpapi08.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi08.c; sourceTree = "<group>"; };
+		FE7038131A6A4B00008DC502 /* glpapi09.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi09.c; sourceTree = "<group>"; };
+		FE7038141A6A4B00008DC502 /* glpapi10.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi10.c; sourceTree = "<group>"; };
+		FE7038151A6A4B00008DC502 /* glpapi11.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi11.c; sourceTree = "<group>"; };
+		FE7038161A6A4B00008DC502 /* glpapi12.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi12.c; sourceTree = "<group>"; };
+		FE7038171A6A4B00008DC502 /* glpapi13.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi13.c; sourceTree = "<group>"; };
+		FE7038181A6A4B00008DC502 /* glpapi14.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi14.c; sourceTree = "<group>"; };
+		FE7038191A6A4B00008DC502 /* glpapi15.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi15.c; sourceTree = "<group>"; };
+		FE70381A1A6A4B00008DC502 /* glpapi16.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi16.c; sourceTree = "<group>"; };
+		FE70381B1A6A4B00008DC502 /* glpapi17.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi17.c; sourceTree = "<group>"; };
+		FE70381C1A6A4B00008DC502 /* glpapi18.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi18.c; sourceTree = "<group>"; };
+		FE70381D1A6A4B00008DC502 /* glpapi19.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpapi19.c; sourceTree = "<group>"; };
+		FE70381E1A6A4B00008DC502 /* glpavl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpavl.c; sourceTree = "<group>"; };
+		FE70381F1A6A4B00008DC502 /* glpavl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpavl.h; sourceTree = "<group>"; };
+		FE7038201A6A4B00008DC502 /* glpbfd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpbfd.c; sourceTree = "<group>"; };
+		FE7038211A6A4B00008DC502 /* glpbfd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpbfd.h; sourceTree = "<group>"; };
+		FE7038221A6A4B00008DC502 /* glpbfx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpbfx.c; sourceTree = "<group>"; };
+		FE7038231A6A4B00008DC502 /* glpbfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpbfx.h; sourceTree = "<group>"; };
+		FE7038241A6A4B00008DC502 /* glpcpx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpcpx.c; sourceTree = "<group>"; };
+		FE7038251A6A4B00008DC502 /* glpdmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpdmp.c; sourceTree = "<group>"; };
+		FE7038261A6A4B00008DC502 /* glpdmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpdmp.h; sourceTree = "<group>"; };
+		FE7038271A6A4B00008DC502 /* glpdmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpdmx.c; sourceTree = "<group>"; };
+		FE7038281A6A4B00008DC502 /* glpenv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpenv.h; sourceTree = "<group>"; };
+		FE7038291A6A4B00008DC502 /* glpenv01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpenv01.c; sourceTree = "<group>"; };
+		FE70382A1A6A4B00008DC502 /* glpenv02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpenv02.c; sourceTree = "<group>"; };
+		FE70382B1A6A4B00008DC502 /* glpenv03.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpenv03.c; sourceTree = "<group>"; };
+		FE70382C1A6A4B00008DC502 /* glpenv04.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpenv04.c; sourceTree = "<group>"; };
+		FE70382D1A6A4B00008DC502 /* glpenv05.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpenv05.c; sourceTree = "<group>"; };
+		FE70382E1A6A4B00008DC502 /* glpenv06.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpenv06.c; sourceTree = "<group>"; };
+		FE70382F1A6A4B00008DC502 /* glpenv07.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpenv07.c; sourceTree = "<group>"; };
+		FE7038301A6A4B00008DC502 /* glpenv08.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpenv08.c; sourceTree = "<group>"; };
+		FE7038311A6A4B00008DC502 /* glpfhv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpfhv.c; sourceTree = "<group>"; };
+		FE7038321A6A4B00008DC502 /* glpfhv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpfhv.h; sourceTree = "<group>"; };
+		FE7038331A6A4B00008DC502 /* glpgmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpgmp.c; sourceTree = "<group>"; };
+		FE7038341A6A4B00008DC502 /* glpgmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpgmp.h; sourceTree = "<group>"; };
+		FE7038351A6A4B00008DC502 /* glphbm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glphbm.c; sourceTree = "<group>"; };
+		FE7038361A6A4B00008DC502 /* glphbm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glphbm.h; sourceTree = "<group>"; };
+		FE7038371A6A4B00008DC502 /* glpini01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpini01.c; sourceTree = "<group>"; };
+		FE7038381A6A4B00008DC502 /* glpini02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpini02.c; sourceTree = "<group>"; };
+		FE7038391A6A4B00008DC502 /* glpios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpios.h; sourceTree = "<group>"; };
+		FE70383A1A6A4B00008DC502 /* glpios01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios01.c; sourceTree = "<group>"; };
+		FE70383B1A6A4B00008DC502 /* glpios02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios02.c; sourceTree = "<group>"; };
+		FE70383C1A6A4B00008DC502 /* glpios03.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios03.c; sourceTree = "<group>"; };
+		FE70383D1A6A4B00008DC502 /* glpios04.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios04.c; sourceTree = "<group>"; };
+		FE70383E1A6A4B00008DC502 /* glpios05.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios05.c; sourceTree = "<group>"; };
+		FE70383F1A6A4B00008DC502 /* glpios06.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios06.c; sourceTree = "<group>"; };
+		FE7038401A6A4B00008DC502 /* glpios07.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios07.c; sourceTree = "<group>"; };
+		FE7038411A6A4B00008DC502 /* glpios08.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios08.c; sourceTree = "<group>"; };
+		FE7038421A6A4B00008DC502 /* glpios09.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios09.c; sourceTree = "<group>"; };
+		FE7038431A6A4B00008DC502 /* glpios10.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios10.c; sourceTree = "<group>"; };
+		FE7038441A6A4B00008DC502 /* glpios11.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios11.c; sourceTree = "<group>"; };
+		FE7038451A6A4B00008DC502 /* glpios12.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpios12.c; sourceTree = "<group>"; };
+		FE7038461A6A4B00008DC502 /* glpipm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpipm.c; sourceTree = "<group>"; };
+		FE7038471A6A4B00008DC502 /* glpipm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpipm.h; sourceTree = "<group>"; };
+		FE7038481A6A4B00008DC502 /* glpk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpk.h; sourceTree = "<group>"; };
+		FE7038491A6A4B00008DC502 /* glplib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glplib.h; sourceTree = "<group>"; };
+		FE70384A1A6A4B00008DC502 /* glplib01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glplib01.c; sourceTree = "<group>"; };
+		FE70384B1A6A4B00008DC502 /* glplib02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glplib02.c; sourceTree = "<group>"; };
+		FE70384C1A6A4B00008DC502 /* glplib03.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glplib03.c; sourceTree = "<group>"; };
+		FE70384D1A6A4B00008DC502 /* glplpf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glplpf.c; sourceTree = "<group>"; };
+		FE70384E1A6A4B00008DC502 /* glplpf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glplpf.h; sourceTree = "<group>"; };
+		FE70384F1A6A4B00008DC502 /* glplpx01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glplpx01.c; sourceTree = "<group>"; };
+		FE7038501A6A4B00008DC502 /* glplpx02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glplpx02.c; sourceTree = "<group>"; };
+		FE7038511A6A4B00008DC502 /* glplpx03.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glplpx03.c; sourceTree = "<group>"; };
+		FE7038521A6A4B00008DC502 /* glpluf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpluf.c; sourceTree = "<group>"; };
+		FE7038531A6A4B00008DC502 /* glpluf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpluf.h; sourceTree = "<group>"; };
+		FE7038541A6A4B00008DC502 /* glplux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glplux.c; sourceTree = "<group>"; };
+		FE7038551A6A4B00008DC502 /* glplux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glplux.h; sourceTree = "<group>"; };
+		FE7038561A6A4B00008DC502 /* glpmat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpmat.c; sourceTree = "<group>"; };
+		FE7038571A6A4B00008DC502 /* glpmat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpmat.h; sourceTree = "<group>"; };
+		FE7038581A6A4B00008DC502 /* glpmpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpmpl.h; sourceTree = "<group>"; };
+		FE7038591A6A4B00008DC502 /* glpmpl01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpmpl01.c; sourceTree = "<group>"; };
+		FE70385A1A6A4B00008DC502 /* glpmpl02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpmpl02.c; sourceTree = "<group>"; };
+		FE70385B1A6A4B00008DC502 /* glpmpl03.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpmpl03.c; sourceTree = "<group>"; };
+		FE70385C1A6A4B00008DC502 /* glpmpl04.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpmpl04.c; sourceTree = "<group>"; };
+		FE70385D1A6A4B00008DC502 /* glpmpl05.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpmpl05.c; sourceTree = "<group>"; };
+		FE70385E1A6A4B00008DC502 /* glpmpl06.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpmpl06.c; sourceTree = "<group>"; };
+		FE70385F1A6A4B00008DC502 /* glpmps.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpmps.c; sourceTree = "<group>"; };
+		FE7038601A6A4B00008DC502 /* glpnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpnet.h; sourceTree = "<group>"; };
+		FE7038611A6A4B00008DC502 /* glpnet01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet01.c; sourceTree = "<group>"; };
+		FE7038621A6A4B00008DC502 /* glpnet02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet02.c; sourceTree = "<group>"; };
+		FE7038631A6A4B00008DC502 /* glpnet03.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet03.c; sourceTree = "<group>"; };
+		FE7038641A6A4B00008DC502 /* glpnet04.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet04.c; sourceTree = "<group>"; };
+		FE7038651A6A4B00008DC502 /* glpnet05.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet05.c; sourceTree = "<group>"; };
+		FE7038661A6A4B00008DC502 /* glpnet06.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet06.c; sourceTree = "<group>"; };
+		FE7038671A6A4B00008DC502 /* glpnet07.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet07.c; sourceTree = "<group>"; };
+		FE7038681A6A4B00008DC502 /* glpnet08.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet08.c; sourceTree = "<group>"; };
+		FE7038691A6A4B00008DC502 /* glpnet09.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnet09.c; sourceTree = "<group>"; };
+		FE70386A1A6A4B00008DC502 /* glpnpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpnpp.h; sourceTree = "<group>"; };
+		FE70386B1A6A4B00008DC502 /* glpnpp01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnpp01.c; sourceTree = "<group>"; };
+		FE70386C1A6A4B00008DC502 /* glpnpp02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnpp02.c; sourceTree = "<group>"; };
+		FE70386D1A6A4B00008DC502 /* glpnpp03.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnpp03.c; sourceTree = "<group>"; };
+		FE70386E1A6A4B00008DC502 /* glpnpp04.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnpp04.c; sourceTree = "<group>"; };
+		FE70386F1A6A4B00008DC502 /* glpnpp05.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpnpp05.c; sourceTree = "<group>"; };
+		FE7038701A6A4B00008DC502 /* glpqmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpqmd.c; sourceTree = "<group>"; };
+		FE7038711A6A4B00008DC502 /* glpqmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpqmd.h; sourceTree = "<group>"; };
+		FE7038721A6A4B00008DC502 /* glprgr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glprgr.c; sourceTree = "<group>"; };
+		FE7038731A6A4B00008DC502 /* glprgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glprgr.h; sourceTree = "<group>"; };
+		FE7038741A6A4B00008DC502 /* glprng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glprng.h; sourceTree = "<group>"; };
+		FE7038751A6A4B00008DC502 /* glprng01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glprng01.c; sourceTree = "<group>"; };
+		FE7038761A6A4B00008DC502 /* glprng02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glprng02.c; sourceTree = "<group>"; };
+		FE7038771A6A4B00008DC502 /* glpscf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpscf.c; sourceTree = "<group>"; };
+		FE7038781A6A4B00008DC502 /* glpscf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpscf.h; sourceTree = "<group>"; };
+		FE7038791A6A4B00008DC502 /* glpscl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpscl.c; sourceTree = "<group>"; };
+		FE70387A1A6A4B00008DC502 /* glpsdf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpsdf.c; sourceTree = "<group>"; };
+		FE70387B1A6A4B00008DC502 /* glpspm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpspm.c; sourceTree = "<group>"; };
+		FE70387C1A6A4B00008DC502 /* glpspm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpspm.h; sourceTree = "<group>"; };
+		FE70387D1A6A4B00008DC502 /* glpspx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpspx.h; sourceTree = "<group>"; };
+		FE70387E1A6A4B00008DC502 /* glpspx01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpspx01.c; sourceTree = "<group>"; };
+		FE70387F1A6A4B00008DC502 /* glpspx02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpspx02.c; sourceTree = "<group>"; };
+		FE7038801A6A4B00008DC502 /* glpsql.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpsql.c; sourceTree = "<group>"; };
+		FE7038811A6A4B00008DC502 /* glpsql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpsql.h; sourceTree = "<group>"; };
+		FE7038821A6A4B00008DC502 /* glpssx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpssx.h; sourceTree = "<group>"; };
+		FE7038831A6A4B00008DC502 /* glpssx01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpssx01.c; sourceTree = "<group>"; };
+		FE7038841A6A4B00008DC502 /* glpssx02.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glpssx02.c; sourceTree = "<group>"; };
+		FE7038851A6A4B00008DC502 /* glpstd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glpstd.h; sourceTree = "<group>"; };
+		FE7038861A6A4B00008DC502 /* glptsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glptsp.c; sourceTree = "<group>"; };
+		FE7038871A6A4B00008DC502 /* glptsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glptsp.h; sourceTree = "<group>"; };
+		FE7038881A6A4B00008DC502 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json_batchallocator.h; path = ../../src/json_batchallocator.h; sourceTree = "<group>"; };
+		FE7038891A6A4B00008DC502 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = json_internalarray.inl; path = ../../src/json_internalarray.inl; sourceTree = "<group>"; };
+		FE70388A1A6A4B00008DC502 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = json_internalmap.inl; path = ../../src/json_internalmap.inl; sourceTree = "<group>"; };
+		FE70388B1A6A4B00008DC502 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_reader.cpp; path = ../../src/json_reader.cpp; sourceTree = "<group>"; };
+		FE70388C1A6A4B00008DC502 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_value.cpp; path = ../../src/json_value.cpp; sourceTree = "<group>"; };
+		FE70388D1A6A4B00008DC502 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = json_valueiterator.inl; path = ../../src/json_valueiterator.inl; sourceTree = "<group>"; };
+		FE70388E1A6A4B00008DC502 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_writer.cpp; path = ../../src/json_writer.cpp; sourceTree = "<group>"; };
+		FE70388F1A6A4B00008DC502 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json.h; path = ../../src/json.h; sourceTree = "<group>"; };
+		FE7038901A6A4B00008DC502 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/main.cpp; sourceTree = "<group>"; };
+		FE7038911A6A4B00008DC502 /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Matrix.cpp; path = ../../src/Matrix.cpp; sourceTree = "<group>"; };
+		FE7038921A6A4B00008DC502 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Matrix.h; path = ../../src/Matrix.h; sourceTree = "<group>"; };
+		FE7038931A6A4B00008DC502 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Model.cpp; path = ../../src/Model.cpp; sourceTree = "<group>"; };
+		FE7038941A6A4B00008DC502 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Model.h; path = ../../src/Model.h; sourceTree = "<group>"; };
+		FE7038951A6A4B00008DC502 /* MtxLP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MtxLP.cpp; path = ../../src/MtxLP.cpp; sourceTree = "<group>"; };
+		FE7038961A6A4B00008DC502 /* MtxLP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MtxLP.h; path = ../../src/MtxLP.h; sourceTree = "<group>"; };
+		FE7038971A6A4B00008DC502 /* PetriNet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PetriNet.cpp; path = ../../src/PetriNet.cpp; sourceTree = "<group>"; };
+		FE7038981A6A4B00008DC502 /* PetriNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PetriNet.h; path = ../../src/PetriNet.h; sourceTree = "<group>"; };
+		FE7038991A6A4B00008DC502 /* PetriNetAlgorithms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PetriNetAlgorithms.cpp; path = ../../src/PetriNetAlgorithms.cpp; sourceTree = "<group>"; };
+		FE70389A1A6A4B00008DC502 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reader.h; path = ../../src/reader.h; sourceTree = "<group>"; };
+		FE70389B1A6A4B00008DC502 /* RecordParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RecordParser.cpp; path = ../../src/RecordParser.cpp; sourceTree = "<group>"; };
+		FE70389C1A6A4B00008DC502 /* RecordParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecordParser.h; path = ../../src/RecordParser.h; sourceTree = "<group>"; };
+		FE70389D1A6A4B00008DC502 /* Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Round.h; path = ../../src/Round.h; sourceTree = "<group>"; };
+		FE70389E1A6A4B00008DC502 /* RPN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RPN.cpp; path = ../../src/RPN.cpp; sourceTree = "<group>"; };
+		FE70389F1A6A4B00008DC502 /* RPN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPN.h; path = ../../src/RPN.h; sourceTree = "<group>"; };
+		FE7038A01A6A4B00008DC502 /* SplitLP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SplitLP.cpp; path = ../../src/SplitLP.cpp; sourceTree = "<group>"; };
+		FE7038A11A6A4B00008DC502 /* SplitLP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitLP.h; path = ../../src/SplitLP.h; sourceTree = "<group>"; };
+		FE7038A21A6A4B00008DC502 /* Text.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Text.cpp; path = ../../src/Text.cpp; sourceTree = "<group>"; };
+		FE7038A31A6A4B00008DC502 /* Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Text.h; path = ../../src/Text.h; sourceTree = "<group>"; };
+		FE7038A41A6A4B00008DC502 /* TfbaLP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TfbaLP.cpp; path = ../../src/TfbaLP.cpp; sourceTree = "<group>"; };
+		FE7038A51A6A4B00008DC502 /* TfbaLP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TfbaLP.h; path = ../../src/TfbaLP.h; sourceTree = "<group>"; };
+		FE7038A61A6A4B00008DC502 /* ThermoLP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ThermoLP.cpp; path = ../../src/ThermoLP.cpp; sourceTree = "<group>"; };
+		FE7038A71A6A4B00008DC502 /* ThermoLP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThermoLP.h; path = ../../src/ThermoLP.h; sourceTree = "<group>"; };
+		FE7038A81A6A4B00008DC502 /* Trajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Trajectory.cpp; path = ../../src/Trajectory.cpp; sourceTree = "<group>"; };
+		FE7038A91A6A4B00008DC502 /* Trajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trajectory.h; path = ../../src/Trajectory.h; sourceTree = "<group>"; };
+		FE7038AA1A6A4B00008DC502 /* TxtParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TxtParser.cpp; path = ../../src/TxtParser.cpp; sourceTree = "<group>"; };
+		FE7038AB1A6A4B00008DC502 /* TxtParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TxtParser.h; path = ../../src/TxtParser.h; sourceTree = "<group>"; };
+		FE7038AC1A6A4B00008DC502 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Types.h; path = ../../src/Types.h; sourceTree = "<group>"; };
+		FE7038AD1A6A4B00008DC502 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = value.h; path = ../../src/value.h; sourceTree = "<group>"; };
+		FE7038AE1A6A4B00008DC502 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = writer.h; path = ../../src/writer.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE7037E11A6A4AE9008DC502 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE7037DB1A6A4AE9008DC502 = {
+			isa = PBXGroup;
+			children = (
+				FE7037E61A6A4AE9008DC502 /* qsspn */,
+				FE7037E51A6A4AE9008DC502 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE7037E51A6A4AE9008DC502 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE7037E41A6A4AE9008DC502 /* qsspn */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE7037E61A6A4AE9008DC502 /* qsspn */ = {
+			isa = PBXGroup;
+			children = (
+				FE7037EE1A6A4B00008DC502 /* AlgebraicExpression.cpp */,
+				FE7037EF1A6A4B00008DC502 /* AlgebraicExpression.h */,
+				FE7037F01A6A4B00008DC502 /* autolink.h */,
+				FE7037F11A6A4B00008DC502 /* config.h */,
+				FE7037F21A6A4B00008DC502 /* Const.h */,
+				FE7037F31A6A4B00008DC502 /* Driver.cpp */,
+				FE7037F41A6A4B00008DC502 /* Driver.h */,
+				FE7037F51A6A4B00008DC502 /* Elements.cpp */,
+				FE7037F61A6A4B00008DC502 /* Elements.h */,
+				FE7037F71A6A4B00008DC502 /* features.h */,
+				FE7037F81A6A4B00008DC502 /* forwards.h */,
+				FE7037F91A6A4B00008DC502 /* glpk */,
+				FE7038881A6A4B00008DC502 /* json_batchallocator.h */,
+				FE7038891A6A4B00008DC502 /* json_internalarray.inl */,
+				FE70388A1A6A4B00008DC502 /* json_internalmap.inl */,
+				FE70388B1A6A4B00008DC502 /* json_reader.cpp */,
+				FE70388C1A6A4B00008DC502 /* json_value.cpp */,
+				FE70388D1A6A4B00008DC502 /* json_valueiterator.inl */,
+				FE70388E1A6A4B00008DC502 /* json_writer.cpp */,
+				FE70388F1A6A4B00008DC502 /* json.h */,
+				FE7038901A6A4B00008DC502 /* main.cpp */,
+				FE7038911A6A4B00008DC502 /* Matrix.cpp */,
+				FE7038921A6A4B00008DC502 /* Matrix.h */,
+				FE7038931A6A4B00008DC502 /* Model.cpp */,
+				FE7038941A6A4B00008DC502 /* Model.h */,
+				FE7038951A6A4B00008DC502 /* MtxLP.cpp */,
+				FE7038961A6A4B00008DC502 /* MtxLP.h */,
+				FE7038971A6A4B00008DC502 /* PetriNet.cpp */,
+				FE7038981A6A4B00008DC502 /* PetriNet.h */,
+				FE7038991A6A4B00008DC502 /* PetriNetAlgorithms.cpp */,
+				FE70389A1A6A4B00008DC502 /* reader.h */,
+				FE70389B1A6A4B00008DC502 /* RecordParser.cpp */,
+				FE70389C1A6A4B00008DC502 /* RecordParser.h */,
+				FE70389D1A6A4B00008DC502 /* Round.h */,
+				FE70389E1A6A4B00008DC502 /* RPN.cpp */,
+				FE70389F1A6A4B00008DC502 /* RPN.h */,
+				FE7038A01A6A4B00008DC502 /* SplitLP.cpp */,
+				FE7038A11A6A4B00008DC502 /* SplitLP.h */,
+				FE7038A21A6A4B00008DC502 /* Text.cpp */,
+				FE7038A31A6A4B00008DC502 /* Text.h */,
+				FE7038A41A6A4B00008DC502 /* TfbaLP.cpp */,
+				FE7038A51A6A4B00008DC502 /* TfbaLP.h */,
+				FE7038A61A6A4B00008DC502 /* ThermoLP.cpp */,
+				FE7038A71A6A4B00008DC502 /* ThermoLP.h */,
+				FE7038A81A6A4B00008DC502 /* Trajectory.cpp */,
+				FE7038A91A6A4B00008DC502 /* Trajectory.h */,
+				FE7038AA1A6A4B00008DC502 /* TxtParser.cpp */,
+				FE7038AB1A6A4B00008DC502 /* TxtParser.h */,
+				FE7038AC1A6A4B00008DC502 /* Types.h */,
+				FE7038AD1A6A4B00008DC502 /* value.h */,
+				FE7038AE1A6A4B00008DC502 /* writer.h */,
+			);
+			path = qsspn;
+			sourceTree = "<group>";
+		};
+		FE7037F91A6A4B00008DC502 /* glpk */ = {
+			isa = PBXGroup;
+			children = (
+				FE7037FA1A6A4B00008DC502 /* amd.h */,
+				FE7037FB1A6A4B00008DC502 /* amd_1.c */,
+				FE7037FC1A6A4B00008DC502 /* amd_2.c */,
+				FE7037FD1A6A4B00008DC502 /* amd_aat.c */,
+				FE7037FE1A6A4B00008DC502 /* amd_control.c */,
+				FE7037FF1A6A4B00008DC502 /* amd_defaults.c */,
+				FE7038001A6A4B00008DC502 /* amd_dump.c */,
+				FE7038011A6A4B00008DC502 /* amd_info.c */,
+				FE7038021A6A4B00008DC502 /* amd_internal.h */,
+				FE7038031A6A4B00008DC502 /* amd_order.c */,
+				FE7038041A6A4B00008DC502 /* amd_post_tree.c */,
+				FE7038051A6A4B00008DC502 /* amd_postorder.c */,
+				FE7038061A6A4B00008DC502 /* amd_preprocess.c */,
+				FE7038071A6A4B00008DC502 /* amd_valid.c */,
+				FE7038081A6A4B00008DC502 /* colamd.c */,
+				FE7038091A6A4B00008DC502 /* colamd.h */,
+				FE70380A1A6A4B00008DC502 /* glpapi.h */,
+				FE70380B1A6A4B00008DC502 /* glpapi01.c */,
+				FE70380C1A6A4B00008DC502 /* glpapi02.c */,
+				FE70380D1A6A4B00008DC502 /* glpapi03.c */,
+				FE70380E1A6A4B00008DC502 /* glpapi04.c */,
+				FE70380F1A6A4B00008DC502 /* glpapi05.c */,
+				FE7038101A6A4B00008DC502 /* glpapi06.c */,
+				FE7038111A6A4B00008DC502 /* glpapi07.c */,
+				FE7038121A6A4B00008DC502 /* glpapi08.c */,
+				FE7038131A6A4B00008DC502 /* glpapi09.c */,
+				FE7038141A6A4B00008DC502 /* glpapi10.c */,
+				FE7038151A6A4B00008DC502 /* glpapi11.c */,
+				FE7038161A6A4B00008DC502 /* glpapi12.c */,
+				FE7038171A6A4B00008DC502 /* glpapi13.c */,
+				FE7038181A6A4B00008DC502 /* glpapi14.c */,
+				FE7038191A6A4B00008DC502 /* glpapi15.c */,
+				FE70381A1A6A4B00008DC502 /* glpapi16.c */,
+				FE70381B1A6A4B00008DC502 /* glpapi17.c */,
+				FE70381C1A6A4B00008DC502 /* glpapi18.c */,
+				FE70381D1A6A4B00008DC502 /* glpapi19.c */,
+				FE70381E1A6A4B00008DC502 /* glpavl.c */,
+				FE70381F1A6A4B00008DC502 /* glpavl.h */,
+				FE7038201A6A4B00008DC502 /* glpbfd.c */,
+				FE7038211A6A4B00008DC502 /* glpbfd.h */,
+				FE7038221A6A4B00008DC502 /* glpbfx.c */,
+				FE7038231A6A4B00008DC502 /* glpbfx.h */,
+				FE7038241A6A4B00008DC502 /* glpcpx.c */,
+				FE7038251A6A4B00008DC502 /* glpdmp.c */,
+				FE7038261A6A4B00008DC502 /* glpdmp.h */,
+				FE7038271A6A4B00008DC502 /* glpdmx.c */,
+				FE7038281A6A4B00008DC502 /* glpenv.h */,
+				FE7038291A6A4B00008DC502 /* glpenv01.c */,
+				FE70382A1A6A4B00008DC502 /* glpenv02.c */,
+				FE70382B1A6A4B00008DC502 /* glpenv03.c */,
+				FE70382C1A6A4B00008DC502 /* glpenv04.c */,
+				FE70382D1A6A4B00008DC502 /* glpenv05.c */,
+				FE70382E1A6A4B00008DC502 /* glpenv06.c */,
+				FE70382F1A6A4B00008DC502 /* glpenv07.c */,
+				FE7038301A6A4B00008DC502 /* glpenv08.c */,
+				FE7038311A6A4B00008DC502 /* glpfhv.c */,
+				FE7038321A6A4B00008DC502 /* glpfhv.h */,
+				FE7038331A6A4B00008DC502 /* glpgmp.c */,
+				FE7038341A6A4B00008DC502 /* glpgmp.h */,
+				FE7038351A6A4B00008DC502 /* glphbm.c */,
+				FE7038361A6A4B00008DC502 /* glphbm.h */,
+				FE7038371A6A4B00008DC502 /* glpini01.c */,
+				FE7038381A6A4B00008DC502 /* glpini02.c */,
+				FE7038391A6A4B00008DC502 /* glpios.h */,
+				FE70383A1A6A4B00008DC502 /* glpios01.c */,
+				FE70383B1A6A4B00008DC502 /* glpios02.c */,
+				FE70383C1A6A4B00008DC502 /* glpios03.c */,
+				FE70383D1A6A4B00008DC502 /* glpios04.c */,
+				FE70383E1A6A4B00008DC502 /* glpios05.c */,
+				FE70383F1A6A4B00008DC502 /* glpios06.c */,
+				FE7038401A6A4B00008DC502 /* glpios07.c */,
+				FE7038411A6A4B00008DC502 /* glpios08.c */,
+				FE7038421A6A4B00008DC502 /* glpios09.c */,
+				FE7038431A6A4B00008DC502 /* glpios10.c */,
+				FE7038441A6A4B00008DC502 /* glpios11.c */,
+				FE7038451A6A4B00008DC502 /* glpios12.c */,
+				FE7038461A6A4B00008DC502 /* glpipm.c */,
+				FE7038471A6A4B00008DC502 /* glpipm.h */,
+				FE7038481A6A4B00008DC502 /* glpk.h */,
+				FE7038491A6A4B00008DC502 /* glplib.h */,
+				FE70384A1A6A4B00008DC502 /* glplib01.c */,
+				FE70384B1A6A4B00008DC502 /* glplib02.c */,
+				FE70384C1A6A4B00008DC502 /* glplib03.c */,
+				FE70384D1A6A4B00008DC502 /* glplpf.c */,
+				FE70384E1A6A4B00008DC502 /* glplpf.h */,
+				FE70384F1A6A4B00008DC502 /* glplpx01.c */,
+				FE7038501A6A4B00008DC502 /* glplpx02.c */,
+				FE7038511A6A4B00008DC502 /* glplpx03.c */,
+				FE7038521A6A4B00008DC502 /* glpluf.c */,
+				FE7038531A6A4B00008DC502 /* glpluf.h */,
+				FE7038541A6A4B00008DC502 /* glplux.c */,
+				FE7038551A6A4B00008DC502 /* glplux.h */,
+				FE7038561A6A4B00008DC502 /* glpmat.c */,
+				FE7038571A6A4B00008DC502 /* glpmat.h */,
+				FE7038581A6A4B00008DC502 /* glpmpl.h */,
+				FE7038591A6A4B00008DC502 /* glpmpl01.c */,
+				FE70385A1A6A4B00008DC502 /* glpmpl02.c */,
+				FE70385B1A6A4B00008DC502 /* glpmpl03.c */,
+				FE70385C1A6A4B00008DC502 /* glpmpl04.c */,
+				FE70385D1A6A4B00008DC502 /* glpmpl05.c */,
+				FE70385E1A6A4B00008DC502 /* glpmpl06.c */,
+				FE70385F1A6A4B00008DC502 /* glpmps.c */,
+				FE7038601A6A4B00008DC502 /* glpnet.h */,
+				FE7038611A6A4B00008DC502 /* glpnet01.c */,
+				FE7038621A6A4B00008DC502 /* glpnet02.c */,
+				FE7038631A6A4B00008DC502 /* glpnet03.c */,
+				FE7038641A6A4B00008DC502 /* glpnet04.c */,
+				FE7038651A6A4B00008DC502 /* glpnet05.c */,
+				FE7038661A6A4B00008DC502 /* glpnet06.c */,
+				FE7038671A6A4B00008DC502 /* glpnet07.c */,
+				FE7038681A6A4B00008DC502 /* glpnet08.c */,
+				FE7038691A6A4B00008DC502 /* glpnet09.c */,
+				FE70386A1A6A4B00008DC502 /* glpnpp.h */,
+				FE70386B1A6A4B00008DC502 /* glpnpp01.c */,
+				FE70386C1A6A4B00008DC502 /* glpnpp02.c */,
+				FE70386D1A6A4B00008DC502 /* glpnpp03.c */,
+				FE70386E1A6A4B00008DC502 /* glpnpp04.c */,
+				FE70386F1A6A4B00008DC502 /* glpnpp05.c */,
+				FE7038701A6A4B00008DC502 /* glpqmd.c */,
+				FE7038711A6A4B00008DC502 /* glpqmd.h */,
+				FE7038721A6A4B00008DC502 /* glprgr.c */,
+				FE7038731A6A4B00008DC502 /* glprgr.h */,
+				FE7038741A6A4B00008DC502 /* glprng.h */,
+				FE7038751A6A4B00008DC502 /* glprng01.c */,
+				FE7038761A6A4B00008DC502 /* glprng02.c */,
+				FE7038771A6A4B00008DC502 /* glpscf.c */,
+				FE7038781A6A4B00008DC502 /* glpscf.h */,
+				FE7038791A6A4B00008DC502 /* glpscl.c */,
+				FE70387A1A6A4B00008DC502 /* glpsdf.c */,
+				FE70387B1A6A4B00008DC502 /* glpspm.c */,
+				FE70387C1A6A4B00008DC502 /* glpspm.h */,
+				FE70387D1A6A4B00008DC502 /* glpspx.h */,
+				FE70387E1A6A4B00008DC502 /* glpspx01.c */,
+				FE70387F1A6A4B00008DC502 /* glpspx02.c */,
+				FE7038801A6A4B00008DC502 /* glpsql.c */,
+				FE7038811A6A4B00008DC502 /* glpsql.h */,
+				FE7038821A6A4B00008DC502 /* glpssx.h */,
+				FE7038831A6A4B00008DC502 /* glpssx01.c */,
+				FE7038841A6A4B00008DC502 /* glpssx02.c */,
+				FE7038851A6A4B00008DC502 /* glpstd.h */,
+				FE7038861A6A4B00008DC502 /* glptsp.c */,
+				FE7038871A6A4B00008DC502 /* glptsp.h */,
+			);
+			name = glpk;
+			path = ../../src/glpk;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE7037E31A6A4AE9008DC502 /* qsspn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE7037EB1A6A4AE9008DC502 /* Build configuration list for PBXNativeTarget "qsspn" */;
+			buildPhases = (
+				FE7037E01A6A4AE9008DC502 /* Sources */,
+				FE7037E11A6A4AE9008DC502 /* Frameworks */,
+				FE7037E21A6A4AE9008DC502 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = qsspn;
+			productName = qsspn;
+			productReference = FE7037E41A6A4AE9008DC502 /* qsspn */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE7037DC1A6A4AE9008DC502 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Andrzej Kierzek";
+				TargetAttributes = {
+					FE7037E31A6A4AE9008DC502 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = FE7037DF1A6A4AE9008DC502 /* Build configuration list for PBXProject "qsspn" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FE7037DB1A6A4AE9008DC502;
+			productRefGroup = FE7037E51A6A4AE9008DC502 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE7037E31A6A4AE9008DC502 /* qsspn */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE7037E01A6A4AE9008DC502 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE70392F1A6A4B00008DC502 /* TxtParser.cpp in Sources */,
+				FE7038EB1A6A4B00008DC502 /* glpios07.c in Sources */,
+				FE7038E71A6A4B00008DC502 /* glpios03.c in Sources */,
+				FE70392D1A6A4B00008DC502 /* ThermoLP.cpp in Sources */,
+				FE7038FD1A6A4B00008DC502 /* glpmpl02.c in Sources */,
+				FE70391E1A6A4B00008DC502 /* glptsp.c in Sources */,
+				FE7038C61A6A4B00008DC502 /* glpapi08.c in Sources */,
+				FE7039241A6A4B00008DC502 /* Model.cpp in Sources */,
+				FE7038C31A6A4B00008DC502 /* glpapi05.c in Sources */,
+				FE7039071A6A4B00008DC502 /* glpnet05.c in Sources */,
+				FE7039261A6A4B00008DC502 /* PetriNet.cpp in Sources */,
+				FE7038C11A6A4B00008DC502 /* glpapi03.c in Sources */,
+				FE7038CA1A6A4B00008DC502 /* glpapi12.c in Sources */,
+				FE7038C01A6A4B00008DC502 /* glpapi02.c in Sources */,
+				FE7039021A6A4B00008DC502 /* glpmps.c in Sources */,
+				FE7038D61A6A4B00008DC502 /* glpdmp.c in Sources */,
+				FE7038BF1A6A4B00008DC502 /* glpapi01.c in Sources */,
+				FE7039201A6A4B00008DC502 /* json_value.cpp in Sources */,
+				FE7038B61A6A4B00008DC502 /* amd_defaults.c in Sources */,
+				FE7038EE1A6A4B00008DC502 /* glpios10.c in Sources */,
+				FE7039051A6A4B00008DC502 /* glpnet03.c in Sources */,
+				FE7038B11A6A4B00008DC502 /* Elements.cpp in Sources */,
+				FE7038EF1A6A4B00008DC502 /* glpios11.c in Sources */,
+				FE7038D41A6A4B00008DC502 /* glpbfx.c in Sources */,
+				FE7038ED1A6A4B00008DC502 /* glpios09.c in Sources */,
+				FE7038DC1A6A4B00008DC502 /* glpenv05.c in Sources */,
+				FE7038C71A6A4B00008DC502 /* glpapi09.c in Sources */,
+				FE7039171A6A4B00008DC502 /* glpsdf.c in Sources */,
+				FE7038C91A6A4B00008DC502 /* glpapi11.c in Sources */,
+				FE7039091A6A4B00008DC502 /* glpnet07.c in Sources */,
+				FE70392C1A6A4B00008DC502 /* TfbaLP.cpp in Sources */,
+				FE7038BC1A6A4B00008DC502 /* amd_preprocess.c in Sources */,
+				FE7038F61A6A4B00008DC502 /* glplpx01.c in Sources */,
+				FE7038DF1A6A4B00008DC502 /* glpenv08.c in Sources */,
+				FE7039041A6A4B00008DC502 /* glpnet02.c in Sources */,
+				FE7038AF1A6A4B00008DC502 /* AlgebraicExpression.cpp in Sources */,
+				FE7038CB1A6A4B00008DC502 /* glpapi13.c in Sources */,
+				FE7038F91A6A4B00008DC502 /* glpluf.c in Sources */,
+				FE7038F81A6A4B00008DC502 /* glplpx03.c in Sources */,
+				FE70392E1A6A4B00008DC502 /* Trajectory.cpp in Sources */,
+				FE7038F21A6A4B00008DC502 /* glplib01.c in Sources */,
+				FE7038EC1A6A4B00008DC502 /* glpios08.c in Sources */,
+				FE7039141A6A4B00008DC502 /* glprng02.c in Sources */,
+				FE7038E51A6A4B00008DC502 /* glpios01.c in Sources */,
+				FE7039271A6A4B00008DC502 /* PetriNetAlgorithms.cpp in Sources */,
+				FE7038B71A6A4B00008DC502 /* amd_dump.c in Sources */,
+				FE7039121A6A4B00008DC502 /* glprgr.c in Sources */,
+				FE7038E61A6A4B00008DC502 /* glpios02.c in Sources */,
+				FE70391A1A6A4B00008DC502 /* glpspx02.c in Sources */,
+				FE7039291A6A4B00008DC502 /* RPN.cpp in Sources */,
+				FE7038C81A6A4B00008DC502 /* glpapi10.c in Sources */,
+				FE70390A1A6A4B00008DC502 /* glpnet08.c in Sources */,
+				FE7038D21A6A4B00008DC502 /* glpavl.c in Sources */,
+				FE7038D31A6A4B00008DC502 /* glpbfd.c in Sources */,
+				FE7038B51A6A4B00008DC502 /* amd_control.c in Sources */,
+				FE7038FC1A6A4B00008DC502 /* glpmpl01.c in Sources */,
+				FE7039131A6A4B00008DC502 /* glprng01.c in Sources */,
+				FE7038E31A6A4B00008DC502 /* glpini01.c in Sources */,
+				FE7038DD1A6A4B00008DC502 /* glpenv06.c in Sources */,
+				FE7038EA1A6A4B00008DC502 /* glpios06.c in Sources */,
+				FE70392A1A6A4B00008DC502 /* SplitLP.cpp in Sources */,
+				FE7038B21A6A4B00008DC502 /* amd_1.c in Sources */,
+				FE7038D11A6A4B00008DC502 /* glpapi19.c in Sources */,
+				FE7038CC1A6A4B00008DC502 /* glpapi14.c in Sources */,
+				FE7038FE1A6A4B00008DC502 /* glpmpl03.c in Sources */,
+				FE7039281A6A4B00008DC502 /* RecordParser.cpp in Sources */,
+				FE7038BA1A6A4B00008DC502 /* amd_post_tree.c in Sources */,
+				FE7038FA1A6A4B00008DC502 /* glplux.c in Sources */,
+				FE7038C41A6A4B00008DC502 /* glpapi06.c in Sources */,
+				FE70390F1A6A4B00008DC502 /* glpnpp04.c in Sources */,
+				FE7039061A6A4B00008DC502 /* glpnet04.c in Sources */,
+				FE7039181A6A4B00008DC502 /* glpspm.c in Sources */,
+				FE7039151A6A4B00008DC502 /* glpscf.c in Sources */,
+				FE7039251A6A4B00008DC502 /* MtxLP.cpp in Sources */,
+				FE7038FF1A6A4B00008DC502 /* glpmpl04.c in Sources */,
+				FE7038B91A6A4B00008DC502 /* amd_order.c in Sources */,
+				FE7038C51A6A4B00008DC502 /* glpapi07.c in Sources */,
+				FE7038C21A6A4B00008DC502 /* glpapi04.c in Sources */,
+				FE7038D81A6A4B00008DC502 /* glpenv01.c in Sources */,
+				FE7039101A6A4B00008DC502 /* glpnpp05.c in Sources */,
+				FE7039011A6A4B00008DC502 /* glpmpl06.c in Sources */,
+				FE7038FB1A6A4B00008DC502 /* glpmat.c in Sources */,
+				FE7038BE1A6A4B00008DC502 /* colamd.c in Sources */,
+				FE70392B1A6A4B00008DC502 /* Text.cpp in Sources */,
+				FE7038D91A6A4B00008DC502 /* glpenv02.c in Sources */,
+				FE7038CD1A6A4B00008DC502 /* glpapi15.c in Sources */,
+				FE7038B31A6A4B00008DC502 /* amd_2.c in Sources */,
+				FE70391B1A6A4B00008DC502 /* glpsql.c in Sources */,
+				FE70390B1A6A4B00008DC502 /* glpnet09.c in Sources */,
+				FE7038B01A6A4B00008DC502 /* Driver.cpp in Sources */,
+				FE7038F51A6A4B00008DC502 /* glplpf.c in Sources */,
+				FE7039001A6A4B00008DC502 /* glpmpl05.c in Sources */,
+				FE7038D01A6A4B00008DC502 /* glpapi18.c in Sources */,
+				FE7039191A6A4B00008DC502 /* glpspx01.c in Sources */,
+				FE7039221A6A4B00008DC502 /* main.cpp in Sources */,
+				FE7039031A6A4B00008DC502 /* glpnet01.c in Sources */,
+				FE70391F1A6A4B00008DC502 /* json_reader.cpp in Sources */,
+				FE7039081A6A4B00008DC502 /* glpnet06.c in Sources */,
+				FE7038E01A6A4B00008DC502 /* glpfhv.c in Sources */,
+				FE7038E41A6A4B00008DC502 /* glpini02.c in Sources */,
+				FE7038BB1A6A4B00008DC502 /* amd_postorder.c in Sources */,
+				FE7038B81A6A4B00008DC502 /* amd_info.c in Sources */,
+				FE7039111A6A4B00008DC502 /* glpqmd.c in Sources */,
+				FE70391C1A6A4B00008DC502 /* glpssx01.c in Sources */,
+				FE7038DB1A6A4B00008DC502 /* glpenv04.c in Sources */,
+				FE7038D71A6A4B00008DC502 /* glpdmx.c in Sources */,
+				FE70391D1A6A4B00008DC502 /* glpssx02.c in Sources */,
+				FE70390D1A6A4B00008DC502 /* glpnpp02.c in Sources */,
+				FE7038E21A6A4B00008DC502 /* glphbm.c in Sources */,
+				FE70390E1A6A4B00008DC502 /* glpnpp03.c in Sources */,
+				FE7038DA1A6A4B00008DC502 /* glpenv03.c in Sources */,
+				FE7038F01A6A4B00008DC502 /* glpios12.c in Sources */,
+				FE7038CF1A6A4B00008DC502 /* glpapi17.c in Sources */,
+				FE7038F71A6A4B00008DC502 /* glplpx02.c in Sources */,
+				FE7039231A6A4B00008DC502 /* Matrix.cpp in Sources */,
+				FE7038B41A6A4B00008DC502 /* amd_aat.c in Sources */,
+				FE7038D51A6A4B00008DC502 /* glpcpx.c in Sources */,
+				FE7038F11A6A4B00008DC502 /* glpipm.c in Sources */,
+				FE7039211A6A4B00008DC502 /* json_writer.cpp in Sources */,
+				FE7038F41A6A4B00008DC502 /* glplib03.c in Sources */,
+				FE7038BD1A6A4B00008DC502 /* amd_valid.c in Sources */,
+				FE7038F31A6A4B00008DC502 /* glplib02.c in Sources */,
+				FE7038DE1A6A4B00008DC502 /* glpenv07.c in Sources */,
+				FE7038CE1A6A4B00008DC502 /* glpapi16.c in Sources */,
+				FE7038E11A6A4B00008DC502 /* glpgmp.c in Sources */,
+				FE7038E81A6A4B00008DC502 /* glpios04.c in Sources */,
+				FE7038E91A6A4B00008DC502 /* glpios05.c in Sources */,
+				FE7039161A6A4B00008DC502 /* glpscl.c in Sources */,
+				FE70390C1A6A4B00008DC502 /* glpnpp01.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FE7037E91A6A4AE9008DC502 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FE7037EA1A6A4AE9008DC502 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FE7037EC1A6A4AE9008DC502 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FE7037ED1A6A4AE9008DC502 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE7037DF1A6A4AE9008DC502 /* Build configuration list for PBXProject "qsspn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE7037E91A6A4AE9008DC502 /* Debug */,
+				FE7037EA1A6A4AE9008DC502 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE7037EB1A6A4AE9008DC502 /* Build configuration list for PBXNativeTarget "qsspn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE7037EC1A6A4AE9008DC502 /* Debug */,
+				FE7037ED1A6A4AE9008DC502 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE7037DC1A6A4AE9008DC502 /* Project object */;
+}

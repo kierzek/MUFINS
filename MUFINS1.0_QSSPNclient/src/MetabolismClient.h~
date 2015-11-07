@@ -1,0 +1,56 @@
+/* 
+ * File:   MetabolismClient.h
+ * Author: marek
+ *
+ * Created on May 28, 2013, 3:18 PM
+ */
+
+#ifndef METABOLISMCLIENT_H
+#define	METABOLISMCLIENT_H
+
+#include <asio.hpp>
+#include <memory>
+#include <string>
+#include <vector>
+
+namespace PNFBA {
+
+enum { max_length = 100 * 1024 * sizeof(int) };
+
+/* Client class for computing metabolism. Takes care of network communication
+ * with MetabolismServer */
+class MetabolismClient {
+public:
+  /* Connects to a specified MetabolismServer. If connection fails,
+   * exits program. */
+  MetabolismClient(const std::string& host, const std::string& port);
+  virtual ~MetabolismClient();
+  
+  /* Sends a given marking to a MetabolismServer, receives a marking
+   * after a metabolism step and modifies the input. */
+  double runMetabolism(const std::string &input);
+  void disconnect() {
+    socket_.close();
+  }
+  
+private:
+  MetabolismClient() : io_service_(), resolver_(io_service_), 
+                       query_(asio::ip::tcp::v4(), "no", "call"), 
+                       socket_(io_service_) {};
+  MetabolismClient(const MetabolismClient& orig) : io_service_(), 
+                                                   resolver_(io_service_), 
+                                                   query_(asio::ip::tcp::v4(), 
+                                                   "no", "call"), 
+  socket_(io_service_) {};
+
+  asio::io_service io_service_;
+  asio::ip::tcp::resolver resolver_;
+  asio::ip::tcp::resolver::query query_;
+  asio::ip::tcp::resolver::iterator iterator_;
+  asio::ip::tcp::socket socket_;
+};
+
+}  // namespace PNFBA
+
+#endif	/* METABOLISMCLIENT_H */
+
