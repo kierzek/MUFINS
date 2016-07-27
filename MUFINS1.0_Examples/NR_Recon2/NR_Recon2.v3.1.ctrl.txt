@@ -1,0 +1,180 @@
+MODEL ./recon2_xt.PIPES.CORE.v1.sfba
+NUMBER_OF_SAMPLES 1
+SEED 761 
+
+TIME_MAX 3000.0	 
+MAXIMAL_TIMESTEP 0.01
+MAX_CHANGE 0.01 
+OUTPUT ./output.xls
+LOG ./log.txt
+
+MONITOR 500
+PROGRESS 500
+
+INITIAL_STATE
+Glucose 0.0
+Lactate 10.0
+RBC 400.0
+Hepatocytes 19.7
+estradiol_source 1.0
+estradiol 0.15
+GR_gene 0.5
+cortisol_blood 0.0
+cortisol 1.14
+cortisol_deg 0
+CYP_mRNA_deg 0
+GR 16.1833
+GR_mRNA_deg 0
+PXR_gene 0.78
+PXR_mRNA_deg 0
+PXR_mRNA 0.0150906
+CYP3A4_mRNA 0.423433
+GR_mRNA 0.000902312
+PXR 50.2991
+PXR_active 0.055
+GR_cort 9.4
+CYP3A4_gene 0.82976
+CYP_deg 0
+GR_deg 0
+PXR_deg 0
+CYP3A4 705.721
+ligand2 0.001
+END
+
+
+*/ Linkage of circadian and GR-PXR models */
+
+
+RESET_FUNCTION perturbation
+50
+END
+
+
+/* Objective function - dFBA commands */
+
+
+
+/* GR-PXR module */
+
+
+PROPENSITY_FUNCTION PXR_transcription
+PXR_gene*0.0000552
+END
+
+PROPENSITY_FUNCTION PXR_transcription_GRcort
+PXR_gene*GR_cort*0.0.000033
+END
+
+PROPENSITY_FUNCTION GR_transcription
+GR_gene*0.0000032
+END 
+
+PROPENSITY_FUNCTION GR_transcription_GRcort
+GR_gene*GR_cort*0.0000012
+END
+
+PROPENSITY_FUNCTION CYP3A4_transcription
+CYP3A4_gene*0.00321
+END
+
+PROPENSITY_FUNCTION CYP3A4_transcription_PXRcort
+CYP3A4_gene*PXR_active*0.3
+END
+
+PROPENSITY_FUNCTION PXR_mRNA_degradation
+PXR_mRNA*0.006
+END
+
+PROPENSITY_FUNCTION GR_mRNA_degradation
+GR_mRNA*0.003
+END
+
+PROPENSITY_FUNCTION CYP3A4_mRNA_degradation
+CYP3A4_mRNA*0.04
+END
+
+PROPENSITY_FUNCTION PXR_translation
+PXR_mRNA*10
+END
+
+PROPENSITY_FUNCTION GR_translation
+GR_mRNA*19.98
+END
+
+PROPENSITY_FUNCTION CYP3A4_translation
+CYP3A4_mRNA*2.5
+END
+
+PROPENSITY_FUNCTION PXR_degradation
+PXR*0.003
+END
+
+PROPENSITY_FUNCTION GR_degradation
+GR*0.001
+END
+
+PROPENSITY_FUNCTION CYP3A4_degradation
+CYP3A4*0.0015
+END
+
+PROPENSITY_FUNCTION PXR_cort_association
+PXR*cortisol*0.01
+END
+
+PROPENSITY_FUNCTION PXR_cort_disassociation
+PXR_active*100
+END
+
+PROPENSITY_FUNCTION GR_cort_association
+GR*cortisol*0.01
+END
+
+PROPENSITY_FUNCTION GR_cort_disassociation
+GR_cort*0.1
+END
+
+PROPENSITY_FUNCTION PXR_cort_degradation
+PXR_active*0.0015
+END
+
+PROPENSITY_FUNCTION GR_cort_degradation
+GR_cort*0.0015
+END
+
+PROPENSITY_FUNCTION PXR_ligand2_association
+PXR*ligand2*0.01
+END
+
+PROPENSITY_FUNCTION PXR_ligand2_disassociation
+PXR_active*100
+END
+
+PROPENSITY_FUNCTION PXR_ligand2_degradation
+PXR_active*0.0015
+END
+
+PROPENSITY_FUNCTION cortisol_degradation_CYP3A4
+CYP3A4*(0.083*cortisol/15000)/(1 + cortisol/15000)
+END 
+
+
+*/ MONITORS */
+
+PETRI_NET_MONITORS
+cortisol_blood
+cortisol
+GR
+GR_cort
+PXR
+PXR_active
+ligand2
+CYP3A4
+Lactate
+Glucose
+Glucose_regeneration_flux
+Lactate_consumption_flux
+estradiol_degradation_flux
+estradiol
+END
+
+SIMULATION
